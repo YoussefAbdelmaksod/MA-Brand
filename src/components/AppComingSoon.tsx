@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
-import { FaApple, FaGooglePlay, FaDumbbell, FaChartLine, FaTrophy, FaBell } from 'react-icons/fa';
+import { FaApple, FaGooglePlay, FaChartLine, FaTrophy, FaBell } from 'react-icons/fa';
 import { useState } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 
 const AppComingSoon = () => {
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
+    const { t, isRTL } = useLanguage();
 
     const handleNotify = (e: React.FormEvent) => {
         e.preventDefault();
@@ -15,9 +17,8 @@ const AppComingSoon = () => {
     };
 
     const features = [
-        { icon: <FaDumbbell />, title: 'AI Trainer', desc: 'Real-time form correction' },
-        { icon: <FaChartLine />, title: 'Progress XP', desc: 'Track your level ups' },
-        { icon: <FaTrophy />, title: 'Achievements', desc: 'Unlock epic rewards' },
+        { icon: <FaChartLine />, title: t('app.progressXp'), desc: t('app.progressXpDesc') },
+        { icon: <FaTrophy />, title: t('app.achievements'), desc: t('app.achievementsDesc') },
     ];
 
     return (
@@ -27,6 +28,7 @@ const AppComingSoon = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="py-16 sm:py-24 relative overflow-hidden"
+            dir={isRTL ? 'rtl' : 'ltr'}
         >
             {/* Background Effects */}
             <div className="absolute inset-0">
@@ -68,9 +70,9 @@ const AppComingSoon = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-gaming mb-4 glitch" data-text="NEW QUEST UNLOCKING">
-                            <span className="text-game-blue">NEW QUEST</span>{' '}
-                            <span className="text-game-red">UNLOCKING</span>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-gaming mb-4">
+                            <span className="text-game-blue">{t('app.title1')}</span>{' '}
+                            <span className="text-game-red">{t('app.title2')}</span>
                         </h2>
                         <motion.div
                             className="absolute -inset-1 bg-gradient-to-r from-game-blue/20 to-game-red/20 blur-lg -z-10"
@@ -80,17 +82,17 @@ const AppComingSoon = () => {
                     </motion.div>
 
                     <p className="text-lg sm:text-xl text-game-white/80 max-w-2xl mx-auto font-gaming">
-                        Your pocket-sized training companion is loading...
+                        {t('app.subtitle')}
                     </p>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     {/* Phone Mockup */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="relative flex justify-center"
+                        className="relative flex justify-center order-1 lg:order-none"
                     >
                         <motion.div
                             className="relative w-64 sm:w-72"
@@ -121,13 +123,13 @@ const AppComingSoon = () => {
                                             <img src="/4.gif" alt="App Logo" className="w-full h-full object-cover" />
                                         </motion.div>
 
-                                        <span className="text-game-blue font-gaming text-sm mb-2">LEVEL UP</span>
-                                        <span className="text-game-white font-gaming text-xs text-center">FITNESS APP</span>
+                                        <span className="text-game-blue font-gaming text-sm mb-2">{t('app.levelUp')}</span>
+                                        <span className="text-game-white font-gaming text-xs text-center">{t('app.fitnessApp')}</span>
 
                                         {/* Loading Bar */}
                                         <div className="w-full mt-8">
                                             <div className="flex justify-between text-xs text-game-white/60 mb-2 font-gaming">
-                                                <span>LOADING...</span>
+                                                <span>{t('app.loading')}</span>
                                                 <motion.span
                                                     animate={{ opacity: [1, 0.5, 1] }}
                                                     transition={{ duration: 1, repeat: Infinity }}
@@ -181,10 +183,10 @@ const AppComingSoon = () => {
 
                     {/* Features & CTA */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: isRTL ? -30 : 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="space-y-6"
+                        className="space-y-6 order-2 lg:order-none"
                     >
                         {/* Features */}
                         <div className="grid gap-4">
@@ -195,22 +197,22 @@ const AppComingSoon = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    whileHover={{ scale: 1.02, x: 10 }}
+                                    whileHover={{ scale: 1.02, x: isRTL ? -10 : 10 }}
                                     className="flex items-center gap-4 bg-black/40 backdrop-blur-sm border border-game-blue/30 rounded-xl p-4 group hover:border-game-blue/60 transition-all duration-300"
                                 >
                                     <motion.div
-                                        className="text-2xl text-game-blue group-hover:text-game-red transition-colors duration-300"
+                                        className="text-2xl text-game-blue group-hover:text-game-red transition-colors duration-300 flex-shrink-0"
                                         whileHover={{ rotate: 360 }}
                                         transition={{ duration: 0.5 }}
                                     >
                                         {feature.icon}
                                     </motion.div>
-                                    <div>
+                                    <div className="flex-1">
                                         <h4 className="font-gaming text-game-white">{feature.title}</h4>
                                         <p className="text-sm text-game-white/60">{feature.desc}</p>
                                     </div>
                                     <motion.div
-                                        className="ml-auto text-game-blue/50"
+                                        className={`text-game-blue/50 flex-shrink-0 ${isRTL ? 'rotate-180' : ''}`}
                                         animate={{ x: [0, 5, 0] }}
                                         transition={{ duration: 1.5, repeat: Infinity }}
                                     >
@@ -223,8 +225,8 @@ const AppComingSoon = () => {
                         {/* App Store Buttons */}
                         <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                             {[
-                                { icon: <FaApple className="text-2xl" />, store: 'App Store', label: 'Download on' },
-                                { icon: <FaGooglePlay className="text-xl" />, store: 'Google Play', label: 'Get it on' },
+                                { icon: <FaApple className="text-2xl" />, store: t('app.appStore'), label: t('app.downloadOn') },
+                                { icon: <FaGooglePlay className="text-xl" />, store: t('app.googlePlay'), label: t('app.getItOn') },
                             ].map((btn) => (
                                 <motion.div
                                     key={btn.store}
@@ -241,13 +243,13 @@ const AppComingSoon = () => {
                                     </div>
                                     {/* Coming Soon Badge */}
                                     <motion.div
-                                        className="absolute -top-2 -right-2 bg-gradient-to-r from-game-red to-game-blue text-white text-xs px-2 py-1 rounded-full font-gaming"
+                                        className={`absolute -top-2 ${isRTL ? '-left-2' : '-right-2'} bg-gradient-to-r from-game-red to-game-blue text-white text-xs px-2 py-1 rounded-full font-gaming`}
                                         animate={{
                                             scale: [1, 1.1, 1],
                                         }}
                                         transition={{ duration: 2, repeat: Infinity }}
                                     >
-                                        SOON
+                                        {t('app.soon')}
                                     </motion.div>
                                 </motion.div>
                             ))}
@@ -265,16 +267,17 @@ const AppComingSoon = () => {
                                 <>
                                     <div className="flex items-center gap-2 mb-4">
                                         <FaBell className="text-game-blue" />
-                                        <span className="font-gaming text-game-white text-sm sm:text-base">Get Launch Notification</span>
+                                        <span className="font-gaming text-game-white text-sm sm:text-base">{t('app.getLaunchNotification')}</span>
                                     </div>
                                     <form onSubmit={handleNotify} className="flex flex-col sm:flex-row gap-3">
                                         <input
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            placeholder="Enter your email"
+                                            placeholder={t('app.enterEmail')}
                                             className="flex-1 bg-black/50 border border-game-white/20 rounded-lg px-4 py-3 text-game-white placeholder:text-game-white/40 focus:border-game-blue focus:outline-none transition-colors font-gaming text-sm min-h-[48px]"
                                             required
+                                            dir={isRTL ? 'rtl' : 'ltr'}
                                         />
                                         <motion.button
                                             type="submit"
@@ -282,7 +285,7 @@ const AppComingSoon = () => {
                                             whileTap={{ scale: 0.95 }}
                                             className="bg-gradient-to-r from-game-blue to-game-red px-6 py-3 rounded-lg font-gaming text-white text-sm whitespace-nowrap min-h-[48px] w-full sm:w-auto"
                                         >
-                                            NOTIFY ME
+                                            {t('app.notifyMe')}
                                         </motion.button>
                                     </form>
                                 </>
@@ -299,8 +302,8 @@ const AppComingSoon = () => {
                                     >
                                         🎮
                                     </motion.span>
-                                    <p className="font-gaming text-game-blue">ACHIEVEMENT UNLOCKED!</p>
-                                    <p className="text-sm text-game-white/70">You'll be first to know when we launch</p>
+                                    <p className="font-gaming text-game-blue">{t('app.achievementUnlocked')}</p>
+                                    <p className="text-sm text-game-white/70">{t('app.firstToKnow')}</p>
                                 </motion.div>
                             )}
                         </motion.div>
