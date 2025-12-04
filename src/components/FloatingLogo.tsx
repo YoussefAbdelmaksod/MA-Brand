@@ -1,63 +1,43 @@
-import { Suspense, useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { Environment, Float } from '@react-three/drei';
 
-const Logo = () => {
-  const texture = useLoader(TextureLoader, '/4.gif');
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.5;
-  });
-
+// Lightweight CSS-only floating logo - no Three.js dependency
+const FloatingLogo = memo(() => {
   return (
-    <Float
-      speed={2}
-      rotationIntensity={0.5}
-      floatIntensity={1}
-    >
-      <mesh
-        ref={meshRef}
-        scale={1}
-      >
-        <planeGeometry args={[2, 2]} />
-        <meshStandardMaterial
-          map={texture}
-          transparent
-          metalness={0.5}
-          roughness={0.3}
-        />
-      </mesh>
-    </Float>
-  );
-};
-
-const FloatingLogo = () => {
-  return (
-    <motion.div 
-      className="w-64 h-64"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
+    <motion.div
+      className="w-full h-full relative"
+      animate={{
+        y: [0, -8, 0],
+        rotateY: [0, 5, 0, -5, 0],
+      }}
       transition={{
-        type: "spring",
-        stiffness: 50,
-        damping: 10,
-        delay: 0.5
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
       }}
     >
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <Suspense fallback={null}>
-          <Environment preset="city" />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <Logo />
-        </Suspense>
-      </Canvas>
+      <motion.div
+        className="w-full h-full rounded-full overflow-hidden border-4 border-game-blue/50 shadow-[0_0_30px_rgba(0,163,255,0.4)]"
+        animate={{
+          boxShadow: [
+            '0 0 20px rgba(0,163,255,0.3)',
+            '0 0 40px rgba(0,163,255,0.5)',
+            '0 0 20px rgba(0,163,255,0.3)'
+          ]
+        }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <img
+          src="/4.gif"
+          alt="Coach Moumen"
+          className="w-full h-full object-cover"
+          loading="eager"
+        />
+      </motion.div>
     </motion.div>
   );
-};
+});
 
-export default FloatingLogo; 
+FloatingLogo.displayName = 'FloatingLogo';
+
+export default FloatingLogo;
