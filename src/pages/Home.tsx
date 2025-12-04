@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingLogo from '../components/FloatingLogo';
 import CoachProfile from '../components/CoachProfile';
+import AppComingSoon from '../components/AppComingSoon';
 import FitnessScene from '../components/FitnessScene';
 import {
   fadeInUp,
@@ -93,7 +94,7 @@ const FeatureCard = ({ title, description, icon }: { title: string; description:
       </motion.div>
       <h3 className="text-xl sm:text-2xl font-gaming mb-3 sm:mb-4 text-game-blue">{title}</h3>
       <p className="text-sm sm:text-base text-game-white/80 relative z-10">{description}</p>
-      
+
       <motion.div
         variants={levelUpFlash}
         className="absolute inset-0 bg-white/10 pointer-events-none"
@@ -118,7 +119,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,0,0,0.1)_0%,transparent_100%)] opacity-30" />
         <FitnessScene />
       </div>
-      
+
       {/* Content */}
       <div className="relative z-10 pointer-events-auto">
         <motion.div
@@ -182,7 +183,7 @@ const Home = () => {
                 className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 px-4 sm:px-0"
               >
                 <motion.button
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     boxShadow: [
                       '0 0 20px rgba(255,0,0,0.5)',
@@ -213,7 +214,7 @@ const Home = () => {
                 </motion.button>
 
                 <motion.button
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     boxShadow: [
                       '0 0 20px rgba(0,163,255,0.5)',
@@ -268,7 +269,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="relative"
             >
-              <motion.div 
+              <motion.div
                 className="text-center mb-12"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
@@ -282,31 +283,31 @@ const Home = () => {
                   <span className="text-2xl">💪</span>
                 </div>
               </motion.div>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                <StatCounter 
-                  value={1500} 
-                  label="Total XP Gained" 
-                  icon="⚡" 
+                <StatCounter
+                  value={1500}
+                  label="Total XP Gained"
+                  icon="⚡"
                 />
-                <StatCounter 
-                  value={350} 
-                  label="Active Warriors" 
-                  icon="⚔️" 
+                <StatCounter
+                  value={350}
+                  label="Active Warriors"
+                  icon="⚔️"
                 />
-                <StatCounter 
-                  value={95} 
-                  label="Success Rate" 
-                  icon="🎯" 
+                <StatCounter
+                  value={95}
+                  label="Success Rate"
+                  icon="🎯"
                 />
-                <StatCounter 
-                  value={180} 
-                  label="Boss Battles Won" 
-                  icon="👑" 
+                <StatCounter
+                  value={180}
+                  label="Boss Battles Won"
+                  icon="👑"
                 />
               </div>
 
-              <motion.div 
+              <motion.div
                 className="mt-16 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -348,7 +349,7 @@ const Home = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-game-blue/5 to-transparent" />
             <div className="relative max-w-4xl mx-auto px-4">
-              <motion.div 
+              <motion.div
                 className="bg-black/40 backdrop-blur-md rounded-2xl p-8 border border-game-blue/30"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
@@ -474,7 +475,7 @@ const Home = () => {
                     <div className="absolute inset-0 p-[2px] rounded-xl bg-gradient-to-r from-game-blue via-white to-game-red">
                       <div className="absolute inset-0 rounded-xl bg-black" />
                     </div>
-                    
+
                     {/* Video Player */}
                     <div className="relative">
                       <video
@@ -490,7 +491,7 @@ const Home = () => {
                         <source src="/video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
-                      
+
                       {/* Overlay Glow Effect */}
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-game-blue/10 to-game-red/10 pointer-events-none"
@@ -578,16 +579,16 @@ const Home = () => {
                 transition={{ duration: 10, repeat: Infinity }}
               />
             </div>
-            
+
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8 }}
               className="relative z-10 max-w-4xl mx-auto text-center px-4"
             >
-              <motion.div 
+              <motion.div
                 className="mb-8 text-6xl"
-                animate={{ 
+                animate={{
                   rotate: [0, 10, -10, 0],
                   scale: [1, 1.1, 1]
                 }}
@@ -595,7 +596,7 @@ const Home = () => {
               >
                 🏆
               </motion.div>
-              
+
               <motion.div
                 className="relative bg-black/40 backdrop-blur-sm p-8 rounded-2xl border border-game-blue/30"
                 whileHover={{ scale: 1.02 }}
@@ -605,16 +606,16 @@ const Home = () => {
                 <div className="absolute -top-4 -right-4 w-8 h-8 border-t-2 border-r-2 border-game-red" />
                 <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-2 border-l-2 border-game-red" />
                 <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-game-blue" />
-                
+
                 <p className="text-xl sm:text-2xl md:text-3xl font-gaming mb-6 text-game-white leading-relaxed">
-                  "In the game of fitness, every rep is a power-up, 
-                  every set is a level, and every workout is a boss fight. 
+                  "In the game of fitness, every rep is a power-up,
+                  every set is a level, and every workout is a boss fight.
                   Are you ready to become the main character of your story?"
                 </p>
-                
+
                 <motion.div
                   className="text-game-blue font-gaming text-xl"
-                  animate={{ 
+                  animate={{
                     color: ['#00A3FF', '#FF0000', '#00A3FF']
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
@@ -622,7 +623,7 @@ const Home = () => {
                   - Coach Moumen
                 </motion.div>
               </motion.div>
-              
+
               <div className="mt-12 flex flex-wrap justify-center gap-4">
                 <motion.div
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-game-blue/20 to-game-blue/10 border border-game-blue"
@@ -645,6 +646,9 @@ const Home = () => {
               </div>
             </motion.div>
           </motion.section>
+
+          {/* App Coming Soon Section */}
+          <AppComingSoon />
 
 
         </motion.div>

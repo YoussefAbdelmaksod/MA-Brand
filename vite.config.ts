@@ -16,7 +16,16 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundles
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+        drop_debugger: true,
+      },
+    },
+    cssCodeSplit: true, // Enable CSS code splitting
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -25,7 +34,15 @@ export default defineConfig({
           'ui-vendor': ['@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
           'animation-vendor': ['framer-motion'],
         },
+        // Optimize asset file names for better caching
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        entryFileNames: 'entries/[name]-[hash].js',
       },
     },
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
   },
 })

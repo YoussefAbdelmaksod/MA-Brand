@@ -24,7 +24,7 @@ const Footer = () => {
           >
             <span className="text-game-white/60">Powered by</span>
             <span className="text-game-blue">
-              Devnium
+              Vibe Tech
             </span>
           </motion.div>
         </div>
