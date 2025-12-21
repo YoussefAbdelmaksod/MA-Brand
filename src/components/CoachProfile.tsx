@@ -22,8 +22,7 @@ interface Stat {
 }
 
 // Badges data for future implementation
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const _badges: Badge[] = [
+export const _badges: Badge[] = [
   {
     title: 'Master Trainer',
     level: 100,
