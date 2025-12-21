@@ -5,6 +5,11 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { FaClock, FaFacebook, FaGamepad, FaTrophy, FaFire, FaMedal } from 'react-icons/fa';
 
+/*
+ * FUTURE FEATURE: Mission Cards for Training Page
+ * Uncomment when ready to implement mission functionality
+ *
+
 interface Mission {
   id: string;
   title: string;
@@ -17,8 +22,7 @@ interface Mission {
   rewards: string[];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _missions: Mission[] = [
+const missions: Mission[] = [
   {
     id: 'str-001',
     title: 'Power Level: Upper Body',
@@ -115,8 +119,7 @@ const difficultyColors = {
   elite: 'text-yellow-400',
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _MissionCard = ({ mission }: { mission: Mission }) => {
+const MissionCard = ({ mission }: { mission: Mission }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -215,6 +218,8 @@ const _MissionCard = ({ mission }: { mission: Mission }) => {
     </motion.div>
   );
 };
+
+END OF FUTURE FEATURE */
 
 const Training = () => {
   return (
