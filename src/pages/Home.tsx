@@ -13,7 +13,7 @@ import {
   bounceIn,
 } from '../hooks/useAnimations';
 import { useNavigate } from 'react-router-dom';
-import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye } from 'react-icons/fa';
+import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye, FaArrowDown } from 'react-icons/fa';
 import { GiCrossedSwords } from 'react-icons/gi';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -191,7 +191,7 @@ const Home = () => {
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   className="text-game-white/60 text-2xl"
                 >
-                  ↓
+                  <FaArrowDown />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -538,7 +538,7 @@ const Home = () => {
                 }}
                 transition={{ duration: 5, repeat: Infinity }}
               >
-                🏆
+                <FaTrophy className="text-game-gold" />
               </motion.div>
 
               <motion.div

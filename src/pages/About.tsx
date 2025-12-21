@@ -439,6 +439,34 @@ const About = () => {
                   ))}
                 </div>
               </motion.div>
+
+              {/* Story Image */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative h-full min-h-[400px] rounded-2xl overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+                <motion.img
+                  src="/profile.jpg"
+                  alt="Coach Moumen"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5 }}
+                />
+                <div className="absolute inset-0 border-2 border-game-blue/30 rounded-2xl z-20 group-hover:border-game-blue/60 transition-colors duration-300" />
+
+                {/* Decorative Elements */}
+                <div className="absolute top-4 right-4 z-20">
+                  <FaCertificate className="text-3xl text-game-gold drop-shadow-lg" />
+                </div>
+                <div className="absolute bottom-4 left-4 z-20">
+                  <div className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg border border-game-blue/30">
+                    <p className="text-game-blue font-gaming text-sm">Level 100 Coach</p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
             {/* Timeline Section */}

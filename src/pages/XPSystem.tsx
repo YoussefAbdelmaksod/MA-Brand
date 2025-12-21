@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye } from 'react-icons/fa';
+import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye, FaArrowRight } from 'react-icons/fa';
 import { GiCrossedSwords, GiLaurelsTrophy } from 'react-icons/gi';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -218,7 +218,7 @@ const XPSystem = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="text-game-blue"
               >
-                →
+                <FaArrowRight />
               </motion.div>
             </div>
           </div>
@@ -392,7 +392,7 @@ const XPSystem = () => {
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    ⚔️
+                    <GiCrossedSwords />
                   </motion.span>
                 </span>
                 <motion.div
