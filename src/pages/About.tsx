@@ -295,27 +295,27 @@ const About = () => {
       date: 'October 2023'
     },
     {
-      title: 'Introduction To Food And Health',
-      organization: 'Stanford University',
+      title: t('about.cert.foodHealth'),
+      organization: t('about.cert.stanford'),
       type: 'online',
       icon: <FaCertificate size={24} className="text-game-gold" />,
-      description: 'Foundation in nutrition science and health optimization',
+      description: t('about.cert.foodHealthDesc'),
       date: 'September 2023'
     },
     {
-      title: 'Certified Personal Trainer',
-      organization: 'TASS UK Academy & PBLS Academy',
+      title: t('about.cert.cpt'),
+      organization: t('about.cert.tass'),
       type: 'onsite',
       icon: <FaCertificate size={24} className="text-game-gold" />,
-      description: 'Specialized in Sports Nutrition, CFT, and Personal Training',
+      description: t('about.cert.cptDesc'),
       date: 'July 2023'
     },
     {
-      title: 'A+ Training Certification',
-      organization: 'World Gym',
+      title: t('about.cert.aplus'),
+      organization: t('about.cert.worldgym'),
       type: 'onsite',
       icon: <FaCertificate size={24} className="text-game-gold" />,
-      description: 'Excellence in Personal Training methodology and practice',
+      description: t('about.cert.aplusDesc'),
       date: 'May 2023'
     }
   ];
@@ -512,9 +512,9 @@ const About = () => {
                 />
 
                 <div className="relative z-10">
-                  <h2 className="text-3xl sm:text-4xl font-gaming mb-6">Ready to Level Up?</h2>
+                  <h2 className="text-3xl sm:text-4xl font-gaming mb-6">{t('about.cta.title')}</h2>
                   <p className="text-lg sm:text-xl text-game-white/80 mb-8">
-                    Join me on this journey of transformation, backed by science and proven by results.
+                    {t('about.cta.subtitle')}
                   </p>
                   <Button
                     variant="primary"
@@ -525,7 +525,7 @@ const About = () => {
                     className="relative overflow-hidden group hover:shadow-[0_0_20px_rgba(255,0,0,0.3)]"
                   >
                     <span className="relative z-10 group-hover:text-white transition-colors flex items-center justify-center gap-2">
-                      <span>Start Your Transformation</span>
+                      <span>{t('about.cta.start')}</span>
                       <motion.span
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}

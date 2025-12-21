@@ -367,6 +367,20 @@ const translations: Record<Language, Record<string, string>> = {
         'app.notifyMe': 'NOTIFY ME',
         'app.achievementUnlocked': 'ACHIEVEMENT UNLOCKED!',
         'app.firstToKnow': "You'll be first to know when we launch",
+        'app.loadingGame': 'LOADING',
+        'app.game': 'THE GAME',
+        'about.cta.title': 'Ready to Level Up?',
+        'about.cta.subtitle': 'Join me on this journey of transformation, backed by science and proven by results.',
+        'about.cta.start': 'Start Your Transformation',
+        'about.cert.foodHealth': 'Introduction To Food And Health',
+        'about.cert.stanford': 'Stanford University',
+        'about.cert.foodHealthDesc': 'Foundation in nutrition science and health optimization',
+        'about.cert.cpt': 'Certified Personal Trainer',
+        'about.cert.tass': 'TASS UK Academy & PBLS Academy',
+        'about.cert.cptDesc': 'Specialized in Sports Nutrition, CFT, and Personal Training',
+        'about.cert.aplus': 'A+ Training Certification',
+        'about.cert.worldgym': 'World Gym',
+        'about.cert.aplusDesc': 'Excellence in Personal Training methodology and practice',
 
         // Common
         'common.learnMore': 'Learn More',
@@ -468,6 +482,18 @@ const translations: Record<Language, Record<string, string>> = {
         'about.cert.weightDesc': 'استراتيجيات متخصصة لفقدان الوزن المستدام وتكوين الجسم',
         'about.cert.cpr': 'الإسعافات الأولية والإنعاش القلبي الرئوي',
         'about.cert.cprDesc': 'معتمد من الهلال الأحمر المصري',
+        'about.cert.foodHealth': 'مقدمة في الغذاء والصحة',
+        'about.cert.stanford': 'جامعة ستانفورد',
+        'about.cert.foodHealthDesc': 'أساسيات علوم التغذية وتحسين الصحة',
+        'about.cert.cpt': 'مدرب شخصي معتمد',
+        'about.cert.tass': 'أكاديمية TASS UK وأكاديمية PBLS',
+        'about.cert.cptDesc': 'متخصص في التغذية الرياضية والتدريب الشخصي',
+        'about.cert.aplus': 'شهادة التدريب A+',
+        'about.cert.worldgym': 'وورلد جيم',
+        'about.cert.aplusDesc': 'التميز في منهجية وممارسة التدريب الشخصي',
+        'about.cta.title': 'مستعد للارتقاء؟',
+        'about.cta.subtitle': 'انضم إلي في رحلة التحول هذه، المدعومة بالعلم والمثبتة بالنتائج.',
+        'about.cta.start': 'ابدأ تحولك',
 
         // Services Page
         'services.title': 'اختر طريقك',
@@ -717,6 +743,8 @@ const translations: Record<Language, Record<string, string>> = {
         'app.levelUp': 'ارتقِ بمستواك',
         'app.fitnessApp': 'تطبيق اللياقة',
         'app.loading': 'جاري التحميل...',
+        'app.loadingGame': 'جاري تحميل',
+        'app.game': 'اللعبه',
         'app.progressXp': 'نقاط الخبرة',
         'app.progressXpDesc': 'تتبع تقدمك',
         'app.achievements': 'الإنجازات',
@@ -763,7 +791,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }, [language]);
 
     const t = (key: string): string => {
-        return translations[language][key] || key;
+        const value = translations[language][key];
+        return value !== undefined ? value : key;
     };
 
     return (

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 
 const LoadingScreen = () => {
+  const { t } = useLanguage();
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
@@ -87,14 +89,14 @@ const LoadingScreen = () => {
               transition={{ duration: 1, repeat: Infinity }}
               className="inline-block"
             >
-              LOADING
+              {t('app.loadingGame')}
             </motion.span>{' '}
             <motion.span
               animate={{ color: ['#FF0000', '#00A3FF', '#FF0000'] }}
               transition={{ duration: 1, repeat: Infinity }}
               className="inline-block"
             >
-              THE GAME
+              {t('app.game')}
             </motion.span>
           </h1>
         </motion.div>
