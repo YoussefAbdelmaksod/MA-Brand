@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import FitnessScene from '@/components/FitnessScene';
-import { FaLock, FaClock, FaFacebook, FaGamepad, FaTrophy, FaFire, FaMedal } from 'react-icons/fa';
+import { FaClock, FaFacebook, FaGamepad, FaTrophy, FaFire, FaMedal } from 'react-icons/fa';
 
 interface Mission {
   id: string;
@@ -18,6 +17,7 @@ interface Mission {
   rewards: string[];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const missions: Mission[] = [
   {
     id: 'str-001',
@@ -115,6 +115,7 @@ const difficultyColors = {
   elite: 'text-yellow-400',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MissionCard = ({ mission }: { mission: Mission }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 

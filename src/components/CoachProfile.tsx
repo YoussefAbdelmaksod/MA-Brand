@@ -20,7 +20,8 @@ interface Stat {
   description: string;
 }
 
-// Badges data for future implementation
+// Badges data for future implementation (prefixed with _ to indicate unused)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _badges: Badge[] = [
   {
     title: 'Master Trainer',
