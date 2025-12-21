@@ -1,42 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye, FaArrowRight } from 'react-icons/fa';
+import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye } from 'react-icons/fa';
 import { GiCrossedSwords, GiLaurelsTrophy } from 'react-icons/gi';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const XPSystem = () => {
   const [currentLevel] = useState(1);
   const [currentXP, setCurrentXP] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const maxXP = 1000;
   const { t } = useLanguage();
-
-  const scrollToSlide = (index: number) => {
-    if (scrollContainerRef.current) {
-      const cardWidth = 320;
-      scrollContainerRef.current.scrollTo({
-        left: index * cardWidth,
-        behavior: 'smooth'
-      });
-    }
-    setCurrentSlide(index);
-  };
-
-  // Handle scroll events to update current slide indicator
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const scrollLeft = scrollContainerRef.current.scrollLeft;
-      const cardWidth = 320;
-      const newSlide = Math.round(scrollLeft / cardWidth);
-      if (newSlide !== currentSlide) {
-        setCurrentSlide(newSlide);
-      }
-    }
-  };
 
   const handleViewArsenal = () => {
     window.location.href = '/services';
@@ -196,152 +171,62 @@ const XPSystem = () => {
           </Card>
         </motion.section>
 
-        {/* Level Tiers Section - Horizontal Timeline */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mb-16 relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-game-blue/5 to-game-red/5 animate-pulse-slow" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,163,255,0.1)_0%,transparent_70%)] animate-pulse" />
-
-          <div className="flex items-center justify-between mb-8 relative z-10">
-            <h2 className="text-2xl sm:text-3xl font-gaming text-game-white flex items-center gap-3">
-              <FaTrophy className="text-game-red animate-bounce-slow" />
-              <span className="bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">{t('xp.levelsAndTitles')}</span>
-            </h2>
-            <div className="hidden sm:flex items-center gap-2 text-game-white/60 text-sm">
-              <span>{t('xp.scroll')}</span>
+        {/* Level Tiers Grid - Clean Responsive Design */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {levelTiers.map((tier, index) => (
               <motion.div
-                animate={{ x: [0, 10, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-game-blue"
+                key={tier.level}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="group"
               >
-                <FaArrowRight />
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Horizontal Timeline */}
-          <div className="relative z-10 mb-8 px-4 sm:px-0">
-            <div className="w-full h-2 bg-gradient-to-r from-game-blue/30 to-game-red/30 rounded-full relative">
-              <motion.div
-                className="absolute top-0 left-0 w-full h-full overflow-hidden"
-                initial={{ width: '0%' }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 2 }}
-              >
-                <div className="w-full h-full bg-gradient-to-r from-game-blue to-game-red rounded-full" />
-              </motion.div>
-
-              {/* Timeline Markers */}
-              {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((level, i) => (
-                <motion.div
-                  key={level}
-                  className="absolute top-1/2 -translate-y-1/2 cursor-pointer"
-                  style={{ left: `${level}%` }}
-                  initial={{ scale: 0 }}
-                  animate={{
-                    scale: currentSlide === i ? 1.5 : 1,
-                    boxShadow: currentSlide === i ? '0 0 20px rgba(0,163,255,0.9)' : 'none'
-                  }}
-                  transition={{ duration: 0.5 }}
-                  onClick={() => scrollToSlide(i)}
+                <Card
+                  glowing
+                  interactive
+                  className="h-full p-6 transform hover:-translate-y-2 transition-all duration-300 relative overflow-hidden bg-gradient-to-br from-black/80 to-black/40 border-2 border-game-blue/20 hover:border-game-blue/50"
                 >
-                  <div className="w-4 h-4 rounded-full bg-gradient-to-r from-game-blue to-game-red -mt-1 shadow-[0_0_10px_rgba(0,163,255,0.7)]" />
-                  <div className="absolute -left-3 -bottom-8 text-xs font-gaming text-game-white/80">{level}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  {/* Animated Background Effects */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-game-blue/5 to-game-red/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-          {/* Native Scroll Cards Container - Much smoother on mobile */}
-          <div
-            ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="relative z-10 overflow-x-auto pb-4 mx-auto scroll-smooth snap-x snap-mandatory hide-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            <div className="flex gap-6 px-4 sm:px-0 py-6" style={{ width: 'max-content' }}>
-              {levelTiers.map((tier, index) => (
-                <motion.div
-                  key={tier.level}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="w-[280px] sm:w-[300px] flex-shrink-0 snap-center"
-                >
-                  <Card
-                    glowing
-                    interactive
-                    className="h-full p-6 sm:p-8 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group bg-gradient-to-br from-black/80 to-black/40 border-2 border-game-blue/20 hover:border-game-blue/50"
-                  >
-                    {/* Animated Background Effects */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-game-blue/10 to-game-red/10 opacity-0 group-hover:opacity-100 transition-all duration-500"
-                      animate={{
-                        background: [
-                          'linear-gradient(45deg, rgba(0,163,255,0.1) 0%, rgba(255,0,0,0.1) 100%)',
-                          'linear-gradient(45deg, rgba(255,0,0,0.1) 0%, rgba(0,163,255,0.1) 100%)'
-                        ]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity, repeatType: 'reverse' }}
-                    />
-                    <motion.div
-                      className="absolute -inset-1 bg-gradient-to-r from-game-blue to-game-red opacity-0 group-hover:opacity-30 blur-lg transition-all duration-500"
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2.5, repeat: Infinity }}
-                    />
-
-                    {/* Level Badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-sm font-gaming bg-black/70 backdrop-blur-sm border-2 border-game-blue/50 text-game-white/90 shadow-[0_0_15px_rgba(0,163,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,163,255,0.5)] transition-all duration-300">
-                      {tier.level}
+                  {/* Level Range Badge */}
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="px-3 py-1 rounded-lg bg-black/50 border border-game-blue/30 text-game-blue font-gaming text-sm">
+                      LVL {tier.level}
                     </div>
+                    <div className="text-2xl text-game-white/20 group-hover:text-game-gold transition-colors duration-300">
+                      {tierIcons[index]}
+                    </div>
+                  </div>
 
-                    {/* Content */}
-                    <div className="flex flex-col items-center text-center mb-6 relative z-10 pt-3">
-                      <motion.div
-                        className="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-black/60 to-black/20 border-2 border-game-blue/30 mb-4 shadow-[0_0_20px_rgba(0,163,255,0.2)] group-hover:shadow-[0_0_30px_rgba(0,163,255,0.4)] transition-all duration-300 text-4xl"
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                      >
+                  {/* Content */}
+                  <div className="text-center relative z-10">
+                    <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-gradient-to-br from-black/60 to-black/20 border border-game-blue/30 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(0,163,255,0.1)]">
+                      <div className="text-2xl">
                         {tierIcons[index]}
-                      </motion.div>
-                      <h3 className="text-2xl font-gaming text-game-white mb-2 group-hover:text-game-blue transition-colors duration-300">
-                        {t(tier.titleKey)}
-                      </h3>
-                      <div className="w-16 h-1 bg-gradient-to-r from-game-blue to-game-red rounded-full my-3 group-hover:w-24 transition-all duration-300" />
+                      </div>
                     </div>
 
-                    <div className="relative z-10 bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-white/10 group-hover:border-white/20 transition-colors duration-300">
-                      <p className="text-game-white/90 text-sm group-hover:text-white transition-colors duration-300">{t(tier.rewardKey)}</p>
-                    </div>
+                    <h3 className="text-xl font-gaming text-game-white mb-3 group-hover:text-game-blue transition-colors duration-300">
+                      {t(tier.titleKey)}
+                    </h3>
 
-                    <motion.div
-                      className="w-full h-1 bg-gradient-to-r from-game-blue to-game-red mt-6 rounded-full overflow-hidden opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.7, delay: index * 0.1 }}
-                    />
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-game-blue/50 to-game-red/50 mx-auto mb-4" />
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center gap-2 mt-4">
-            {levelTiers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => scrollToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${index === currentSlide ? 'bg-game-blue' : 'bg-gray-600 hover:bg-gray-500'}`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
+                    <p className="text-game-white/70 text-sm leading-relaxed group-hover:text-game-white/90 transition-colors duration-300">
+                      {t(tier.rewardKey)}
+                    </p>
+                  </div>
+
+                  {/* Bottom Highlight */}
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-game-blue to-game-red opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </motion.section>
+        </div>
 
         {/* View Full Arsenal CTA */}
         <motion.section
