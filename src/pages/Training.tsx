@@ -367,7 +367,7 @@ const Training = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
               className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-game-blue/20 to-game-red/20 
-                backdrop-blur-md border border-white/10 p-8 sm:p-12 text-center"
+                backdrop-blur-md border border-white/10 p-4 sm:p-8 md:p-12 text-center"
             >
               {/* Animated Background */}
               <motion.div
@@ -393,7 +393,7 @@ const Training = () => {
                     repeat: Infinity,
                     repeatType: "reverse"
                   }}
-                  className="text-5xl sm:text-6xl mb-6 inline-block"
+                  className="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 inline-block"
                 >
                   🎮
                 </motion.div>

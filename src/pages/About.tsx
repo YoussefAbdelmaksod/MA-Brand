@@ -392,7 +392,7 @@ const About = () => {
                   <motion.img
                     src={image}
                     alt={`Coach Moumen ${index + 1}`}
-                    className="relative w-72 h-72 object-cover rounded-xl border-2 border-game-white/20 transform group-hover:scale-105 transition duration-300"
+                    className="relative w-48 sm:w-56 md:w-72 h-48 sm:h-56 md:h-72 object-cover rounded-xl border-2 border-game-white/20 transform group-hover:scale-105 transition duration-300"
                     whileHover={{ scale: 1.05 }}
                     layoutId={`coach-image-${index}`}
                   />

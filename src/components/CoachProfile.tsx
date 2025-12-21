@@ -166,7 +166,7 @@ export const CoachProfile = () => {
         {/* Stats and Achievements */}
         <div className="lg:col-span-2 space-y-6">
           {/* Tab Navigation */}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {[
               { id: 'stats', label: t('coach.stats') },
               { id: 'achievements', label: t('app.achievements') },
@@ -175,8 +175,8 @@ export const CoachProfile = () => {
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-6 py-3 rounded-lg font-gaming text-lg transition-all
-                ${activeTab === tab.id
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-gaming text-sm sm:text-lg transition-all flex-grow sm:flex-grow-0
+                  ${activeTab === tab.id
                     ? 'bg-gradient-to-r from-game-blue to-game-red text-white'
                     : 'bg-black/50 text-game-white/70 hover:bg-black/70'}`}
                 whileHover={{ scale: 1.05 }}

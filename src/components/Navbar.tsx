@@ -173,6 +173,20 @@ const Navbar = () => {
                         </span>
                       </Link>
                     ))}
+
+                    {/* Language Toggle - Mobile */}
+                    <button
+                      onClick={() => {
+                        setLanguage(language === 'en' ? 'ar' : 'en');
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="mt-2 px-4 py-3 rounded-lg bg-white/10 border border-white/20 
+                        font-gaming text-base text-white flex items-center justify-center gap-2"
+                    >
+                      <span className={language === 'ar' ? 'text-game-blue' : 'text-white/60'}>العربية</span>
+                      <span className="text-white/40">/</span>
+                      <span className={language === 'en' ? 'text-game-blue' : 'text-white/60'}>English</span>
+                    </button>
                   </div>
                 </motion.div>
               </div>

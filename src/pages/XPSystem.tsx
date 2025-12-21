@@ -73,15 +73,15 @@ const XPSystem = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-block bg-gradient-to-br from-black/80 to-black/40 p-8 rounded-2xl border-2 border-game-blue/30 shadow-[0_0_50px_rgba(0,163,255,0.4)] relative overflow-hidden group hover:scale-105 transition-transform duration-300">
+          <div className="inline-block bg-gradient-to-br from-black/80 to-black/40 p-4 sm:p-6 md:p-8 rounded-2xl border-2 border-game-blue/30 shadow-[0_0_50px_rgba(0,163,255,0.4)] relative overflow-hidden group hover:scale-105 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-r from-game-blue/10 via-transparent to-game-red/10 animate-pulse" />
             <div className="relative z-10">
-              <h2 className="text-4xl font-gaming text-game-blue mb-4 animate-glow">{t('xp.currentLevel')}</h2>
-              <div className="text-7xl font-gaming text-game-white mb-6 animate-bounce-slow relative">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-gaming text-game-blue mb-2 sm:mb-4 animate-glow">{t('xp.currentLevel')}</h2>
+              <div className="text-5xl sm:text-6xl md:text-7xl font-gaming text-game-white mb-4 sm:mb-6 animate-bounce-slow relative">
                 {currentLevel}
                 <div className="absolute -inset-4 bg-gradient-to-r from-game-blue/20 to-game-red/20 blur-lg animate-pulse" />
               </div>
-              <div className="relative w-full h-6 bg-black/50 rounded-full overflow-hidden border-2 border-game-blue/30 p-1">
+              <div className="relative w-full h-4 sm:h-6 bg-black/50 rounded-full overflow-hidden border-2 border-game-blue/30 p-1">
                 <motion.div
                   className="h-full rounded-full bg-gradient-to-r from-game-blue via-white to-game-red relative overflow-hidden"
                   style={{ width: `${xpProgress}%` }}
@@ -96,7 +96,7 @@ const XPSystem = () => {
                   />
                 </motion.div>
               </div>
-              <div className="mt-4 text-xl text-game-white/80 font-gaming animate-pulse">
+              <div className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl text-game-white/80 font-gaming animate-pulse">
                 {currentXP} / {maxXP} XP
               </div>
               <motion.button

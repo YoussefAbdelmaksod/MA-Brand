@@ -128,12 +128,12 @@ const ServiceCard = ({ service, index, t }: { service: Service; index: number; t
               </motion.span>
             )}
             <motion.span
-              className={`text-4xl font-gaming bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}
+              className={`text-2xl sm:text-3xl md:text-4xl font-gaming bg-gradient-to-r ${colors.gradient} bg-clip-text text-transparent`}
               whileHover={{ scale: 1.05 }}
             >
               {service.price}
             </motion.span>
-            <span className="text-white/50 text-sm ml-2">/month</span>
+            <span className="text-white/50 text-xs sm:text-sm ml-1 sm:ml-2">/month</span>
           </div>
 
           {/* Highlights */}
@@ -329,10 +329,10 @@ const Services = () => {
               <p className="text-xl text-white/80 max-w-3xl mx-auto mb-4">
                 {t('services.subtitle')}
               </p>
-              <div className="flex items-center justify-center gap-4 text-sm text-white/60">
-                <span className="flex items-center gap-2"><FaRocket className="text-game-blue" /> {t('services.instantStart')}</span>
-                <span className="flex items-center gap-2"><GiLaurelsTrophy className="text-game-gold" /> {t('services.provenResults')}</span>
-                <span className="flex items-center gap-2"><FaWhatsapp className="text-green-400" /> {t('services.support247')}</span>
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/60">
+                <span className="flex items-center gap-1 sm:gap-2"><FaRocket className="text-game-blue" /> {t('services.instantStart')}</span>
+                <span className="flex items-center gap-1 sm:gap-2"><GiLaurelsTrophy className="text-game-gold" /> {t('services.provenResults')}</span>
+                <span className="flex items-center gap-1 sm:gap-2"><FaWhatsapp className="text-green-400" /> {t('services.support247')}</span>
               </div>
             </motion.div>
 
@@ -348,22 +348,22 @@ const Services = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16"
             >
               {[
-                { icon: <FaTrophy className="text-3xl text-game-gold" />, value: '1000+', labelKey: 'services.warriorsTrained' },
-                { icon: <FaStar className="text-3xl text-yellow-400" />, value: '95%', labelKey: 'home.successRate' },
-                { icon: <FaFire className="text-3xl text-game-red" />, value: '8+', labelKey: 'services.yearsExperience' },
-                { icon: <GiCrossedSwords className="text-3xl text-game-blue" />, value: '500+', labelKey: 'nav.transformations' }
+                { icon: <FaTrophy className="text-2xl sm:text-3xl text-game-gold" />, value: '1000+', labelKey: 'services.warriorsTrained' },
+                { icon: <FaStar className="text-2xl sm:text-3xl text-yellow-400" />, value: '95%', labelKey: 'home.successRate' },
+                { icon: <FaFire className="text-2xl sm:text-3xl text-game-red" />, value: '8+', labelKey: 'services.yearsExperience' },
+                { icon: <GiCrossedSwords className="text-2xl sm:text-3xl text-game-blue" />, value: '500+', labelKey: 'nav.transformations' }
               ].map((stat, i) => (
                 <motion.div
                   key={i}
-                  className="text-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                  className="text-center p-4 sm:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
                   whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.3)' }}
                 >
-                  <div className="mb-3">{stat.icon}</div>
-                  <div className="text-3xl font-gaming text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-white/60">{t(stat.labelKey)}</div>
+                  <div className="mb-2 sm:mb-3">{stat.icon}</div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-gaming text-white mb-1">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-white/60">{t(stat.labelKey)}</div>
                 </motion.div>
               ))}
             </motion.div>

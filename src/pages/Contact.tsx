@@ -180,7 +180,7 @@ ${formData.message}`,
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-gaming font-bold mb-8 relative inline-block">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-gaming font-bold mb-6 sm:mb-8 relative inline-block">
                 {t('contact.joinAdventure').split(' ')[0]} <span className="text-game-blue">{t('contact.joinAdventure').split(' ').slice(1).join(' ')}</span>
                 <motion.div
                   className="absolute -top-6 -right-6 text-4xl text-game-gold"
@@ -190,7 +190,7 @@ ${formData.message}`,
                   <FaStar />
                 </motion.div>
               </h1>
-              <p className="text-xl sm:text-2xl text-game-white/90 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-game-white/90 max-w-3xl mx-auto">
                 {t('contact.heroSubtitle')}
               </p>
             </motion.div>
@@ -251,14 +251,14 @@ ${formData.message}`,
               className="max-w-4xl mx-auto"
             >
               <Card glowing className="relative overflow-hidden">
-                <div className="p-8">
-                  <div className="flex items-center gap-4 mb-6">
+                <div className="p-4 sm:p-6 md:p-8">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                     <div className="p-3 bg-game-blue/20 rounded-lg">
                       <FaHandshake className="text-3xl text-game-blue" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-gaming text-game-white">{t('contact.title')}</h2>
-                      <p className="text-game-white/80">{t('contact.partnerOrJoin')}</p>
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-gaming text-game-white">{t('contact.title')}</h2>
+                      <p className="text-sm sm:text-base text-game-white/80">{t('contact.partnerOrJoin')}</p>
                     </div>
                   </div>
 
