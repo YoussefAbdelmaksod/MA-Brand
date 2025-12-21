@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   // Memoize scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -156,7 +156,7 @@ const Navbar = () => {
                   className="h-screen flex flex-col items-center justify-center p-4"
                 >
                   <div className="w-full max-w-[280px] flex flex-col gap-3">
-                    {navLinks.map(({ path, label }, index) => (
+                    {navLinks.map(({ path, label }) => (
                       <Link
                         key={path}
                         to={path}
