@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   // Memoize scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -113,6 +115,17 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
+
+          {/* Language Toggle - Desktop */}
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 
+              border border-white/20 hover:border-game-blue transition-all duration-300 font-gaming text-sm text-white"
+          >
+            <span className={language === 'ar' ? 'text-game-blue' : 'text-white/60'}>ع</span>
+            <span className="text-white/40">/</span>
+            <span className={language === 'en' ? 'text-game-blue' : 'text-white/60'}>EN</span>
+          </button>
 
           {/* Mobile Menu Button */}
           <button

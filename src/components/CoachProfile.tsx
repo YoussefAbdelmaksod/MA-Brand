@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Card from './Card';
+import { FaCrown, FaDumbbell, FaBolt, FaRunning, FaBrain, FaGamepad, FaAppleAlt } from 'react-icons/fa';
 
 interface Badge {
   title: string;
   level: number;
   color: string;
-  icon: string;
+  icon: React.ReactNode;
   description: string;
   position: { x: number; y: number };
   unlockRequirement: string;
@@ -15,7 +16,7 @@ interface Badge {
 interface Stat {
   name: string;
   value: number;
-  icon: string;
+  icon: React.ReactNode;
   color: string;
   description: string;
 }
@@ -27,7 +28,7 @@ const _badges: Badge[] = [
     title: 'Master Trainer',
     level: 100,
     color: 'from-yellow-400 to-yellow-600',
-    icon: '👑',
+    icon: <FaCrown className="text-yellow-400" />,
     description: 'Legendary status achieved through years of dedication',
     position: { x: -20, y: -20 },
     unlockRequirement: 'Train 1000+ clients successfully'
@@ -36,7 +37,7 @@ const _badges: Badge[] = [
     title: 'Strength Sage',
     level: 95,
     color: 'from-red-500 to-red-700',
-    icon: '💪',
+    icon: <FaDumbbell className="text-red-400" />,
     description: 'Expert in strength and conditioning',
     position: { x: 20, y: -40 },
     unlockRequirement: 'Perfect form in all exercises'
@@ -45,7 +46,7 @@ const _badges: Badge[] = [
     title: 'Nutrition Oracle',
     level: 90,
     color: 'from-green-400 to-green-600',
-    icon: '🥗',
+    icon: <FaAppleAlt className="text-green-400" />,
     description: 'Master of performance nutrition',
     position: { x: -30, y: 20 },
     unlockRequirement: 'Create 500+ meal plans'
@@ -54,7 +55,7 @@ const _badges: Badge[] = [
     title: 'Transformation Guru',
     level: 100,
     color: 'from-purple-400 to-purple-600',
-    icon: '⚡',
+    icon: <FaBolt className="text-purple-400" />,
     description: 'Specialist in complete body transformations',
     position: { x: 30, y: 30 },
     unlockRequirement: 'Guide 100+ successful transformations'
@@ -63,7 +64,7 @@ const _badges: Badge[] = [
     title: 'Quest Master',
     level: 88,
     color: 'from-blue-400 to-blue-600',
-    icon: '🎮',
+    icon: <FaGamepad className="text-blue-400" />,
     description: 'Creator of epic fitness challenges',
     position: { x: 0, y: -50 },
     unlockRequirement: 'Design 200+ workout programs'
@@ -74,28 +75,28 @@ const stats: Stat[] = [
   {
     name: 'Strength',
     value: 95,
-    icon: '💪',
+    icon: <FaDumbbell className="text-red-400" />,
     color: 'from-red-500 to-red-700',
     description: 'Master of power and form'
   },
   {
     name: 'Agility',
     value: 88,
-    icon: '⚡',
+    icon: <FaBolt className="text-yellow-400" />,
     color: 'from-yellow-400 to-yellow-600',
     description: 'Swift and precise movements'
   },
   {
     name: 'Endurance',
     value: 92,
-    icon: '🏃',
+    icon: <FaRunning className="text-green-400" />,
     color: 'from-green-400 to-green-600',
     description: 'Unstoppable stamina'
   },
   {
     name: 'Wisdom',
     value: 97,
-    icon: '🧠',
+    icon: <FaBrain className="text-blue-400" />,
     color: 'from-blue-400 to-blue-600',
     description: 'Elite coaching knowledge'
   }
@@ -103,18 +104,18 @@ const stats: Stat[] = [
 
 // Achievements data for future implementation
 const _achievements = [
-  { title: 'Warriors Trained', value: '1000+', icon: '👥', color: 'from-purple-400 to-purple-600' },
-  { title: 'Boss Fights Won', value: '500+', icon: '⚔️', color: 'from-red-400 to-red-600' },
-  { title: 'Success Rate', value: '95%', icon: '🎯', color: 'from-green-400 to-green-600' },
-  { title: 'Experience Points', value: '8+ Years', icon: '⭐', color: 'from-yellow-400 to-yellow-600' }
+  { title: 'Warriors Trained', value: '1000+', icon: <FaCrown className="text-purple-400" />, color: 'from-purple-400 to-purple-600' },
+  { title: 'Boss Fights Won', value: '500+', icon: <FaDumbbell className="text-red-400" />, color: 'from-red-400 to-red-600' },
+  { title: 'Success Rate', value: '95%', icon: <FaBolt className="text-green-400" />, color: 'from-green-400 to-green-600' },
+  { title: 'Experience Points', value: '8+ Years', icon: <FaCrown className="text-yellow-400" />, color: 'from-yellow-400 to-yellow-600' }
 ];
 
 // Special moves data for future implementation
 const _specialMoves = [
-  { name: 'Perfect Form Master', description: 'Execute exercises with flawless precision', icon: '🎯' },
-  { name: 'Nutrition Strategist', description: 'Craft optimal fuel plans for peak performance', icon: '🥗' },
-  { name: 'Mind-Body Sync', description: 'Achieve perfect harmony of mental and physical power', icon: '🧘' },
-  { name: 'Motivation Amplifier', description: 'Boost warrior spirits to new heights', icon: '🔥' }
+  { name: 'Perfect Form Master', description: 'Execute exercises with flawless precision', icon: <FaBolt className="text-blue-400" /> },
+  { name: 'Nutrition Strategist', description: 'Craft optimal fuel plans for peak performance', icon: <FaAppleAlt className="text-green-400" /> },
+  { name: 'Mind-Body Sync', description: 'Achieve perfect harmony of mental and physical power', icon: <FaBrain className="text-purple-400" /> },
+  { name: 'Motivation Amplifier', description: 'Boost warrior spirits to new heights', icon: <FaBolt className="text-orange-400" /> }
 ];
 
 const CoachProfile = () => {
