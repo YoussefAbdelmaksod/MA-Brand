@@ -12,8 +12,8 @@ interface Transformation {
   beforeImage: string;
   afterImage: string;
   achievement: string;
-  duration: string;
-  weightLost: string;
+  durationVal: string;
+  weightLostVal: string;
   rank: number;
   xpGained: number;
   program: string;
@@ -29,8 +29,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_1.jpeg',
     afterImage: '/Clients/After/client_1.jpeg',
     achievement: 'transformations.achieve.champion',
-    duration: '12 weeks',
-    weightLost: '15 kg',
+    durationVal: '12',
+    weightLostVal: '15',
     rank: 1,
     xpGained: 5000,
     program: 'transformations.program.elite',
@@ -43,8 +43,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_2.jpeg',
     afterImage: '/Clients/After/client_2.jpeg',
     achievement: 'transformations.achieve.master',
-    duration: '16 weeks',
-    weightLost: '18 kg',
+    durationVal: '16',
+    weightLostVal: '18',
     rank: 2,
     xpGained: 4800,
     program: 'transformations.program.warrior',
@@ -57,8 +57,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_3.jpeg',
     afterImage: '/Clients/After/client_3.jpeg',
     achievement: 'transformations.achieve.warrior',
-    duration: '14 weeks',
-    weightLost: '12 kg',
+    durationVal: '14',
+    weightLostVal: '12',
     rank: 3,
     xpGained: 4600,
     program: 'transformations.program.elite',
@@ -71,8 +71,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_4.jpeg',
     afterImage: '/Clients/After/client_4.jpeg',
     achievement: 'transformations.achieve.legend',
-    duration: '20 weeks',
-    weightLost: '22 kg',
+    durationVal: '20',
+    weightLostVal: '22',
     rank: 4,
     xpGained: 4400,
     program: 'transformations.program.legendary',
@@ -85,8 +85,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_5.jpeg',
     afterImage: '/Clients/After/client_5.jpeg',
     achievement: 'transformations.achieve.king',
-    duration: '15 weeks',
-    weightLost: '14 kg',
+    durationVal: '15',
+    weightLostVal: '14',
     rank: 5,
     xpGained: 4200,
     program: 'transformations.program.warrior',
@@ -99,8 +99,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_6.jpeg',
     afterImage: '/Clients/After/client_6.jpeg',
     achievement: 'transformations.achieve.star',
-    duration: '13 weeks',
-    weightLost: '16 kg',
+    durationVal: '13',
+    weightLostVal: '16',
     rank: 6,
     xpGained: 4000,
     program: 'transformations.program.elite',
@@ -114,8 +114,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_7.jpeg',
     afterImage: '/Clients/After/client_7.jpeg',
     achievement: 'transformations.achieve.master',
-    duration: '18 weeks',
-    weightLost: '20 kg',
+    durationVal: '18',
+    weightLostVal: '20',
     rank: 7,
     xpGained: 3800,
     program: 'transformations.program.legendary',
@@ -128,8 +128,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_8.jpeg',
     afterImage: '/Clients/After/client_8.jpeg',
     achievement: 'transformations.achieve.elite',
-    duration: '14 weeks',
-    weightLost: '15 kg',
+    durationVal: '14',
+    weightLostVal: '15',
     rank: 8,
     xpGained: 3600,
     program: 'transformations.program.warrior',
@@ -142,8 +142,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_9.jpeg',
     afterImage: '/Clients/After/client_9.jpeg',
     achievement: 'transformations.achieve.champion',
-    duration: '16 weeks',
-    weightLost: '17 kg',
+    durationVal: '16',
+    weightLostVal: '17',
     rank: 9,
     xpGained: 3400,
     program: 'transformations.program.elite',
@@ -156,8 +156,8 @@ const transformations: Transformation[] = [
     beforeImage: '/Clients/Before/client_10.jpeg',
     afterImage: '/Clients/After/client_10.jpeg',
     achievement: 'transformations.achieve.warrior',
-    duration: '15 weeks',
-    weightLost: '19 kg',
+    durationVal: '15',
+    weightLostVal: '19',
     rank: 10,
     xpGained: 3200,
     program: 'transformations.program.warrior',
@@ -217,7 +217,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
             {/* Front Side */}
             <div className={`relative ${isFlipped ? 'invisible' : 'visible'}`}>
               {/* Before/After Images */}
-              <div className="relative h-48 sm:h-80 flex">
+              <div className="relative h-48 sm:h-64 md:h-80 flex">
                 <motion.div
                   className="w-1/2 relative overflow-hidden"
                   whileHover={{ scale: 1.05 }}
@@ -265,13 +265,13 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
                   <div className="bg-black/30 rounded-lg p-2 sm:p-3 backdrop-blur-sm">
                     <div className="flex items-center gap-1 sm:gap-2 text-game-blue">
                       <FaCalendar className="text-xs sm:text-base" />
-                      <span className="text-[10px] sm:text-sm font-gaming">{transformation.duration}</span>
+                      <span className="text-[10px] sm:text-sm font-gaming">{transformation.durationVal} {t('common.weeks')}</span>
                     </div>
                   </div>
                   <div className="bg-black/30 rounded-lg p-2 sm:p-3 backdrop-blur-sm">
                     <div className="flex items-center gap-1 sm:gap-2 text-game-red">
                       <FaWeightHanging className="text-xs sm:text-base" />
-                      <span className="text-[10px] sm:text-sm font-gaming">{transformation.weightLost}</span>
+                      <span className="text-[10px] sm:text-sm font-gaming">{transformation.weightLostVal} {t('common.kg')}</span>
                     </div>
                   </div>
                   <div className="bg-black/30 rounded-lg p-2 sm:p-3 backdrop-blur-sm">

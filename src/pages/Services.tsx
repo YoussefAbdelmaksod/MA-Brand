@@ -229,7 +229,7 @@ const Services = () => {
       highlights: [t('plans.highlight.beginners'), t('plans.highlight.foundation')],
       icon: <FaShieldAlt className="text-5xl" />,
       level: t('plans.novice'),
-      price: '300 EGP',
+      price: `300 ${t('common.currency')}`,
       xpBonus: 300,
       color: 'green'
     },
@@ -247,7 +247,7 @@ const Services = () => {
       highlights: [t('plans.highlight.popular'), t('plans.highlight.transformations')],
       icon: <GiCrossedSwords className="text-5xl" />,
       level: t('plans.warrior'),
-      price: '900 EGP',
+      price: `900 ${t('common.currency')}`,
       xpBonus: 900,
       color: 'blue',
       popular: true
@@ -266,7 +266,7 @@ const Services = () => {
       highlights: [t('plans.highlight.athletes'), t('plans.highlight.complete')],
       icon: <FaTrophy className="text-5xl" />,
       level: t('plans.elite'),
-      price: '2,000 EGP',
+      price: `2,000 ${t('common.currency')}`,
       xpBonus: 2000,
       color: 'purple'
     },
@@ -285,8 +285,8 @@ const Services = () => {
       highlights: [t('plans.highlight.bestValue'), t('plans.highlight.vip')],
       icon: <FaGem className="text-5xl" />,
       level: t('plans.legendary'),
-      price: '3,500 EGP',
-      originalPrice: '5,000 EGP',
+      price: `3,500 ${t('common.currency')}`,
+      originalPrice: `5,000 ${t('common.currency')}`,
       xpBonus: 5000,
       color: 'yellow',
       bestValue: true

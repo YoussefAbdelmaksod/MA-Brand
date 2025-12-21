@@ -19,6 +19,40 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.transformations': 'Transformations',
         'nav.xpSystem': 'XP System',
         'nav.contact': 'Contact',
+        'nav.blog': 'Blog',
+
+        // Common Units & Currency
+        'common.currency': 'EGP',
+        'common.weeks': 'weeks',
+        'common.kg': 'kg',
+        'common.perMonth': '/month',
+
+        // Months
+        'month.jan': 'Jan',
+        'month.feb': 'Feb',
+        'month.mar': 'Mar',
+        'month.apr': 'Apr',
+        'month.may': 'May',
+        'month.jun': 'Jun',
+        'month.jul': 'Jul',
+        'month.aug': 'Aug',
+        'month.sep': 'Sep',
+        'month.oct': 'Oct',
+        'month.nov': 'Nov',
+        'month.dec': 'Dec',
+
+        'month.full.jan': 'January',
+        'month.full.feb': 'February',
+        'month.full.mar': 'March',
+        'month.full.apr': 'April',
+        'month.full.may': 'May',
+        'month.full.jun': 'June',
+        'month.full.jul': 'July',
+        'month.full.aug': 'August',
+        'month.full.sep': 'September',
+        'month.full.oct': 'October',
+        'month.full.nov': 'November',
+        'month.full.dec': 'December',
 
         // Home Page
         'home.levelUp': 'Level Up',
@@ -104,6 +138,7 @@ const translations: Record<Language, Record<string, string>> = {
         'about.cert.weightDesc': 'Specialized strategies for sustainable weight loss and body composition',
         'about.cert.cpr': 'CPR & First Aid',
         'about.cert.cprDesc': 'Certified by Egyptian Red Crescent',
+        'about.badge.level100': 'Level 100 Coach',
 
         // Services Page
         'services.title': 'Choose Your Path',
@@ -397,6 +432,40 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.transformations': 'التحولات',
         'nav.xpSystem': 'نظام XP',
         'nav.contact': 'تواصل معنا',
+        'nav.blog': 'المقالات',
+
+        // Common Units & Currency
+        'common.currency': 'ج.م',
+        'common.weeks': 'أسابيع',
+        'common.kg': 'كجم',
+        'common.perMonth': '/شهر',
+
+        // Months
+        'month.jan': 'يناير',
+        'month.feb': 'فبراير',
+        'month.mar': 'مارس',
+        'month.apr': 'أبريل',
+        'month.may': 'مايو',
+        'month.jun': 'يونيو',
+        'month.jul': 'يوليو',
+        'month.aug': 'أغسطس',
+        'month.sep': 'سبتمبر',
+        'month.oct': 'أكتوبر',
+        'month.nov': 'نوفمبر',
+        'month.dec': 'ديسمبر',
+
+        'month.full.jan': 'يناير',
+        'month.full.feb': 'فبراير',
+        'month.full.mar': 'مارس',
+        'month.full.apr': 'أبريل',
+        'month.full.may': 'مايو',
+        'month.full.jun': 'يونيو',
+        'month.full.jul': 'يوليو',
+        'month.full.aug': 'أغسطس',
+        'month.full.sep': 'سبتمبر',
+        'month.full.oct': 'أكتوبر',
+        'month.full.nov': 'نوفمبر',
+        'month.full.dec': 'ديسمبر',
 
         // Home Page
         'home.levelUp': 'ارتقِ',
@@ -482,6 +551,7 @@ const translations: Record<Language, Record<string, string>> = {
         'about.cert.weightDesc': 'استراتيجيات متخصصة لفقدان الوزن المستدام وتكوين الجسم',
         'about.cert.cpr': 'الإسعافات الأولية والإنعاش القلبي الرئوي',
         'about.cert.cprDesc': 'معتمد من الهلال الأحمر المصري',
+        'about.badge.level100': 'مدرب مستوى 100',
         'about.cert.foodHealth': 'مقدمة في الغذاء والصحة',
         'about.cert.stanford': 'جامعة ستانفورد',
         'about.cert.foodHealthDesc': 'أساسيات علوم التغذية وتحسين الصحة',

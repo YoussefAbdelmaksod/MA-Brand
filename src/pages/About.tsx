@@ -8,7 +8,8 @@ import { FaGraduationCap, FaDumbbell, FaCertificate, FaUserTie, FaChartLine, FaT
 import { useLanguage } from '@/hooks/useLanguage';
 
 interface TimelineItem {
-  date: string;
+  year: string;
+  monthKey: string;
   title: string;
   description: string;
   type: 'education' | 'career' | 'certification' | 'management';
@@ -36,14 +37,7 @@ interface Education {
 const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const formatDate = (dateStr: string) => {
-    const [month, year] = dateStr.split(' ');
-    const monthAbbr = month.substring(0, 3).toUpperCase();
-    return { monthAbbr, year };
-  };
-
-  const { monthAbbr, year } = formatDate(item.date);
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -54,10 +48,10 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
       className="relative flex items-center gap-4 mb-12 last:mb-0 md:gap-8"
     >
       {/* Left side - Date and Icon */}
-      <div className="flex flex-col items-center min-w-[120px] md:min-w-[160px]">
+      <div className="flex flex-col items-center min-w-[100px] sm:min-w-[120px] md:min-w-[160px]">
         {/* Date Badge */}
         <motion.div
-          className={`px-4 py-2 rounded-xl text-sm font-gaming mb-4 w-full text-center bg-black border-2
+          className={`px-2 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-gaming mb-4 w-full text-center bg-black border-2
             ${item.type === 'education' ? 'border-game-blue text-game-blue' :
               item.type === 'management' ? 'border-purple-500 text-purple-500' :
                 'border-game-red text-game-red'}`}
@@ -65,13 +59,13 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: index * 0.3 }}
         >
-          <div className="text-lg font-bold">{monthAbbr}</div>
-          <div className="text-sm opacity-90">{year}</div>
+          <div className="text-base sm:text-lg font-bold">{t(item.monthKey)}</div>
+          <div className="text-xs sm:text-sm opacity-90">{item.year}</div>
         </motion.div>
 
         {/* Icon Circle */}
         <motion.div
-          className={`relative z-20 w-12 h-12 rounded-full border-2 flex items-center justify-center bg-black
+          className={`relative z-20 w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 flex items-center justify-center bg-black
             ${item.type === 'education' ? 'border-game-blue' :
               item.type === 'management' ? 'border-purple-500' :
                 'border-game-red'}
@@ -82,7 +76,7 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
           whileHover={{ scale: 1.1 }}
         >
           <motion.div
-            className={`text-xl
+            className={`text-lg sm:text-xl
               ${item.type === 'education' ? 'text-game-blue' :
                 item.type === 'management' ? 'text-purple-500' :
                   'text-game-red'}`}
@@ -95,7 +89,7 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
       </div>
 
       {/* Vertical Line */}
-      <div className="absolute left-[120px] md:left-[160px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-game-white/10 to-transparent" />
+      <div className="absolute left-[100px] sm:left-[120px] md:left-[160px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-game-white/10 to-transparent" />
 
       {/* Right side - Content */}
       <div className="flex-1">
@@ -224,7 +218,8 @@ const About = () => {
 
   const timelineData: TimelineItem[] = [
     {
-      date: 'March 2025',
+      year: '2025',
+      monthKey: 'month.mar',
       title: t('about.timeline.branchManager'),
       description: t('about.timeline.branchManagerDesc'),
       type: 'management',
@@ -232,28 +227,32 @@ const About = () => {
       highlight: true
     },
     {
-      date: 'June 2024',
+      year: '2024',
+      monthKey: 'month.jun',
       title: t('about.timeline.fitnessManager'),
       description: t('about.timeline.fitnessManagerDesc'),
       type: 'management',
       icon: <FaUserTie size={24} className="text-purple-500" />,
     },
     {
-      date: 'January 2024',
+      year: '2024',
+      monthKey: 'month.jan',
       title: t('about.timeline.fitnessMgmt'),
       description: t('about.timeline.fitnessMgmtDesc'),
       type: 'management',
       icon: <FaChartLine size={24} className="text-purple-500" />
     },
     {
-      date: 'June 2023',
+      year: '2023',
+      monthKey: 'month.jun',
       title: t('about.timeline.coaching'),
       description: t('about.timeline.coachingDesc'),
       type: 'career',
       icon: <FaDumbbell size={24} className="text-game-red" />
     },
     {
-      date: 'September 2022',
+      year: '2022',
+      monthKey: 'month.sep',
       title: t('about.timeline.founder'),
       description: t('about.timeline.founderDesc'),
       type: 'career',
@@ -261,7 +260,8 @@ const About = () => {
       highlight: true
     },
     {
-      date: 'March 2022',
+      year: '2022',
+      monthKey: 'month.mar',
       title: t('about.timeline.online'),
       description: t('about.timeline.onlineDesc'),
       type: 'career',
@@ -355,7 +355,7 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h1 className="text-5xl sm:text-7xl font-gaming font-bold mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-gaming font-bold mb-6">
                 {t('about.title').split(' ')[0]} <span className="text-game-red">{t('about.title').split(' ').slice(1).join(' ')}</span>
               </h1>
               <p className="text-xl sm:text-2xl text-game-white/80 max-w-3xl mx-auto">
@@ -463,7 +463,7 @@ const About = () => {
                 </div>
                 <div className="absolute bottom-4 left-4 z-20">
                   <div className="bg-black/60 backdrop-blur-sm px-4 py-2 rounded-lg border border-game-blue/30">
-                    <p className="text-game-blue font-gaming text-sm">Level 100 Coach</p>
+                    <p className="text-game-blue font-gaming text-sm">{t('about.badge.level100')}</p>
                   </div>
                 </div>
               </motion.div>
@@ -479,7 +479,7 @@ const About = () => {
                   {/* Main Timeline Container */}
                   <div className="relative">
                     {timelineData.map((item, index) => (
-                      <TimelineItem key={item.date} item={item} index={index} />
+                      <TimelineItem key={`${item.year}-${item.monthKey}`} item={item} index={index} />
                     ))}
                   </div>
                 </div>
