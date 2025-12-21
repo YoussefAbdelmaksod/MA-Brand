@@ -120,7 +120,16 @@ const AppComingSoon = () => {
                                             }}
                                             transition={{ duration: 2, repeat: Infinity }}
                                         >
-                                            <img src="/4.gif" alt="App Logo" className="w-full h-full object-cover" />
+                                            <video
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                                className="w-full h-full object-cover"
+                                            >
+                                                <source src="/4.webm" type="video/webm" />
+                                                <source src="/4.mp4" type="video/mp4" />
+                                            </video>
                                         </motion.div>
 
                                         <span className="text-game-blue font-gaming text-sm mb-2">{t('app.levelUp')}</span>

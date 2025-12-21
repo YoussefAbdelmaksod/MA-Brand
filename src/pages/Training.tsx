@@ -256,19 +256,16 @@ const Training = () => {
                   }}
                   className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-game-blue/50"
                 >
-                  <motion.img
-                    src="/4.gif"
-                    alt="Coach Moumen"
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="w-full h-full object-cover"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                  />
+                  >
+                    <source src="/4.webm" type="video/webm" />
+                    <source src="/4.mp4" type="video/mp4" />
+                  </video>
                 </motion.div>
               </motion.div>
 

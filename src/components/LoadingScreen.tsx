@@ -61,13 +61,16 @@ const LoadingScreen = () => {
             transition={{ duration: 0.8, repeat: Infinity }}
             className="w-32 h-32 rounded-full overflow-hidden border-4 border-game-blue/50"
           >
-            <motion.img
-              src="/4.gif"
-              alt="Coach Moumen"
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-full object-cover"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            />
+            >
+              <source src="/4.webm" type="video/webm" />
+              <source src="/4.mp4" type="video/mp4" />
+            </video>
           </motion.div>
         </motion.div>
 

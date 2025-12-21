@@ -39,22 +39,23 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="flex items-center"
             role="button"
           >
-            <motion.img 
-              src="/4.gif" 
-              alt="Coach Moumen" 
+            <motion.img
+              src="/4-poster.jpg"
+              alt="Coach Moumen"
               className="h-16 w-auto sm:h-20"
+              width={80}
+              height={80}
               loading="eager"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -73,8 +74,8 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className={`relative px-3 lg:px-4 py-2 font-gaming text-sm tracking-wider
-                    ${location.pathname === path 
-                      ? 'text-game-white bg-game-blue border-2 border-game-blue rounded-lg' 
+                    ${location.pathname === path
+                      ? 'text-game-white bg-game-blue border-2 border-game-blue rounded-lg'
                       : 'text-game-white hover:text-game-white'}
                     transition-all duration-300 hover:bg-gradient-to-r hover:from-game-blue hover:to-game-red
                     before:absolute before:inset-0 before:border-2 before:border-transparent
@@ -87,7 +88,7 @@ const Navbar = () => {
                     <motion.span
                       className="absolute inset-0 rounded-lg"
                       initial={{ opacity: 0 }}
-                      animate={{ 
+                      animate={{
                         opacity: [0.2, 0.4, 0.2],
                         boxShadow: [
                           '0 0 10px rgba(0,163,255,0.5), 0 0 20px rgba(0,163,255,0.3)',
@@ -108,7 +109,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="md:hidden fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center
               rounded-lg bg-black border border-game-white/30 hover:border-game-blue 
               transition-all duration-300"
@@ -142,8 +143,8 @@ const Navbar = () => {
                         to={path}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`px-4 py-3 rounded-lg font-gaming text-base text-center bg-black
-                          ${location.pathname === path 
-                            ? 'border-2 border-white/20' 
+                          ${location.pathname === path
+                            ? 'border-2 border-white/20'
                             : 'border border-white/10'}
                           hover:border-white/30 transition-all duration-300`}
                       >

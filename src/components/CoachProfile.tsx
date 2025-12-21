@@ -70,31 +70,31 @@ const _badges: Badge[] = [
 ];
 
 const stats: Stat[] = [
-  { 
-    name: 'Strength', 
-    value: 95, 
-    icon: '💪', 
+  {
+    name: 'Strength',
+    value: 95,
+    icon: '💪',
     color: 'from-red-500 to-red-700',
     description: 'Master of power and form'
   },
-  { 
-    name: 'Agility', 
-    value: 88, 
-    icon: '⚡', 
+  {
+    name: 'Agility',
+    value: 88,
+    icon: '⚡',
     color: 'from-yellow-400 to-yellow-600',
     description: 'Swift and precise movements'
   },
-  { 
-    name: 'Endurance', 
-    value: 92, 
-    icon: '🏃', 
+  {
+    name: 'Endurance',
+    value: 92,
+    icon: '🏃',
     color: 'from-green-400 to-green-600',
     description: 'Unstoppable stamina'
   },
-  { 
-    name: 'Wisdom', 
-    value: 97, 
-    icon: '🧠', 
+  {
+    name: 'Wisdom',
+    value: 97,
+    icon: '🧠',
     color: 'from-blue-400 to-blue-600',
     description: 'Elite coaching knowledge'
   }
@@ -133,10 +133,10 @@ const CoachProfile = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
@@ -145,7 +145,7 @@ const CoachProfile = () => {
   return (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Profile Header */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-12"
@@ -161,7 +161,7 @@ const CoachProfile = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Profile Section - Enhanced Image */}
         <div className="lg:col-span-1 flex items-center justify-center py-4 sm:py-6 lg:py-8">
-          <motion.div 
+          <motion.div
             className="relative w-[min(220px,90vw)] h-[min(220px,90vw)] xs:w-[min(260px,80vw)] xs:h-[min(260px,80vw)] sm:w-[min(320px,70vw)] sm:h-[min(320px,70vw)] md:w-[min(380px,50vw)] md:h-[min(380px,50vw)] lg:w-[420px] lg:h-[420px]"
             whileHover={{ scale: isMobile ? 1 : 1.05 }}
             transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
@@ -239,9 +239,11 @@ const CoachProfile = () => {
               transition={{ delay: 0.3 }}
             >
               <img
-                src="/profile.jpg"
+                src="/profile_optimized.jpg"
                 alt="Coach Profile"
                 className="w-full h-full object-cover object-center"
+                width={400}
+                height={400}
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-game-black/80 to-transparent" />
@@ -338,9 +340,11 @@ const CoachProfile = () => {
             {/* Image Container - Optimized for mobile */}
             <div className="absolute inset-3 xs:inset-4 overflow-hidden rounded-xl border-2 xs:border-3 sm:border-4 border-game-white/30 bg-gradient-to-br from-game-blue/20 to-game-red/20">
               <img
-                src="/profile.jpg"
+                src="/profile_optimized.jpg"
                 alt="Coach Moumen"
                 className="w-full h-full object-cover object-center"
+                width={400}
+                height={400}
                 loading="eager"
               />
             </div>
@@ -398,8 +402,8 @@ const CoachProfile = () => {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 className={`px-6 py-3 rounded-lg font-gaming text-lg transition-all
-                  ${activeTab === tab.id 
-                    ? 'bg-gradient-to-r from-game-blue to-game-red text-white' 
+                  ${activeTab === tab.id
+                    ? 'bg-gradient-to-r from-game-blue to-game-red text-white'
                     : 'bg-black/50 text-game-white/70 hover:bg-black/70'}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
