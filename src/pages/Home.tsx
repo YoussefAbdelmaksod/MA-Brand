@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye, FaGamepad } from 'react-icons/fa';
 import { GiCrossedSwords } from 'react-icons/gi';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const StatCounter = ({ value, label, icon }: { value: number; label: string; icon: React.ReactNode }) => {
   const [count, setCount] = useState(0);
@@ -73,6 +74,7 @@ const StatCounter = ({ value, label, icon }: { value: number; label: string; ico
 const Home = () => {
   const { scrollYProgress } = useScroll();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
@@ -123,13 +125,13 @@ const Home = () => {
                 className="text-4xl sm:text-6xl md:text-7xl font-gaming font-bold mb-6 sm:mb-8 leading-tight tracking-wider"
               >
                 <span className="text-game-white text-glow inline-block">
-                  Level Up
+                  {t('home.levelUp')}
                 </span>{' '}
                 <span className="text-game-blue text-glow inline-block">
-                  Your Life
+                  {t('home.yourLife')}
                 </span>
                 <span className="block text-game-red text-glow-red mt-2 sm:mt-4 text-3xl sm:text-5xl md:text-6xl">
-                  With Coach Moumen
+                  {t('home.withCoach')}
                 </span>
               </motion.h1>
 
@@ -140,7 +142,7 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg sm:text-xl md:text-2xl mb-10 sm:mb-12 text-game-white/80 font-gaming tracking-wide max-w-2xl mx-auto"
               >
-                Transform your fitness journey into an epic adventure
+                {t('home.heroSubtitle')}
               </motion.p>
 
               {/* CTA Buttons - Cleaner design */}
@@ -160,7 +162,7 @@ const Home = () => {
                     hover:border-game-red transition-colors duration-200
                     shadow-[0_0_20px_rgba(255,0,0,0.3)]"
                 >
-                  Start Your Journey
+                  {t('home.startJourney')}
                 </motion.button>
 
                 <motion.button
@@ -173,7 +175,7 @@ const Home = () => {
                     hover:border-game-blue transition-colors duration-200
                     shadow-[0_0_20px_rgba(0,163,255,0.3)]"
                 >
-                  View Programs
+                  {t('home.viewPrograms')}
                 </motion.button>
               </motion.div>
 
@@ -223,34 +225,29 @@ const Home = () => {
                 transition={{ duration: 0.3 }}
               >
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-gaming mb-4">
-                  Achievement <span className="text-game-red">Unlocked</span>
+                  {t('home.statsTitle')}
                 </h2>
-                <div className="flex justify-center items-center gap-2 text-xl font-gaming text-game-white/80">
-                  <FaGamepad className="text-2xl text-game-blue" />
-                  <span>Level Up Your Fitness Journey</span>
-                  <FaBolt className="text-2xl text-game-gold" />
-                </div>
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 <StatCounter
                   value={1500}
-                  label="Total XP Gained"
+                  label={t('home.totalXpGained')}
                   icon={<FaBolt className="text-yellow-400" />}
                 />
                 <StatCounter
                   value={350}
-                  label="Active Warriors"
+                  label={t('home.activeWarriors')}
                   icon={<GiCrossedSwords className="text-game-red" />}
                 />
                 <StatCounter
                   value={95}
-                  label="Success Rate"
+                  label={t('home.successRate')}
                   icon={<FaBullseye className="text-game-blue" />}
                 />
                 <StatCounter
                   value={180}
-                  label="Boss Battles Won"
+                  label={t('home.bossBattlesWon')}
                   icon={<FaCrown className="text-game-gold" />}
                 />
               </div>

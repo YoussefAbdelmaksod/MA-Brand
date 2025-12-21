@@ -21,16 +21,19 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.contact': 'Contact',
 
         // Home Page
-        'home.heroTitle': 'Level Up Your Life',
-        'home.heroSubtitle': 'Transform your body with gaming-inspired training',
+        'home.levelUp': 'Level Up',
+        'home.yourLife': 'Your Life',
+        'home.withCoach': 'With Coach Moumen',
+        'home.heroSubtitle': 'Transform your fitness journey into an epic adventure',
         'home.startJourney': 'Start Your Journey',
-        'home.viewTransformations': 'View Transformations',
-        'home.achievementUnlocked': 'Achievement Unlocked',
-        'home.levelUpFitness': 'Level Up Your Fitness Journey',
+        'home.viewPrograms': 'View Programs',
+        'home.statsTitle': 'Your Stats',
         'home.totalXpGained': 'Total XP Gained',
         'home.activeWarriors': 'Active Warriors',
         'home.successRate': 'Success Rate',
         'home.bossBattlesWon': 'Boss Battles Won',
+        'home.readyToLevel': 'Ready to level up?',
+        'home.joinUs': 'Join thousands of warriors',
 
         // About Page
         'about.title': 'About Coach Moumen',
@@ -179,16 +182,19 @@ const translations: Record<Language, Record<string, string>> = {
         'nav.contact': 'تواصل معنا',
 
         // Home Page
-        'home.heroTitle': 'ارتقِ بحياتك',
-        'home.heroSubtitle': 'حوّل جسمك بتدريب مستوحى من الألعاب',
+        'home.levelUp': 'ارتقِ',
+        'home.yourLife': 'بحياتك',
+        'home.withCoach': 'مع الكابتن مؤمن',
+        'home.heroSubtitle': 'حوّل رحلة لياقتك إلى مغامرة ملحمية',
         'home.startJourney': 'ابدأ رحلتك',
-        'home.viewTransformations': 'شاهد التحولات',
-        'home.achievementUnlocked': 'تم فتح إنجاز',
-        'home.levelUpFitness': 'ارتقِ بمستوى لياقتك',
+        'home.viewPrograms': 'عرض البرامج',
+        'home.statsTitle': 'إحصائياتك',
         'home.totalXpGained': 'إجمالي نقاط الخبرة',
         'home.activeWarriors': 'المحاربون النشطون',
         'home.successRate': 'معدل النجاح',
         'home.bossBattlesWon': 'معارك الزعماء المنتصرة',
+        'home.readyToLevel': 'مستعد للارتقاء؟',
+        'home.joinUs': 'انضم لآلاف المحاربين',
 
         // About Page
         'about.title': 'عن الكابتن مؤمن',
