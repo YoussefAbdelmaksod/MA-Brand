@@ -23,7 +23,6 @@ import './styles/globals.css';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -36,7 +35,6 @@ function App() {
     // Show loading screen for 1.5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-      setHasLoaded(true);
     }, 1500);
 
     return () => {
@@ -76,7 +74,16 @@ function App() {
                         transition={{ duration: 1, repeat: Infinity }}
                         className="w-16 h-16 rounded-full overflow-hidden border-2 border-game-blue/50"
                       >
-                        <img src="/4.gif" alt="Loading" className="w-full h-full object-cover" />
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover"
+                        >
+                          <source src="/4.webm" type="video/webm" />
+                          <source src="/4.mp4" type="video/mp4" />
+                        </video>
                       </motion.div>
                     </div>
                   }>

@@ -429,7 +429,7 @@ const Home = () => {
                         className="w-full rounded-xl aspect-video"
                         controls
                         playsInline
-                        poster="/4.gif"
+                        poster="/4-poster.jpg"
                         controlsList="nodownload"
                         onContextMenu={(e) => e.preventDefault()}
                         disablePictureInPicture
