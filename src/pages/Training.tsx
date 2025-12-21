@@ -18,7 +18,7 @@ interface Mission {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const missions: Mission[] = [
+const _missions: Mission[] = [
   {
     id: 'str-001',
     title: 'Power Level: Upper Body',
@@ -116,7 +116,7 @@ const difficultyColors = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const MissionCard = ({ mission }: { mission: Mission }) => {
+const _MissionCard = ({ mission }: { mission: Mission }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
