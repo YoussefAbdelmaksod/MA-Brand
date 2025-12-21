@@ -1,93 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
-import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift } from 'react-icons/fa';
+import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye } from 'react-icons/fa';
+import { GiCrossedSwords, GiLaurelsTrophy } from 'react-icons/gi';
 
 const XPSystem = () => {
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentLevel] = useState(1);
   const [currentXP, setCurrentXP] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [startTouchX, setStartTouchX] = useState(0);
-  const [currentX, setCurrentX] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const maxXP = 1000;
 
-  const handleDragStart = (clientX: number) => {
-    setIsDragging(true);
-    setStartX(clientX);
-    setCurrentX(clientX);
-    setDragOffset(0);
-  };
-
-  const handleDragMove = (clientX: number, container: HTMLElement) => {
-    if (!isDragging) return;
-    const rect = container.getBoundingClientRect();
-    const deltaX = clientX - startX;
-    setCurrentX(clientX);
-    setDragOffset(deltaX);
-
-    const slideWidth = rect.width / levelTiers.length;
-    const newSlide = Math.max(0, Math.min(levelTiers.length - 1, Math.round(-deltaX / slideWidth)));
-
-    if (Math.abs(deltaX) > slideWidth * 0.1) {
-      setCurrentSlide(newSlide);
+  const scrollToSlide = (index: number) => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 320;
+      scrollContainerRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
     }
+    setCurrentSlide(index);
   };
 
-  const handleDragEnd = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    handleDragStart(e.clientX);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    handleDragMove(e.clientX, e.currentTarget as HTMLElement);
-  };
-
-  const handleMouseUp = () => {
-    handleDragEnd();
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    handleDragStart(touch.clientX);
-    setStartTouchX(touch.clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    handleDragMove(touch.clientX, e.currentTarget as HTMLElement);
-  };
-
-  const handleTouchEnd = () => {
-    handleDragEnd();
-  };
-
-  const handleClick = (level: number) => {
-    if (Math.abs(currentX - startX) < 5) {
-      setCurrentSlide(level);
+  // Handle scroll events to update current slide indicator
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      const cardWidth = 320;
+      const newSlide = Math.round(scrollLeft / cardWidth);
+      if (newSlide !== currentSlide) {
+        setCurrentSlide(newSlide);
+      }
     }
   };
 
   const handleViewArsenal = () => {
     window.location.href = '/services';
   };
-
-  useEffect(() => {
-    if (!isDragging) {
-      const slideTimer = setInterval(() => {
-        setCurrentSlide(prev => (prev + 1) % 11);
-      }, 3000);
-
-      return () => clearInterval(slideTimer);
-    }
-  }, [isDragging]);
 
   useEffect(() => {
     // Simulate XP progress animation
@@ -99,19 +50,36 @@ const XPSystem = () => {
   }, []);
 
   const xpProgress = (currentXP / maxXP) * 100;
+
+  // Themed icons instead of emojis
+  const tierIcons = [
+    <FaStar className="text-green-400" />,           // Novice
+    <GiCrossedSwords className="text-game-red" />,   // Warrior
+    <FaBullseye className="text-game-blue" />,       // Elite Trainee
+    <FaStar className="text-yellow-400" />,          // Legend
+    <FaCrown className="text-game-gold" />,          // Leader
+    <FaShieldAlt className="text-purple-400" />,     // Knight
+    <FaTrophy className="text-game-red" />,          // Victory Master
+    <GiLaurelsTrophy className="text-game-blue" />,  // Champion
+    <FaFire className="text-orange-500" />,          // Beast
+    <FaStar className="text-game-gold" />,           // Legend Elite
+    <FaGem className="text-cyan-400" />,             // Supreme Warrior
+    <FaCrown className="text-game-gold" />,          // Captain MA
+  ];
+
   const levelTiers = [
-    { level: '1-9', title: 'Fitness Novice', reward: 'Gaining exercise experience', icon: '🌱' },
-    { level: '10-19', title: 'MA Warrior', reward: 'Special MA Warrior T-shirt', icon: '⚔️' },
-    { level: '20-29', title: 'Elite Trainee', reward: 'MA Hoodie for distinguished players', icon: '🎯' },
-    { level: '30-39', title: 'MA Legend', reward: 'Special Edition MA T-shirt', icon: '🌟' },
-    { level: '40-49', title: 'Fitness Leader', reward: 'Limited Edition MA Hoodie', icon: '👑' },
-    { level: '50-59', title: 'MA Knight', reward: 'New Design MA T-shirt', icon: '🛡️' },
-    { level: '60-69', title: 'Victory Master', reward: 'Level-specific MA Hoodie', icon: '🏆' },
-    { level: '70-79', title: 'MA Champion', reward: 'Exclusive Design MA T-shirt', icon: '💫' },
-    { level: '80-89', title: 'Fitness Beast', reward: 'Champions MA Hoodie', icon: '🔥' },
-    { level: '90-98', title: 'MA Legend Elite', reward: 'Top-tier MA T-shirt', icon: '⭐' },
-    { level: '99', title: 'Supreme Warrior', reward: 'VIP Edition MA Hoodie', icon: '💎' },
-    { level: '100', title: 'Captain MA', reward: 'Exclusive to Captain Moumen (MA)', icon: '👑' },
+    { level: '1-9', title: 'Fitness Novice', reward: 'Gaining exercise experience' },
+    { level: '10-19', title: 'MA Warrior', reward: 'Special MA Warrior T-shirt' },
+    { level: '20-29', title: 'Elite Trainee', reward: 'MA Hoodie for distinguished players' },
+    { level: '30-39', title: 'MA Legend', reward: 'Special Edition MA T-shirt' },
+    { level: '40-49', title: 'Fitness Leader', reward: 'Limited Edition MA Hoodie' },
+    { level: '50-59', title: 'MA Knight', reward: 'New Design MA T-shirt' },
+    { level: '60-69', title: 'Victory Master', reward: 'Level-specific MA Hoodie' },
+    { level: '70-79', title: 'MA Champion', reward: 'Exclusive Design MA T-shirt' },
+    { level: '80-89', title: 'Fitness Beast', reward: 'Champions MA Hoodie' },
+    { level: '90-98', title: 'MA Legend Elite', reward: 'Top-tier MA T-shirt' },
+    { level: '99', title: 'Supreme Warrior', reward: 'VIP Edition MA Hoodie' },
+    { level: '100', title: 'Captain MA', reward: 'Exclusive to Captain Moumen (MA)' },
   ];
 
   return (
@@ -121,9 +89,9 @@ const XPSystem = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,163,255,0.2)_0%,transparent_70%)] animate-pulse opacity-70" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,0,0,0.2)_0%,transparent_100%)] animate-pulse opacity-50" />
         <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%_50%,rgba(0,163,255,0.1)_0%,rgba(255,0,0,0.1)_25%,rgba(0,163,255,0.1)_50%,rgba(255,0,0,0.1)_75%,rgba(0,163,255,0.1)_100%)] animate-spin-slow opacity-30" />
-      
+
         {/* Current Level Display with Enhanced Effects */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
@@ -167,7 +135,7 @@ const XPSystem = () => {
         </motion.div>
 
         {/* Hero Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16 relative"
@@ -182,7 +150,7 @@ const XPSystem = () => {
         </motion.div>
 
         {/* How to Earn XP Section */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -194,28 +162,28 @@ const XPSystem = () => {
               <h2 className="text-2xl sm:text-3xl font-gaming text-game-white">How to Earn XP</h2>
             </div>
             <ul className="space-y-4 text-game-white/80">
-              <motion.li 
+              <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
                 <p className="group-hover:text-game-blue transition-colors">Start at Level 1 when you subscribe to any package</p>
               </motion.li>
-              <motion.li 
+              <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
                 <p className="group-hover:text-game-blue transition-colors">Each package grants you XP to help you progress</p>
               </motion.li>
-              <motion.li 
+              <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
                 <p className="group-hover:text-game-blue transition-colors">Every 10 levels, unlock a new title and special rewards</p>
               </motion.li>
-              <motion.li 
+              <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
@@ -227,7 +195,7 @@ const XPSystem = () => {
         </motion.section>
 
         {/* Level Tiers Section - Horizontal Timeline */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -235,7 +203,7 @@ const XPSystem = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-game-blue/5 to-game-red/5 animate-pulse-slow" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,163,255,0.1)_0%,transparent_70%)] animate-pulse" />
-          
+
           <div className="flex items-center justify-between mb-8 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-gaming text-game-white flex items-center gap-3">
               <FaTrophy className="text-game-red animate-bounce-slow" />
@@ -243,7 +211,7 @@ const XPSystem = () => {
             </h2>
             <div className="hidden sm:flex items-center gap-2 text-game-white/60 text-sm">
               <span>Scroll</span>
-              <motion.div 
+              <motion.div
                 animate={{ x: [0, 10, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="text-game-blue"
@@ -256,7 +224,7 @@ const XPSystem = () => {
           {/* Horizontal Timeline */}
           <div className="relative z-10 mb-8 px-4 sm:px-0">
             <div className="w-full h-2 bg-gradient-to-r from-game-blue/30 to-game-red/30 rounded-full relative">
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 w-full h-full overflow-hidden"
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
@@ -264,27 +232,20 @@ const XPSystem = () => {
               >
                 <div className="w-full h-full bg-gradient-to-r from-game-blue to-game-red rounded-full" />
               </motion.div>
-              
+
               {/* Timeline Markers */}
               {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((level, i) => (
-                <motion.div 
+                <motion.div
                   key={level}
                   className="absolute top-1/2 -translate-y-1/2 cursor-pointer"
                   style={{ left: `${level}%` }}
                   initial={{ scale: 0 }}
-                  animate={{ 
+                  animate={{
                     scale: currentSlide === i ? 1.5 : 1,
                     boxShadow: currentSlide === i ? '0 0 20px rgba(0,163,255,0.9)' : 'none'
                   }}
                   transition={{ duration: 0.5 }}
-                  onClick={() => setCurrentSlide(i)}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
+                  onClick={() => scrollToSlide(i)}
                 >
                   <div className="w-4 h-4 rounded-full bg-gradient-to-r from-game-blue to-game-red -mt-1 shadow-[0_0_10px_rgba(0,163,255,0.7)]" />
                   <div className="absolute -left-3 -bottom-8 text-xs font-gaming text-game-white/80">{level}</div>
@@ -293,41 +254,21 @@ const XPSystem = () => {
             </div>
           </div>
 
-          {/* Auto-sliding Cards Container */}
-          <div className="relative z-10 overflow-hidden pb-4 mx-auto max-w-[90vw] sm:max-w-none">
-            <motion.div 
-              className="flex space-x-8 px-4 sm:px-0 py-6"
-              animate={{ 
-                x: currentSlide * -320,
-                transition: {
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30
-                }
-              }}
-              drag="x"
-              dragConstraints={{ left: -((levelTiers.length - 1) * 320), right: 0 }}
-              dragElastic={0.1}
-              onDragEnd={(e, info) => {
-                const slideWidth = 320;
-                const newSlide = Math.min(
-                  Math.max(0, Math.round(Math.abs(info.point.x) / slideWidth)),
-                  levelTiers.length - 1
-                );
-                setCurrentSlide(newSlide);
-              }}
-              style={{ 
-                width: `${levelTiers.length * 320}px`,
-                cursor: isDragging ? "grabbing" : "grab"
-              }}
-            >
+          {/* Native Scroll Cards Container - Much smoother on mobile */}
+          <div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="relative z-10 overflow-x-auto pb-4 mx-auto scroll-smooth snap-x snap-mandatory hide-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div className="flex gap-6 px-4 sm:px-0 py-6" style={{ width: 'max-content' }}>
               {levelTiers.map((tier, index) => (
                 <motion.div
                   key={tier.level}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="w-[280px] sm:w-[300px] flex-shrink-0"
+                  className="w-[280px] sm:w-[300px] flex-shrink-0 snap-center"
                 >
                   <Card
                     glowing
@@ -350,33 +291,32 @@ const XPSystem = () => {
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 2.5, repeat: Infinity }}
                     />
-                    
+
                     {/* Level Badge */}
                     <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-sm font-gaming bg-black/70 backdrop-blur-sm border-2 border-game-blue/50 text-game-white/90 shadow-[0_0_15px_rgba(0,163,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,163,255,0.5)] transition-all duration-300">
                       {tier.level}
                     </div>
-                    
+
                     {/* Content */}
                     <div className="flex flex-col items-center text-center mb-6 relative z-10 pt-3">
-                      <motion.div 
-                        className="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-black/60 to-black/20 border-2 border-game-blue/30 mb-4 shadow-[0_0_20px_rgba(0,163,255,0.2)] group-hover:shadow-[0_0_30px_rgba(0,163,255,0.4)] transition-all duration-300"
+                      <motion.div
+                        className="w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br from-black/60 to-black/20 border-2 border-game-blue/30 mb-4 shadow-[0_0_20px_rgba(0,163,255,0.2)] group-hover:shadow-[0_0_30px_rgba(0,163,255,0.4)] transition-all duration-300 text-4xl"
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <FaMedal className="text-4xl text-game-red group-hover:text-game-blue transition-colors duration-300" />
+                        {tierIcons[index]}
                       </motion.div>
-                      <h3 className="text-2xl font-gaming text-game-white mb-2 group-hover:text-game-blue transition-colors duration-300 flex items-center justify-center gap-2">
-                        <span className="text-2xl">{tier.icon}</span>
-                        <span>{tier.title}</span>
+                      <h3 className="text-2xl font-gaming text-game-white mb-2 group-hover:text-game-blue transition-colors duration-300">
+                        {tier.title}
                       </h3>
                       <div className="w-16 h-1 bg-gradient-to-r from-game-blue to-game-red rounded-full my-3 group-hover:w-24 transition-all duration-300" />
                     </div>
-                    
+
                     <div className="relative z-10 bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-white/10 group-hover:border-white/20 transition-colors duration-300">
                       <p className="text-game-white/90 text-sm group-hover:text-white transition-colors duration-300">{tier.reward}</p>
                     </div>
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="w-full h-1 bg-gradient-to-r from-game-blue to-game-red mt-6 rounded-full overflow-hidden opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
@@ -385,16 +325,17 @@ const XPSystem = () => {
                   </Card>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
-          
+
           {/* Navigation Dots */}
           <div className="flex justify-center gap-2 mt-4">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-              <motion.div
+            {levelTiers.map((_, index) => (
+              <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-300 ${index === currentSlide ? 'bg-game-blue' : 'bg-gray-600'}`}
+                onClick={() => scrollToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${index === currentSlide ? 'bg-game-blue' : 'bg-gray-600 hover:bg-gray-500'}`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
@@ -407,12 +348,12 @@ const XPSystem = () => {
           transition={{ delay: 0.6 }}
           className="mb-16 text-center"
         >
-          <Card 
-            glowing 
+          <Card
+            glowing
             className="inline-block max-w-2xl w-full transform hover:scale-105 transition-all duration-300 
               hover:shadow-[0_0_30px_rgba(0,163,255,0.3)] relative overflow-hidden bg-gradient-to-br from-black/80 to-black/40"
           >
-            <motion.div 
+            <motion.div
               className="absolute inset-0 opacity-20"
               animate={{
                 background: [
@@ -427,7 +368,7 @@ const XPSystem = () => {
                 ease: "linear"
               }}
             />
-            
+
             <div className="relative z-10 p-6 xs:p-8 sm:p-10">
               <h2 className="text-2xl xs:text-3xl sm:text-4xl font-gaming mb-4 xs:mb-6 bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">
                 Ready to Begin Your Journey?

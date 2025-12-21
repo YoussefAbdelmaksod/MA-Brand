@@ -50,16 +50,22 @@ const Navbar = () => {
             className="flex items-center"
             role="button"
           >
-            <motion.img
-              src="/4-poster.jpg"
-              alt="Coach Moumen"
-              className="h-16 w-auto sm:h-20"
-              width={80}
-              height={80}
-              loading="eager"
+            <motion.div
+              className="h-16 w-16 sm:h-20 sm:w-20 overflow-hidden rounded-full"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-            />
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/4.webm" type="video/webm" />
+                <source src="/4.mp4" type="video/mp4" />
+              </video>
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}

@@ -13,9 +13,10 @@ import {
   bounceIn,
 } from '../hooks/useAnimations';
 import { useNavigate } from 'react-router-dom';
-import { FaStar, FaChartLine, FaTrophy, FaHeartbeat } from 'react-icons/fa';
+import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye, FaGamepad } from 'react-icons/fa';
+import { GiCrossedSwords } from 'react-icons/gi';
 
-const StatCounter = ({ value, label, icon }: { value: number; label: string; icon: string }) => {
+const StatCounter = ({ value, label, icon }: { value: number; label: string; icon: React.ReactNode }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -225,9 +226,9 @@ const Home = () => {
                   Achievement <span className="text-game-red">Unlocked</span>
                 </h2>
                 <div className="flex justify-center items-center gap-2 text-xl font-gaming text-game-white/80">
-                  <span className="text-2xl">🎮</span>
+                  <FaGamepad className="text-2xl text-game-blue" />
                   <span>Level Up Your Fitness Journey</span>
-                  <span className="text-2xl">💪</span>
+                  <FaBolt className="text-2xl text-game-gold" />
                 </div>
               </motion.div>
 
@@ -235,22 +236,22 @@ const Home = () => {
                 <StatCounter
                   value={1500}
                   label="Total XP Gained"
-                  icon="⚡"
+                  icon={<FaBolt className="text-yellow-400" />}
                 />
                 <StatCounter
                   value={350}
                   label="Active Warriors"
-                  icon="⚔️"
+                  icon={<GiCrossedSwords className="text-game-red" />}
                 />
                 <StatCounter
                   value={95}
                   label="Success Rate"
-                  icon="🎯"
+                  icon={<FaBullseye className="text-game-blue" />}
                 />
                 <StatCounter
                   value={180}
                   label="Boss Battles Won"
-                  icon="👑"
+                  icon={<FaCrown className="text-game-gold" />}
                 />
               </div>
 

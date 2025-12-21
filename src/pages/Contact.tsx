@@ -4,8 +4,10 @@ import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import FitnessScene from '@/components/FitnessScene';
-import { FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaEnvelope, FaDiscord, 
-         FaWhatsapp, FaStar, FaHandshake, FaArrowRight, FaSnapchatGhost } from 'react-icons/fa';
+import {
+  FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaEnvelope, FaDiscord,
+  FaWhatsapp, FaStar, FaHandshake, FaArrowRight, FaSnapchatGhost, FaFileAlt
+} from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
 const EMAILJS_PUBLIC_KEY = "x9dqPxdwnZdgOh1jq";
@@ -82,7 +84,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const templateParams = {
         from_name: formData.name,
@@ -273,7 +275,7 @@ ${formData.message}`,
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         >
-                          🤝
+                          <FaHandshake className="text-lg" />
                         </motion.span>
                       </span>
                     </Button>
@@ -421,8 +423,8 @@ ${formData.message}`,
                             focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                             placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                             backdrop-blur-sm min-h-[120px] resize-y"
-                          placeholder={formData.requestType === 'job' ? 
-                            "Tell us about your experience and why you'd be a great fit" : 
+                          placeholder={formData.requestType === 'job' ?
+                            "Tell us about your experience and why you'd be a great fit" :
                             "Tell us about your partnership idea"}
                         />
                       </div>
@@ -446,7 +448,7 @@ ${formData.message}`,
                               animate={{ scale: [1, 1.2, 1] }}
                               transition={{ duration: 1.5, repeat: Infinity }}
                             >
-                              {formData.requestType === 'job' ? '📝' : '✉️'}
+                              {formData.requestType === 'job' ? <FaFileAlt className="text-lg" /> : <FaEnvelope className="text-lg" />}
                             </motion.span>
                           </span>
                           <motion.div
@@ -460,7 +462,7 @@ ${formData.message}`,
                 </div>
 
                 {/* Background Effects */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 opacity-20 pointer-events-none"
                   animate={{
                     background: [

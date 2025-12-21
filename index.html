@@ -44,10 +44,14 @@
   <!-- Body Font with font-display: swap -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
     media="print" onload="this.media='all'" />
+  <!-- Arabic Gaming Font - Cairo has a modern tech/gaming feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'" />
   <!-- Fallback for noscript -->
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </noscript>
 
   <title>Level Up Fitness ⚔️ | Coach Moumen Atef - Gaming-Inspired Personal Training</title>
@@ -71,11 +75,18 @@
   <style>
     /* Ensure fonts are loaded before displaying content */
     .font-gaming {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Orbitron', 'Cairo', sans-serif;
     }
 
     .font-body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'Cairo', sans-serif;
+    }
+
+    /* Arabic-specific font when RTL */
+    [dir="rtl"] .font-gaming,
+    [dir="rtl"] .font-body,
+    [dir="rtl"] {
+      font-family: 'Cairo', 'Inter', sans-serif;
     }
   </style>
 </head>
