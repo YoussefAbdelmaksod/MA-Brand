@@ -1,8 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
-import Card from '@/components/Card';
-import Button from '@/components/Button';
 import { FaClock, FaFacebook, FaGamepad, FaTrophy, FaFire, FaMedal } from 'react-icons/fa';
 
 /*
