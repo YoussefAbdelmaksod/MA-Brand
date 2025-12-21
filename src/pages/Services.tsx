@@ -23,85 +23,6 @@ interface Service {
   bestValue?: boolean;
 }
 
-const services: Service[] = [
-  {
-    title: '1 Month Quest',
-    subtitle: 'Begin Your Legend',
-    description: 'The perfect starting point for aspiring fitness warriors. Master the fundamentals and build your foundation.',
-    features: [
-      'Customized Training Program',
-      'Detailed Nutrition Guide',
-      'Weekly Progress Tracking',
-      'WhatsApp Community Access',
-      'Video Form Tutorials'
-    ],
-    highlights: ['Perfect for beginners', 'Foundation building'],
-    icon: <FaShieldAlt className="text-5xl" />,
-    level: 'Novice',
-    price: '300 EGP',
-    xpBonus: 300,
-    color: 'green'
-  },
-  {
-    title: '3 Months Protocol',
-    subtitle: 'Forge Your Power',
-    description: 'Intermediate program with advanced training techniques and regular personalized coaching support.',
-    features: [
-      'Advanced Training Plans',
-      'Personalized Meal Plans',
-      '2x Weekly Check-ins',
-      'Video Form Analysis',
-      '24/7 WhatsApp Support'
-    ],
-    highlights: ['Most popular choice', 'Real transformations'],
-    icon: <GiCrossedSwords className="text-5xl" />,
-    level: 'Warrior',
-    price: '900 EGP',
-    xpBonus: 900,
-    color: 'blue',
-    popular: true
-  },
-  {
-    title: '6 Months System',
-    subtitle: 'Master Your Destiny',
-    description: 'Comprehensive coaching for dedicated athletes with premium support and advanced programming.',
-    features: [
-      'Elite Custom Programming',
-      'Advanced Nutrition Planning',
-      '3x Weekly Coaching Calls',
-      'Priority VIP Support',
-      'Recovery & Sleep Guide'
-    ],
-    highlights: ['For serious athletes', 'Complete transformation'],
-    icon: <FaTrophy className="text-5xl" />,
-    level: 'Elite',
-    price: '2,000 EGP',
-    xpBonus: 2000,
-    color: 'purple'
-  },
-  {
-    title: '12 Months Legendary',
-    subtitle: 'Become Immortal',
-    description: 'The ultimate VIP experience with unlimited access, daily coaching, and exclusive benefits for maximum results.',
-    features: [
-      'Legendary Custom Plans',
-      'Daily Personal Coaching',
-      'Elite Recovery System',
-      'Private WhatsApp Line',
-      'Exclusive VIP Benefits',
-      'Monthly Body Analysis'
-    ],
-    highlights: ['Best value', 'VIP treatment'],
-    icon: <FaGem className="text-5xl" />,
-    level: 'Legendary',
-    price: '3,500 EGP',
-    originalPrice: '5,000 EGP',
-    xpBonus: 5000,
-    color: 'yellow',
-    bestValue: true
-  }
-];
-
 const colorClasses: Record<string, { text: string; bg: string; border: string; gradient: string; glow: string }> = {
   green: {
     text: 'text-green-400',
@@ -293,6 +214,85 @@ const ServiceCard = ({ service, index, t }: { service: Service; index: number; t
 const Services = () => {
   const { t } = useLanguage();
 
+  const plans = [
+    {
+      title: t('plans.1month'),
+      subtitle: t('plans.1monthSub'),
+      description: t('plans.1month.desc'),
+      features: [
+        t('plans.feature.customProgram'),
+        t('plans.feature.nutrition'),
+        t('plans.feature.tracking'),
+        t('plans.feature.community'),
+        t('plans.feature.tutorials')
+      ],
+      highlights: [t('plans.highlight.beginners'), t('plans.highlight.foundation')],
+      icon: <FaShieldAlt className="text-5xl" />,
+      level: t('plans.novice'),
+      price: '300 EGP',
+      xpBonus: 300,
+      color: 'green'
+    },
+    {
+      title: t('plans.3months'),
+      subtitle: t('plans.3monthsSub'),
+      description: t('plans.3months.desc'),
+      features: [
+        t('plans.feature.advancedPlans'),
+        t('plans.feature.mealPlans'),
+        t('plans.feature.checkins2x'),
+        t('plans.feature.analysis'),
+        t('plans.feature.support247')
+      ],
+      highlights: [t('plans.highlight.popular'), t('plans.highlight.transformations')],
+      icon: <GiCrossedSwords className="text-5xl" />,
+      level: t('plans.warrior'),
+      price: '900 EGP',
+      xpBonus: 900,
+      color: 'blue',
+      popular: true
+    },
+    {
+      title: t('plans.6months'),
+      subtitle: t('plans.6monthsSub'),
+      description: t('plans.6months.desc'),
+      features: [
+        t('plans.feature.eliteProg'),
+        t('plans.feature.advancedNut'),
+        t('plans.feature.calls3x'),
+        t('plans.feature.vipSupport'),
+        t('plans.feature.recovery')
+      ],
+      highlights: [t('plans.highlight.athletes'), t('plans.highlight.complete')],
+      icon: <FaTrophy className="text-5xl" />,
+      level: t('plans.elite'),
+      price: '2,000 EGP',
+      xpBonus: 2000,
+      color: 'purple'
+    },
+    {
+      title: t('plans.12months'),
+      subtitle: t('plans.12monthsSub'),
+      description: t('plans.12months.desc'),
+      features: [
+        t('plans.feature.legendaryPlans'),
+        t('plans.feature.dailyCoaching'),
+        t('plans.feature.eliteRecovery'),
+        t('plans.feature.privateLine'),
+        t('plans.feature.vipBenefits'),
+        t('plans.feature.bodyAnalysis')
+      ],
+      highlights: [t('plans.highlight.bestValue'), t('plans.highlight.vip')],
+      icon: <FaGem className="text-5xl" />,
+      level: t('plans.legendary'),
+      price: '3,500 EGP',
+      originalPrice: '5,000 EGP',
+      xpBonus: 5000,
+      color: 'yellow',
+      bestValue: true
+    }
+  ];
+
   return (
     <PageTransition>
       <div className="relative min-h-screen bg-game-black overflow-hidden">
@@ -338,8 +338,8 @@ const Services = () => {
 
             {/* Plans Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-20">
-              {services.map((service, index) => (
-                <ServiceCard key={service.title} service={service} index={index} t={t} />
+              {plans.map((service, index) => (
+                <ServiceCard key={service.title} service={service as any} index={index} t={t} />
               ))}
             </div>
 

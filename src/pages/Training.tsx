@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import { FaClock, FaFacebook, FaGamepad, FaTrophy, FaFire, FaMedal } from 'react-icons/fa';
+import { useLanguage } from '@/hooks/useLanguage';
 
 /*
  * FUTURE FEATURE: Mission Cards for Training Page
@@ -219,6 +220,7 @@ const MissionCard = ({ mission }: { mission: Mission }) => {
 END OF FUTURE FEATURE */
 
 const Training = () => {
+  const { t } = useLanguage();
   return (
     <PageTransition>
       <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
@@ -279,8 +281,8 @@ const Training = () => {
                 transition={{ delay: 0.3 }}
                 className="text-4xl sm:text-6xl md:text-7xl font-gaming mb-6 relative inline-block"
               >
-                <span className="text-game-blue">Epic</span>{' '}
-                <span className="text-game-red">Missions</span>
+                <span className="text-game-blue">{t('training.title').split(' ')[0]}</span>{' '}
+                <span className="text-game-red">{t('training.title').split(' ').slice(1).join(' ')}</span>
                 <motion.span
                   animate={{
                     opacity: [0.5, 1, 0.5],
@@ -293,7 +295,7 @@ const Training = () => {
                   }}
                   className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 text-xl sm:text-2xl text-game-gold"
                 >
-                  BETA
+                  {t('training.beta')}
                 </motion.span>
               </motion.h1>
 
@@ -303,7 +305,7 @@ const Training = () => {
                 transition={{ delay: 0.5 }}
                 className="text-lg sm:text-xl text-game-white/80 max-w-2xl mx-auto mb-8"
               >
-                Embark on your fitness journey through gamified workouts and challenges
+                {t('training.subtitle')}
               </motion.p>
             </motion.div>
 
@@ -316,27 +318,27 @@ const Training = () => {
             >
               {[
                 {
-                  title: 'Daily Quests',
+                  title: t('training.dailyQuests'),
                   icon: <FaGamepad className="text-game-blue" />,
-                  description: 'Quick daily workouts',
+                  description: t('training.dailyQuestsDesc'),
                   color: 'border-game-blue'
                 },
                 {
-                  title: 'Boss Battles',
+                  title: t('training.bossBattles'),
                   icon: <FaFire className="text-game-red" />,
-                  description: 'Intense challenges',
+                  description: t('training.bossBattlesDesc'),
                   color: 'border-game-red'
                 },
                 {
-                  title: 'Achievement Hunt',
+                  title: t('training.achievementHunt'),
                   icon: <FaTrophy className="text-game-gold" />,
-                  description: 'Unlock rewards',
+                  description: t('training.achievementHuntDesc'),
                   color: 'border-yellow-500'
                 },
                 {
-                  title: 'Skill Tree',
+                  title: t('training.skillTree'),
                   icon: <FaMedal className="text-purple-400" />,
-                  description: 'Progress tracking',
+                  description: t('training.skillTreeDesc'),
                   color: 'border-purple-400'
                 }
               ].map((category, index) => (
@@ -397,12 +399,12 @@ const Training = () => {
                 </motion.div>
 
                 <h2 className="text-2xl sm:text-3xl font-gaming mb-4">
-                  <span className="text-game-blue">Launching</span>{' '}
-                  <span className="text-game-red">Soon</span>
+                  <span className="text-game-blue">{t('training.launchingSoon').split(' ')[0]}</span>{' '}
+                  <span className="text-game-red">{t('training.launchingSoon').split(' ').slice(1).join(' ')}</span>
                 </h2>
 
                 <p className="text-lg text-game-white/80 mb-8 max-w-2xl mx-auto">
-                  Get ready for an epic fitness adventure! Join our community to be the first to access exclusive missions and rewards.
+                  {t('training.launchingDesc')}
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -414,7 +416,7 @@ const Training = () => {
                     onClick={() => window.open('https://www.facebook.com/groups/coachmoumen', '_blank')}
                   >
                     <FaFacebook className="text-2xl" />
-                    <span>Join Community</span>
+                    <span>{t('training.joinCommunity')}</span>
                     <motion.div
                       className="absolute inset-0 bg-white/10"
                       animate={{
@@ -436,7 +438,7 @@ const Training = () => {
                       border border-game-blue/30 w-full sm:w-auto justify-center"
                   >
                     <FaClock className="text-game-blue" />
-                    <span className="font-gaming text-game-white/90">Phase 1 Development</span>
+                    <span className="font-gaming text-game-white/90">{t('training.phase1')}</span>
                   </motion.div>
                 </div>
               </div>

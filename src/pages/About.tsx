@@ -5,6 +5,7 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import FitnessScene from '@/components/FitnessScene';
 import { FaGraduationCap, FaDumbbell, FaCertificate, FaUserTie, FaChartLine, FaTrophy, FaMedal, FaStar, FaUniversity, FaBook } from 'react-icons/fa';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface TimelineItem {
   date: string;
@@ -31,121 +32,6 @@ interface Education {
   description: string;
   icon: React.ReactNode;
 }
-
-const timelineData: TimelineItem[] = [
-  {
-    date: 'March 2025',
-    title: 'Branch Manager',
-    description: 'Leading operations at Elegant and N13 Gyms, overseeing facility management and team development.',
-    type: 'management',
-    icon: <FaChartLine size={24} className="text-purple-500" />,
-    highlight: true
-  },
-  {
-    date: 'June 2024',
-    title: 'Fitness Manager',
-    description: 'Managing fitness operations and client success at Doctor and Coach.',
-    type: 'management',
-    icon: <FaUserTie size={24} className="text-purple-500" />,
-  },
-  {
-    date: 'January 2024',
-    title: 'Fitness Management',
-    description: 'Advanced to Fitness Manager at Dr and Coach, expanding into Personal Training roles at N13 and Elegant Gyms.',
-    type: 'management',
-    icon: <FaChartLine size={24} className="text-purple-500" />
-  },
-  {
-    date: 'June 2023',
-    title: 'Professional Coaching',
-    description: 'Gained diverse experience across B1 Gym and Mego Gym, progressing to Operations Manager.',
-    type: 'career',
-    icon: <FaDumbbell size={24} className="text-game-red" />
-  },
-  {
-    date: 'September 2022',
-    title: 'Well and Fit Founder',
-    description: 'Established Well and Fit while serving as Vice Head of Education Committee.',
-    type: 'career',
-    icon: <FaUserTie size={24} className="text-game-red" />,
-    highlight: true
-  },
-  {
-    date: 'March 2022',
-    title: 'Online Training Launch',
-    description: 'Started online personal training services, reaching clients globally.',
-    type: 'career',
-    icon: <FaDumbbell size={24} className="text-game-red" />
-  }
-];
-
-const certifications: Certification[] = [
-  {
-    title: 'Strength & Conditioning Specialist',
-    organization: 'TASS / PBLS Academy',
-    type: 'onsite',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Approved by TASS, certified through PBLS Academy, endorsed by Egyptian Federation of Sport Culture. Includes 3.0 CE credits.',
-    date: 'July - September 2025'
-  },
-  {
-    title: 'Sport Nutrition Coach',
-    organization: 'Swedish Academy of Sports Training',
-    type: 'online',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Advanced sports nutrition principles and meal planning',
-    date: 'December 2023'
-  },
-  {
-    title: 'Weight Management: Beyond Balancing Calories',
-    organization: 'Stanford University',
-    type: 'online',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Comprehensive approach to sustainable weight management',
-    date: 'October 2023'
-  },
-  {
-    title: 'Introduction To Food And Health',
-    organization: 'Stanford University',
-    type: 'online',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Foundation in nutrition science and health optimization',
-    date: 'September 2023'
-  },
-  {
-    title: 'Certified Personal Trainer',
-    organization: 'TASS UK Academy & PBLS Academy',
-    type: 'onsite',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Specialized in Sports Nutrition, CFT, and Personal Training',
-    date: 'July 2023'
-  },
-  {
-    title: 'A+ Training Certification',
-    organization: 'World Gym',
-    type: 'onsite',
-    icon: <FaCertificate size={24} className="text-game-gold" />,
-    description: 'Excellence in Personal Training methodology and practice',
-    date: 'May 2023'
-  }
-];
-
-const educationData: Education[] = [
-  {
-    degree: 'Bachelor of Sports Science',
-    institution: 'Alexandria University',
-    period: '2021 - Present',
-    description: 'Specializing in Physical Education and Sports Training, with focus on advanced training methodologies and sports nutrition.',
-    icon: <FaUniversity size={24} className="text-game-blue" />
-  },
-  {
-    degree: 'Sports Nutrition Advanced Studies',
-    institution: 'International Sports Sciences Association',
-    period: '2023',
-    description: 'Specialized program in sports nutrition and performance optimization.',
-    icon: <FaBook size={24} className="text-game-blue" />
-  }
-];
 
 const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) => {
   const ref = useRef(null);
@@ -332,6 +218,125 @@ const EducationCard = ({ edu, index }: { edu: Education; index: number }) => {
 };
 
 const About = () => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true });
+  const { t } = useLanguage();
+
+  const timelineData: TimelineItem[] = [
+    {
+      date: 'March 2025',
+      title: t('about.timeline.branchManager'),
+      description: t('about.timeline.branchManagerDesc'),
+      type: 'management',
+      icon: <FaChartLine size={24} className="text-purple-500" />,
+      highlight: true
+    },
+    {
+      date: 'June 2024',
+      title: t('about.timeline.fitnessManager'),
+      description: t('about.timeline.fitnessManagerDesc'),
+      type: 'management',
+      icon: <FaUserTie size={24} className="text-purple-500" />,
+    },
+    {
+      date: 'January 2024',
+      title: t('about.timeline.fitnessMgmt'),
+      description: t('about.timeline.fitnessMgmtDesc'),
+      type: 'management',
+      icon: <FaChartLine size={24} className="text-purple-500" />
+    },
+    {
+      date: 'June 2023',
+      title: t('about.timeline.coaching'),
+      description: t('about.timeline.coachingDesc'),
+      type: 'career',
+      icon: <FaDumbbell size={24} className="text-game-red" />
+    },
+    {
+      date: 'September 2022',
+      title: t('about.timeline.founder'),
+      description: t('about.timeline.founderDesc'),
+      type: 'career',
+      icon: <FaUserTie size={24} className="text-game-red" />,
+      highlight: true
+    },
+    {
+      date: 'March 2022',
+      title: t('about.timeline.online'),
+      description: t('about.timeline.onlineDesc'),
+      type: 'career',
+      icon: <FaDumbbell size={24} className="text-game-red" />
+    }
+  ];
+
+  const certifications: Certification[] = [
+    {
+      title: t('about.cert.strength'),
+      organization: 'TASS / PBLS Academy',
+      type: 'onsite',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: t('about.cert.strengthDesc'),
+      date: 'July - September 2025'
+    },
+    {
+      title: t('about.cert.nutrition'),
+      organization: 'Swedish Academy of Sports Training',
+      type: 'online',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: t('about.cert.nutritionDesc'),
+      date: 'December 2023'
+    },
+    {
+      title: t('about.cert.weight'),
+      organization: 'Stanford University',
+      type: 'online',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: t('about.cert.weightDesc'),
+      date: 'October 2023'
+    },
+    {
+      title: 'Introduction To Food And Health',
+      organization: 'Stanford University',
+      type: 'online',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: 'Foundation in nutrition science and health optimization',
+      date: 'September 2023'
+    },
+    {
+      title: 'Certified Personal Trainer',
+      organization: 'TASS UK Academy & PBLS Academy',
+      type: 'onsite',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: 'Specialized in Sports Nutrition, CFT, and Personal Training',
+      date: 'July 2023'
+    },
+    {
+      title: 'A+ Training Certification',
+      organization: 'World Gym',
+      type: 'onsite',
+      icon: <FaCertificate size={24} className="text-game-gold" />,
+      description: 'Excellence in Personal Training methodology and practice',
+      date: 'May 2023'
+    }
+  ];
+
+  const educationData: Education[] = [
+    {
+      degree: t('about.education.degree'),
+      institution: t('about.education.school'),
+      period: '2021 - Present',
+      description: t('about.education.desc'),
+      icon: <FaUniversity size={24} className="text-game-blue" />
+    },
+    {
+      degree: 'Sports Nutrition Advanced Studies',
+      institution: 'International Sports Sciences Association',
+      period: '2023',
+      description: 'Specialized program in sports nutrition and performance optimization.',
+      icon: <FaBook size={24} className="text-game-blue" />
+    }
+  ];
+
   return (
     <PageTransition>
       <div className="relative min-h-screen bg-game-black">
@@ -341,76 +346,100 @@ const About = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 pointer-events-auto">
+        <div ref={containerRef} className="relative z-10 pointer-events-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
-            {/* Hero Section */}
+            {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16 sm:mb-24"
+              className="text-center mb-16"
             >
-              <motion.h1
-                className="text-6xl md:text-7xl font-gaming font-bold mb-8 relative inline-block"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
+              <h1 className="text-5xl sm:text-7xl font-gaming font-bold mb-6">
+                {t('about.title').split(' ')[0]} <span className="text-game-red">{t('about.title').split(' ').slice(1).join(' ')}</span>
+              </h1>
+              <p className="text-xl sm:text-2xl text-game-white/80 max-w-3xl mx-auto">
+                {t('about.subtitle')}
+              </p>
+            </motion.div>
+
+            {/* Coach Images Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+            >
+              {['/8.png', '/9.png', '/7.png'].map((image, index) => (
+                <motion.div
+                  key={image}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="relative group"
+                >
+                  <motion.div
+                    className="absolute -inset-1 bg-gradient-to-r from-game-blue via-game-red to-game-blue rounded-xl opacity-75 blur-lg group-hover:opacity-100 transition duration-300"
+                    animate={{
+                      background: [
+                        'linear-gradient(to right, rgba(0,163,255,0.5), rgba(255,0,0,0.5), rgba(0,163,255,0.5))',
+                        'linear-gradient(to right, rgba(255,0,0,0.5), rgba(0,163,255,0.5), rgba(255,0,0,0.5))',
+                        'linear-gradient(to right, rgba(0,163,255,0.5), rgba(255,0,0,0.5), rgba(0,163,255,0.5))'
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
+                  <motion.img
+                    src={image}
+                    alt={`Coach Moumen ${index + 1}`}
+                    className="relative w-72 h-72 object-cover rounded-xl border-2 border-game-white/20 transform group-hover:scale-105 transition duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    layoutId={`coach-image-${index}`}
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Introduction / Bio */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8 }}
               >
-                The <span className="text-game-blue">Journey</span> of
-                <span className="text-game-red"> Coach Moumen</span>
-                <motion.div
-                  className="absolute -top-8 -right-8 text-4xl text-game-gold opacity-75"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                >
-                  <FaStar />
-                </motion.div>
-              </motion.h1>
-              <p className="text-lg sm:text-xl text-game-white/90 max-w-3xl mx-auto mb-12">
-                From Sports Science student to Fitness Industry Leader, discover how I turned the
-                challenges of COVID-19 into opportunities to transform lives through innovative fitness solutions.
-              </p>
+                <h2 className="text-3xl font-gaming mb-6">{t('about.story')}</h2>
+                <div className="space-y-4 text-game-white/80 leading-relaxed text-lg">
+                  <p>
+                    {t('about.storyText1')}
+                  </p>
+                  <p>
+                    {t('about.storyText2')}
+                  </p>
+                </div>
 
-              {/* Coach Images Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
-              >
-                {['/8.png', '/9.png', '/7.png'].map((image, index) => (
-                  <motion.div
-                    key={image}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.2 }}
-                    className="relative group"
-                  >
+                <div className="grid grid-cols-2 gap-6 mt-8">
+                  {[
+                    { label: t('about.philosophy.scientific'), desc: t('about.philosophy.scientificDesc'), icon: <FaGraduationCap /> },
+                    { label: t('about.philosophy.mindset'), desc: t('about.philosophy.mindsetDesc'), icon: <FaStar /> },
+                    { label: t('about.philosophy.sustainable'), desc: t('about.philosophy.sustainableDesc'), icon: <FaMedal /> },
+                    { label: t('about.philosophy.holistic'), desc: t('about.philosophy.holisticDesc'), icon: <FaTrophy /> }
+                  ].map((item, index) => (
                     <motion.div
-                      className="absolute -inset-1 bg-gradient-to-r from-game-blue via-game-red to-game-blue rounded-xl opacity-75 blur-lg group-hover:opacity-100 transition duration-300"
-                      animate={{
-                        background: [
-                          'linear-gradient(to right, rgba(0,163,255,0.5), rgba(255,0,0,0.5), rgba(0,163,255,0.5))',
-                          'linear-gradient(to right, rgba(255,0,0,0.5), rgba(0,163,255,0.5), rgba(255,0,0,0.5))',
-                          'linear-gradient(to right, rgba(0,163,255,0.5), rgba(255,0,0,0.5), rgba(0,163,255,0.5))'
-                        ]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    />
-                    <motion.img
-                      src={image}
-                      alt={`Coach Moumen ${index + 1}`}
-                      className="relative w-72 h-72 object-cover rounded-xl border-2 border-game-white/20 transform group-hover:scale-105 transition duration-300"
-                      whileHover={{ scale: 1.05 }}
-                      layoutId={`coach-image-${index}`}
-                    />
-                    <motion.div
-                      className="absolute inset-0 bg-black/40 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300"
-                    />
-                  </motion.div>
-                ))}
+                      key={index}
+                      className="bg-game-white/5 p-4 rounded-xl border border-game-white/10"
+                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                    >
+                      <div className="text-game-blue text-2xl mb-2">{item.icon}</div>
+                      <h3 className="font-gaming text-sm mb-1">{item.label}</h3>
+                      <p className="text-xs text-game-white/60">{item.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* Timeline Section */}
             <section className="mb-24">
@@ -432,7 +461,7 @@ const About = () => {
             {/* Education Section */}
             <section className="mb-24">
               <h2 className="text-4xl font-gaming text-center mb-16">
-                <span className="text-game-blue">Education</span>
+                <span className="text-game-blue">{t('about.education')}</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto px-4">
                 {educationData.map((edu, index) => (
@@ -444,7 +473,7 @@ const About = () => {
             {/* Certifications Section */}
             <section className="mb-24">
               <h2 className="text-4xl font-gaming text-center mb-16">
-                <span className="text-game-gold">Certifications</span>
+                <span className="text-game-gold">{t('about.certifications')}</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
                 {certifications.map((cert, index) => (

@@ -265,7 +265,7 @@ const Home = () => {
                     onClick={() => navigate('/transformations')}
                     className="px-8 py-4 bg-gradient-to-r from-game-blue to-game-red rounded-lg font-gaming text-xl relative overflow-hidden group"
                   >
-                    <span className="relative z-10">View Leaderboard</span>
+                    <span className="relative z-10">{t('home.viewLeaderboard')}</span>
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-game-red to-game-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
@@ -280,7 +280,7 @@ const Home = () => {
                       repeat: Infinity,
                     }}
                   >
-                    NEW!
+                    {t('home.new')}
                   </motion.div>
                 </div>
               </motion.div>
@@ -300,14 +300,14 @@ const Home = () => {
                 transition={{ duration: 0.3 }}
               >
                 <div className="flex items-center justify-between mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-gaming text-game-blue">Current Quest</h3>
-                  <span className="px-4 py-2 bg-game-red/20 rounded-lg text-game-red font-gaming">LEVEL 1</span>
+                  <h3 className="text-2xl sm:text-3xl font-gaming text-game-blue">{t('home.quest.title')}</h3>
+                  <span className="px-4 py-2 bg-game-red/20 rounded-lg text-game-red font-gaming">{t('home.quest.level1')}</span>
                 </div>
 
                 <div className="space-y-6">
                   <div>
                     <div className="flex justify-between text-game-white/90 mb-2">
-                      <span className="font-gaming">Daily Workout Streak</span>
+                      <span className="font-gaming">{t('home.quest.streak')}</span>
                       <span className="font-gaming">7/10</span>
                     </div>
                     <div className="h-4 bg-black/50 rounded-full overflow-hidden">
@@ -322,7 +322,7 @@ const Home = () => {
 
                   <div>
                     <div className="flex justify-between text-game-white/90 mb-2">
-                      <span className="font-gaming">Nutrition Goals</span>
+                      <span className="font-gaming">{t('home.quest.nutrition')}</span>
                       <span className="font-gaming">85%</span>
                     </div>
                     <div className="h-4 bg-black/50 rounded-full overflow-hidden">
@@ -340,19 +340,19 @@ const Home = () => {
                       whileHover={{ scale: 1.05 }}
                       className="px-4 py-2 bg-game-blue/20 rounded-lg border border-game-blue/50"
                     >
-                      <span className="font-gaming text-game-blue">🎯 Perfect Form</span>
+                      <span className="font-gaming text-game-blue">{t('home.quest.perfectForm')}</span>
                     </motion.div>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       className="px-4 py-2 bg-game-red/20 rounded-lg border border-game-red/50"
                     >
-                      <span className="font-gaming text-game-red">💪 Strength +10</span>
+                      <span className="font-gaming text-game-red">{t('home.quest.strength')}</span>
                     </motion.div>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       className="px-4 py-2 bg-white/10 rounded-lg border border-white/30"
                     >
-                      <span className="font-gaming text-white">⚡ Speed +5</span>
+                      <span className="font-gaming text-white">{t('home.quest.speed')}</span>
                     </motion.div>
                   </div>
                 </div>
@@ -390,8 +390,8 @@ const Home = () => {
                 className="text-center mb-12"
               >
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-gaming mb-4 relative inline-block">
-                  <span className="text-game-blue">Experience</span> The{' '}
-                  <span className="text-game-red">Journey</span>
+                  <span className="text-game-blue">{t('home.experience.title')}</span> {t('home.experience.the')}{' '}
+                  <span className="text-game-red">{t('home.experience.journey')}</span>
                   <motion.div
                     className="absolute -top-4 -right-4 text-2xl text-game-gold opacity-75"
                     animate={{ rotate: 360 }}
@@ -401,8 +401,7 @@ const Home = () => {
                   </motion.div>
                 </h2>
                 <p className="text-base sm:text-lg text-game-white/90 max-w-2xl mx-auto">
-                  Discover how our gamified fitness system transforms your workout experience
-                  into an epic adventure of personal growth and achievement.
+                  {t('home.experience.desc')}
                 </p>
               </motion.div>
 
@@ -464,18 +463,18 @@ const Home = () => {
                   {[
                     {
                       icon: <FaChartLine className="text-game-blue" />,
-                      title: "Smart Progress Tracking",
-                      description: "Advanced analytics to monitor your fitness journey in real-time"
+                      title: t('home.feature.tracking'),
+                      description: t('home.feature.trackingDesc')
                     },
                     {
                       icon: <FaTrophy className="text-game-gold" />,
-                      title: "Achievement System",
-                      description: "Earn rewards and unlock special perks as you reach new milestones"
+                      title: t('home.feature.achievements'),
+                      description: t('home.feature.achievementsDesc')
                     },
                     {
                       icon: <FaHeartbeat className="text-game-red" />,
-                      title: "Personalized Coaching",
-                      description: "Get expert guidance tailored to your unique fitness goals"
+                      title: t('home.feature.coaching'),
+                      description: t('home.feature.coachingDesc')
                     }
                   ].map((feature, index) => (
                     <motion.div
@@ -553,9 +552,7 @@ const Home = () => {
                 <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-game-blue" />
 
                 <p className="text-xl sm:text-2xl md:text-3xl font-gaming mb-6 text-game-white leading-relaxed">
-                  "In the game of fitness, every rep is a power-up,
-                  every set is a level, and every workout is a boss fight.
-                  Are you ready to become the main character of your story?"
+                  "{t('home.quote.text')}"
                 </p>
 
                 <motion.div
@@ -565,7 +562,7 @@ const Home = () => {
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
-                  - Coach Moumen
+                  {t('home.quote.author')}
                 </motion.div>
               </motion.div>
 
@@ -574,19 +571,19 @@ const Home = () => {
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-game-blue/20 to-game-blue/10 border border-game-blue"
                   whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0,163,255,0.3)' }}
                 >
-                  <span className="text-game-blue font-gaming">Elite Trainer</span>
+                  <span className="text-game-blue font-gaming">{t('home.badge.elite')}</span>
                 </motion.div>
                 <motion.div
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-game-red/20 to-game-red/10 border border-game-red"
                   whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,0,0,0.3)' }}
                 >
-                  <span className="text-game-red font-gaming">Fitness Master</span>
+                  <span className="text-game-red font-gaming">{t('home.badge.master')}</span>
                 </motion.div>
                 <motion.div
                   className="px-6 py-3 rounded-xl bg-gradient-to-r from-game-blue/20 to-game-red/20 border-2 border-white/20"
                   whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,255,255,0.2)' }}
                 >
-                  <span className="text-white font-gaming">Level 100</span>
+                  <span className="text-white font-gaming">{t('home.badge.level100')}</span>
                 </motion.div>
               </div>
             </motion.div>

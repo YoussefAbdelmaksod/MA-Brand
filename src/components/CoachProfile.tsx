@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Card from './Card';
-import { FaCrown, FaDumbbell, FaBolt, FaRunning, FaBrain, FaGamepad, FaAppleAlt } from 'react-icons/fa';
+import { FaCrown, FaDumbbell, FaBolt, FaRunning, FaBrain, FaAppleAlt } from 'react-icons/fa';
+import { useLanguage } from '@/hooks/useLanguage';
 
-interface Badge {
-  title: string;
-  level: number;
-  color: string;
-  icon: React.ReactNode;
-  description: string;
-  position: { x: number; y: number };
-  unlockRequirement: string;
-}
+
 
 interface Stat {
   name: string;
@@ -21,107 +14,60 @@ interface Stat {
   description: string;
 }
 
-// Badges data for future implementation
-export const _badges: Badge[] = [
-  {
-    title: 'Master Trainer',
-    level: 100,
-    color: 'from-yellow-400 to-yellow-600',
-    icon: <FaCrown className="text-yellow-400" />,
-    description: 'Legendary status achieved through years of dedication',
-    position: { x: -20, y: -20 },
-    unlockRequirement: 'Train 1000+ clients successfully'
-  },
-  {
-    title: 'Strength Sage',
-    level: 95,
-    color: 'from-red-500 to-red-700',
-    icon: <FaDumbbell className="text-red-400" />,
-    description: 'Expert in strength and conditioning',
-    position: { x: 20, y: -40 },
-    unlockRequirement: 'Perfect form in all exercises'
-  },
-  {
-    title: 'Nutrition Oracle',
-    level: 90,
-    color: 'from-green-400 to-green-600',
-    icon: <FaAppleAlt className="text-green-400" />,
-    description: 'Master of performance nutrition',
-    position: { x: -30, y: 20 },
-    unlockRequirement: 'Create 500+ meal plans'
-  },
-  {
-    title: 'Transformation Guru',
-    level: 100,
-    color: 'from-purple-400 to-purple-600',
-    icon: <FaBolt className="text-purple-400" />,
-    description: 'Specialist in complete body transformations',
-    position: { x: 30, y: 30 },
-    unlockRequirement: 'Guide 100+ successful transformations'
-  },
-  {
-    title: 'Quest Master',
-    level: 88,
-    color: 'from-blue-400 to-blue-600',
-    icon: <FaGamepad className="text-blue-400" />,
-    description: 'Creator of epic fitness challenges',
-    position: { x: 0, y: -50 },
-    unlockRequirement: 'Design 200+ workout programs'
-  }
-];
-
-const stats: Stat[] = [
-  {
-    name: 'Strength',
-    value: 95,
-    icon: <FaDumbbell className="text-red-400" />,
-    color: 'from-red-500 to-red-700',
-    description: 'Master of power and form'
-  },
-  {
-    name: 'Agility',
-    value: 88,
-    icon: <FaBolt className="text-yellow-400" />,
-    color: 'from-yellow-400 to-yellow-600',
-    description: 'Swift and precise movements'
-  },
-  {
-    name: 'Endurance',
-    value: 92,
-    icon: <FaRunning className="text-green-400" />,
-    color: 'from-green-400 to-green-600',
-    description: 'Unstoppable stamina'
-  },
-  {
-    name: 'Wisdom',
-    value: 97,
-    icon: <FaBrain className="text-blue-400" />,
-    color: 'from-blue-400 to-blue-600',
-    description: 'Elite coaching knowledge'
-  }
-];
-
-// Achievements data for future implementation
-const _achievements = [
-  { title: 'Warriors Trained', value: '1000+', icon: <FaCrown className="text-purple-400" />, color: 'from-purple-400 to-purple-600' },
-  { title: 'Boss Fights Won', value: '500+', icon: <FaDumbbell className="text-red-400" />, color: 'from-red-400 to-red-600' },
-  { title: 'Success Rate', value: '95%', icon: <FaBolt className="text-green-400" />, color: 'from-green-400 to-green-600' },
-  { title: 'Experience Points', value: '8+ Years', icon: <FaCrown className="text-yellow-400" />, color: 'from-yellow-400 to-yellow-600' }
-];
-
-// Special moves data for future implementation
-const _specialMoves = [
-  { name: 'Perfect Form Master', description: 'Execute exercises with flawless precision', icon: <FaBolt className="text-blue-400" /> },
-  { name: 'Nutrition Strategist', description: 'Craft optimal fuel plans for peak performance', icon: <FaAppleAlt className="text-green-400" /> },
-  { name: 'Mind-Body Sync', description: 'Achieve perfect harmony of mental and physical power', icon: <FaBrain className="text-purple-400" /> },
-  { name: 'Motivation Amplifier', description: 'Boost warrior spirits to new heights', icon: <FaBolt className="text-orange-400" /> }
-];
-
-const CoachProfile = () => {
+export const CoachProfile = () => {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'stats' | 'achievements' | 'moves'>('stats');
   const [hoveredStat, setHoveredStat] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Stats data
+  const stats: Stat[] = [
+    {
+      name: t('coach.stat.strength'),
+      value: 95,
+      icon: <FaDumbbell className="text-red-400" />,
+      color: 'from-red-500 to-red-700',
+      description: t('coach.stat.strengthDesc')
+    },
+    {
+      name: t('coach.stat.agility'),
+      value: 88,
+      icon: <FaBolt className="text-yellow-400" />,
+      color: 'from-yellow-400 to-yellow-600',
+      description: t('coach.stat.agilityDesc')
+    },
+    {
+      name: t('coach.stat.endurance'),
+      value: 92,
+      icon: <FaRunning className="text-green-400" />,
+      color: 'from-green-400 to-green-600',
+      description: t('coach.stat.enduranceDesc')
+    },
+    {
+      name: t('coach.stat.wisdom'),
+      value: 97,
+      icon: <FaBrain className="text-blue-400" />,
+      color: 'from-blue-400 to-blue-600',
+      description: t('coach.stat.wisdomDesc')
+    }
+  ];
+
+  // Achievements data
+  const achievements = [
+    { title: t('coach.achieve.warriors'), value: '1000+', icon: <FaCrown className="text-purple-400" />, color: 'from-purple-400 to-purple-600' },
+    { title: t('coach.achieve.bossFights'), value: '500+', icon: <FaDumbbell className="text-red-400" />, color: 'from-red-400 to-red-600' },
+    { title: t('coach.achieve.success'), value: '95%', icon: <FaBolt className="text-green-400" />, color: 'from-green-400 to-green-600' },
+    { title: t('coach.expTitle'), value: t('coach.achieve.years'), icon: <FaCrown className="text-yellow-400" />, color: 'from-yellow-400 to-yellow-600' }
+  ];
+
+  // Special moves data
+  const specialMoves = [
+    { name: t('coach.move.form'), description: t('coach.move.formDesc'), icon: <FaBolt className="text-blue-400" /> },
+    { name: t('coach.move.nutrition'), description: t('coach.move.nutritionDesc'), icon: <FaAppleAlt className="text-green-400" /> },
+    { name: t('coach.move.mind'), description: t('coach.move.mindDesc'), icon: <FaBrain className="text-purple-400" /> },
+    { name: t('coach.move.motivation'), description: t('coach.move.motivationDesc'), icon: <FaBolt className="text-orange-400" /> }
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -152,10 +98,10 @@ const CoachProfile = () => {
         className="text-center mb-12"
       >
         <h2 className="text-4xl sm:text-5xl font-gaming mb-4">
-          <span className="text-game-blue">Character</span>
-          <span className="text-game-white"> Profile</span>
+          <span className="text-game-blue">{t('about.title').split(' ')[0]}</span>
+          <span className="text-game-white"> {t('coach.title')}</span>
         </h2>
-        <p className="text-lg text-game-white/80">Coach Moumen Atef</p>
+        <p className="text-lg text-game-white/80">{t('about.title')}</p>
       </motion.div>
 
       {/* Main Content */}
@@ -167,7 +113,7 @@ const CoachProfile = () => {
             whileHover={{ scale: isMobile ? 1 : 1.05 }}
             transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
           >
-            {/* Premium Hexagonal Frame */}
+            {/* Hexagonal Frame Animation layers... keeping original visual logic */}
             <div className="absolute inset-0">
               {[...Array(6)].map((_, i) => (
                 <motion.div
@@ -184,53 +130,6 @@ const CoachProfile = () => {
                 />
               ))}
             </div>
-
-            {/* Subtle Energy Pulse */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full bg-game-blue/30"
-                style={{
-                  left: `${50 + 48 * Math.cos(2 * Math.PI * i / 6)}%`,
-                  top: `${50 + 48 * Math.sin(2 * Math.PI * i / 6)}%`,
-                  boxShadow: '0 0 10px rgba(0,163,255,0.3)'
-                }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-
-            {/* Rotating Border */}
-            <motion.div
-              className="absolute -inset-4 rounded-xl"
-              style={{
-                background: 'conic-gradient(from 0deg, rgba(0,163,255,0.3), rgba(0,163,255,0.1), rgba(0,163,255,0.3))',
-                filter: 'blur(8px)',
-                opacity: 0.8
-              }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            <motion.div
-              className="absolute -inset-4 rounded-xl"
-              style={{
-                background: 'linear-gradient(45deg, rgba(0,163,255,0.2), transparent)',
-                backdropFilter: 'blur(2px)',
-                border: '1px solid rgba(0,163,255,0.1)'
-              }}
-            />
 
             {/* Profile Image */}
             <motion.div
@@ -249,144 +148,18 @@ const CoachProfile = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-game-black/80 to-transparent" />
             </motion.div>
-            {/* Hexagonal Frame */}
-            <div className="absolute inset-0">
-              {[...Array(isMobile ? 3 : 6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-full h-full"
-                  style={{
-                    transform: `rotate(${isMobile ? 120 * i : 60 * i}${isMobile ? '' : ` + ${rotation}`}deg)`,
-                    transformOrigin: 'center',
-                    border: `${isMobile ? '1px' : '2px'} solid rgba(0,163,255,${isMobile ? '0.4' : '0.5'})`,
-                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                  }}
-                />
-              ))}
-            </div>
 
-            {/* Energy Particles - Reduced for mobile */}
-            {[...Array(isMobile ? 3 : 8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1.5 h-1.5 xs:w-2 xs:h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-game-blue to-game-red"
-                style={{
-                  left: `${50 + 45 * Math.cos(2 * Math.PI * i / (isMobile ? 3 : 8))}%`,
-                  top: `${50 + 45 * Math.sin(2 * Math.PI * i / (isMobile ? 3 : 8))}%`,
-                }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{
-                  duration: isMobile ? 5 : 3,
-                  repeat: Infinity,
-                  delay: i * (isMobile ? 0.7 : 0.3),
-                }}
-              />
-            ))}
-
-            {/* Rotating Border - Optimized for mobile */}
-            <motion.div
-              className="absolute -inset-2 sm:-inset-3 md:-inset-4 rounded-xl"
-              style={{
-                background: 'conic-gradient(from 0deg, rgba(0,163,255,0.5), rgba(255,0,0,0.5), rgba(0,163,255,0.5))',
-                filter: isMobile ? 'blur(3px)' : 'blur(6px)',
-                opacity: isMobile ? 0.7 : 0.9
-              }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: isMobile ? 15 : 10,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-
-            {/* Pulsing Glow Effect - Optimized for mobile */}
-            {!isMobile && (
-              <motion.div
-                className="absolute -inset-4 xs:-inset-5 sm:-inset-6"
-                animate={{
-                  boxShadow: [
-                    '0 0 30px rgba(0,163,255,0.6), inset 0 0 30px rgba(0,163,255,0.6)',
-                    '0 0 60px rgba(255,0,0,0.6), inset 0 0 60px rgba(255,0,0,0.6)',
-                    '0 0 30px rgba(0,163,255,0.6), inset 0 0 30px rgba(0,163,255,0.6)'
-                  ]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            )}
-            {isMobile && (
-              <motion.div
-                className="absolute -inset-2 xs:-inset-3"
-                animate={{
-                  boxShadow: [
-                    '0 0 10px rgba(0,163,255,0.4), inset 0 0 10px rgba(0,163,255,0.4)',
-                    '0 0 20px rgba(255,0,0,0.4), inset 0 0 20px rgba(255,0,0,0.4)',
-                    '0 0 10px rgba(0,163,255,0.4), inset 0 0 10px rgba(0,163,255,0.4)'
-                  ]
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            )}
-
-            {/* Image Container - Optimized for mobile */}
-            <div className="absolute inset-3 xs:inset-4 overflow-hidden rounded-xl border-2 xs:border-3 sm:border-4 border-game-white/30 bg-gradient-to-br from-game-blue/20 to-game-red/20">
-              <img
-                src="/profile_optimized.jpg"
-                alt="Coach Moumen"
-                className="w-full h-full object-cover object-center"
-                width={400}
-                height={400}
-                loading="eager"
-              />
-            </div>
-
-            {/* MA Coach Badge - Responsive positioning */}
+            {/* MA Coach Badge */}
             <motion.div
               className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 bg-game-black/90 px-3 sm:px-4 py-1 sm:py-2 rounded-lg border-2 border-game-blue/50 shadow-lg z-20"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: isMobile ? 1 : 1.1, boxShadow: '0 0 20px rgba(0,163,255,0.5)' }}
             >
               <div className="text-game-blue font-gaming text-sm sm:text-lg flex items-center gap-1 sm:gap-2">
                 <span className="text-lg sm:text-xl">👑</span>
-                <span>MA Coach</span>
+                <span>{t('coach.role')}</span>
               </div>
             </motion.div>
-
-            {/* Corner Decorations - Responsive sizing */}
-            {[...Array(4)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
-                style={{
-                  top: i < 2 ? '-0.5rem' : 'auto',
-                  bottom: i >= 2 ? '-0.5rem' : 'auto',
-                  left: i % 2 === 0 ? '-0.5rem' : 'auto',
-                  right: i % 2 === 1 ? '-0.5rem' : 'auto',
-                  background: 'linear-gradient(45deg, var(--color-blue), var(--color-red))',
-                  clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
-                }}
-                animate={{
-                  rotate: isMobile ? [0, 360] : [0, 180, 360],
-                  scale: isMobile ? [1, 1.05, 1] : [1, 1.2, 1]
-                }}
-                transition={{
-                  duration: isMobile ? 6 : 4,
-                  repeat: Infinity,
-                  delay: i * 0.5
-                }}
-              />
-            ))}
           </motion.div>
         </div>
 
@@ -395,15 +168,15 @@ const CoachProfile = () => {
           {/* Tab Navigation */}
           <div className="flex gap-4">
             {[
-              { id: 'stats', label: 'Stats Matrix' },
-              { id: 'achievements', label: 'Achievement Log' },
-              { id: 'moves', label: 'Special Moves' }
+              { id: 'stats', label: t('coach.stats') },
+              { id: 'achievements', label: t('app.achievements') },
+              { id: 'moves', label: t('training.skillTree') }
             ].map((tab) => (
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 className={`px-6 py-3 rounded-lg font-gaming text-lg transition-all
-                  ${activeTab === tab.id
+                ${activeTab === tab.id
                     ? 'bg-gradient-to-r from-game-blue to-game-red text-white'
                     : 'bg-black/50 text-game-white/70 hover:bg-black/70'}`}
                 whileHover={{ scale: 1.05 }}
@@ -480,7 +253,7 @@ const CoachProfile = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               >
-                {_achievements.map((achievement) => (
+                {achievements.map((achievement) => (
                   <Card
                     key={achievement.title}
                     interactive
@@ -543,7 +316,7 @@ const CoachProfile = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               >
-                {_specialMoves.map((move) => (
+                {specialMoves.map((move) => (
                   <Card
                     key={move.name}
                     interactive

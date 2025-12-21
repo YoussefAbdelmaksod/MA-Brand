@@ -17,7 +17,7 @@ const Footer = () => {
             className="text-game-white/80 font-gaming text-sm"
             whileHover={{ scale: 1.05 }}
           >
-            © {new Date().getFullYear()} Coach Moumen. {t('footer.allRights')}
+            © {new Date().getFullYear()} {t('footer.coachName')}. {t('footer.allRights')}
           </motion.div>
 
           {/* Powered By */}

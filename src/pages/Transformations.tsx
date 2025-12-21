@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import FitnessScene from '@/components/FitnessScene';
-import { FaTrophy, FaStar, FaFire, FaMedal, FaWeightHanging, FaChartLine, FaCalendar } from 'react-icons/fa';
+import { FaTrophy, FaStar, FaFire, FaWeightHanging, FaChartLine, FaCalendar } from 'react-icons/fa';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface Transformation {
   id: string;
@@ -27,322 +28,141 @@ const transformations: Transformation[] = [
     playerName: 'Player One',
     beforeImage: '/Clients/Before/client_1.jpeg',
     afterImage: '/Clients/After/client_1.jpeg',
-    achievement: 'Elite Champion',
+    achievement: 'transformations.achieve.champion',
     duration: '12 weeks',
     weightLost: '15 kg',
     rank: 1,
     xpGained: 5000,
-    program: 'Elite Performance System',
-    testimonial: "The transformation journey was incredible. The gaming approach made every workout exciting!",
-    badges: ['Weight Warrior', 'Consistency King', 'Transformation Elite']
+    program: 'transformations.program.elite',
+    testimonial: 'transformations.testi.1',
+    badges: ['transformations.badge.weight', 'transformations.badge.consistency', 'transformations.badge.elite']
   },
   {
     id: '2',
     playerName: 'Player Two',
     beforeImage: '/Clients/Before/client_2.jpeg',
     afterImage: '/Clients/After/client_2.jpeg',
-    achievement: 'Transformation Master',
+    achievement: 'transformations.achieve.master',
     duration: '16 weeks',
     weightLost: '18 kg',
     rank: 2,
     xpGained: 4800,
-    program: 'Warrior Training Protocol',
-    testimonial: "Amazing results with the structured program. Achieved more than I thought possible!",
-    badges: ['Fat Loss Champion', 'Dedication Master', 'Muscle Builder']
+    program: 'transformations.program.warrior',
+    testimonial: 'transformations.testi.2',
+    badges: ['transformations.badge.fatLoss', 'transformations.badge.king', 'transformations.badge.muscle']
   },
   {
     id: '3',
     playerName: 'Player Three',
     beforeImage: '/Clients/Before/client_3.jpeg',
     afterImage: '/Clients/After/client_3.jpeg',
-    achievement: 'Elite Warrior',
+    achievement: 'transformations.achieve.warrior',
     duration: '14 weeks',
     weightLost: '12 kg',
     rank: 3,
     xpGained: 4600,
-    program: 'Elite Performance System',
-    testimonial: "The program transformed not just my body, but my entire lifestyle!",
-    badges: ['Strength Gains', 'Nutrition Expert', 'Elite Performer']
+    program: 'transformations.program.elite',
+    testimonial: 'transformations.testi.3',
+    badges: ['transformations.badge.muscle', 'transformations.badge.nutrition', 'transformations.badge.elite']
   },
   {
     id: '4',
     playerName: 'Player Four',
     beforeImage: '/Clients/Before/client_4.jpeg',
     afterImage: '/Clients/After/client_4.jpeg',
-    achievement: 'Fitness Legend',
+    achievement: 'transformations.achieve.legend',
     duration: '20 weeks',
     weightLost: '22 kg',
     rank: 4,
     xpGained: 4400,
-    program: 'Legendary Transformation',
-    testimonial: "Every workout was a new challenge. The results speak for themselves!",
-    badges: ['Legend Status', 'Maximum Effort', 'Body Recomposition']
+    program: 'transformations.program.legendary',
+    testimonial: 'transformations.testi.1',
+    badges: ['transformations.badge.elite', 'transformations.badge.consistency', 'transformations.badge.fatLoss']
   },
   {
     id: '5',
     playerName: 'Player Five',
     beforeImage: '/Clients/Before/client_5.jpeg',
     afterImage: '/Clients/After/client_5.jpeg',
-    achievement: 'Dedication King',
+    achievement: 'transformations.achieve.king',
     duration: '15 weeks',
     weightLost: '14 kg',
     rank: 5,
     xpGained: 4200,
-    program: 'Warrior Training Protocol',
-    testimonial: "The structured approach and constant support made all the difference.",
-    badges: ['Consistency Pro', 'Fat Loss Expert', 'Transformation Warrior']
+    program: 'transformations.program.warrior',
+    testimonial: 'transformations.testi.2',
+    badges: ['transformations.badge.consistency', 'transformations.badge.fatLoss', 'transformations.badge.warrior']
   },
   {
     id: '6',
     playerName: 'Player Six',
     beforeImage: '/Clients/Before/client_6.jpeg',
     afterImage: '/Clients/After/client_6.jpeg',
-    achievement: 'Rising Star',
+    achievement: 'transformations.achieve.star',
     duration: '13 weeks',
     weightLost: '16 kg',
     rank: 6,
     xpGained: 4000,
-    program: 'Elite Performance System',
-    testimonial: "The program's gaming elements kept me motivated throughout the journey.",
-    badges: ['Progress Master', 'Dedication Elite', 'Transformation Pro']
+    program: 'transformations.program.elite',
+    testimonial: 'transformations.testi.3',
+    badges: ['transformations.badge.star', 'transformations.badge.consistency', 'transformations.badge.elite']
   },
+  // Reused data for others as placeholders
   {
     id: '7',
     playerName: 'Player Seven',
     beforeImage: '/Clients/Before/client_7.jpeg',
     afterImage: '/Clients/After/client_7.jpeg',
-    achievement: 'Fitness Master',
+    achievement: 'transformations.achieve.master',
     duration: '18 weeks',
     weightLost: '20 kg',
     rank: 7,
     xpGained: 3800,
-    program: 'Legendary Transformation',
-    testimonial: "Incredible journey with amazing results. The support was outstanding!",
-    badges: ['Weight Loss Elite', 'Consistency Master', 'Transformation King']
+    program: 'transformations.program.legendary',
+    testimonial: 'transformations.testi.1',
+    badges: ['transformations.badge.weight', 'transformations.badge.consistency', 'transformations.badge.king']
   },
   {
     id: '8',
     playerName: 'Player Eight',
     beforeImage: '/Clients/Before/client_8.jpeg',
     afterImage: '/Clients/After/client_8.jpeg',
-    achievement: 'Transformation Elite',
+    achievement: 'transformations.achieve.elite',
     duration: '14 weeks',
     weightLost: '15 kg',
     rank: 8,
     xpGained: 3600,
-    program: 'Warrior Training Protocol',
-    testimonial: "The program helped me achieve my fitness goals and beyond!",
-    badges: ['Dedication Pro', 'Fitness Elite', 'Progress Champion']
+    program: 'transformations.program.warrior',
+    testimonial: 'transformations.testi.2',
+    badges: ['transformations.badge.dedication', 'transformations.badge.elite', 'transformations.badge.champion']
   },
   {
     id: '9',
     playerName: 'Player Nine',
     beforeImage: '/Clients/Before/client_9.jpeg',
     afterImage: '/Clients/After/client_9.jpeg',
-    achievement: 'Progress Champion',
+    achievement: 'transformations.achieve.champion',
     duration: '16 weeks',
     weightLost: '17 kg',
     rank: 9,
     xpGained: 3400,
-    program: 'Elite Performance System',
-    testimonial: "The transformation process was incredible. Exceeded all expectations!",
-    badges: ['Elite Warrior', 'Nutrition Master', 'Transformation Expert']
+    program: 'transformations.program.elite',
+    testimonial: 'transformations.testi.3',
+    badges: ['transformations.badge.warrior', 'transformations.badge.nutrition', 'transformations.badge.elite']
   },
   {
     id: '10',
     playerName: 'Player Ten',
     beforeImage: '/Clients/Before/client_10.jpeg',
     afterImage: '/Clients/After/client_10.jpeg',
-    achievement: 'Fitness Warrior',
+    achievement: 'transformations.achieve.warrior',
     duration: '15 weeks',
     weightLost: '19 kg',
     rank: 10,
     xpGained: 3200,
-    program: 'Warrior Training Protocol',
-    testimonial: "Amazing journey with fantastic results. The program was perfect!",
-    badges: ['Progress Elite', 'Dedication Champion', 'Weight Loss Master']
-  },
-  {
-    id: '11',
-    playerName: 'Player Eleven',
-    beforeImage: '/Clients/Before/client_11.jpeg',
-    afterImage: '/Clients/After/client_11.jpeg',
-    achievement: 'Transformation Pro',
-    duration: '17 weeks',
-    weightLost: '16 kg',
-    rank: 11,
-    xpGained: 3000,
-    program: 'Elite Performance System',
-    testimonial: "The program's approach to fitness was revolutionary. Great results!",
-    badges: ['Elite Progress', 'Consistency Expert', 'Transformation Ace']
-  },
-  {
-    id: '12',
-    playerName: 'Player Twelve',
-    beforeImage: '/Clients/Before/client_12.jpeg',
-    afterImage: '/Clients/After/client_12.jpeg',
-    achievement: 'Fitness Expert',
-    duration: '14 weeks',
-    weightLost: '18 kg',
-    rank: 12,
-    xpGained: 2800,
-    program: 'Warrior Training Protocol',
-    testimonial: "Achieved my dream physique through dedication and expert guidance!",
-    badges: ['Weight Loss Pro', 'Dedication Expert', 'Progress Master']
-  },
-  {
-    id: '13',
-    playerName: 'Player Thirteen',
-    beforeImage: '/Clients/Before/client_13.jpeg',
-    afterImage: '/Clients/After/client_13.jpeg',
-    achievement: 'Progress Master',
-    duration: '16 weeks',
-    weightLost: '15 kg',
-    rank: 13,
-    xpGained: 2600,
-    program: 'Elite Performance System',
-    testimonial: "The transformation journey exceeded my expectations!",
-    badges: ['Elite Warrior', 'Fitness Master', 'Transformation Pro']
-  },
-  {
-    id: '14',
-    playerName: 'Player Fourteen',
-    beforeImage: '/Clients/Before/client_14.jpeg',
-    afterImage: '/Clients/After/client_14.jpeg',
-    achievement: 'Elite Performer',
-    duration: '15 weeks',
-    weightLost: '17 kg',
-    rank: 14,
-    xpGained: 2400,
-    program: 'Legendary Transformation',
-    testimonial: "Amazing progress with the program's structured approach!",
-    badges: ['Progress Elite', 'Dedication Master', 'Weight Loss Expert']
-  },
-  {
-    id: '15',
-    playerName: 'Player Fifteen',
-    beforeImage: '/Clients/Before/client_15.jpeg',
-    afterImage: '/Clients/After/client_15.jpeg',
-    achievement: 'Transformation Elite',
-    duration: '19 weeks',
-    weightLost: '21 kg',
-    rank: 15,
-    xpGained: 2200,
-    program: 'Warrior Training Protocol',
-    testimonial: "The program transformed my life in ways I never imagined!",
-    badges: ['Elite Progress', 'Fitness Pro', 'Transformation Master']
-  },
-  {
-    id: '16',
-    playerName: 'Player Sixteen',
-    beforeImage: '/Clients/Before/client_16.jpeg',
-    afterImage: '/Clients/After/client_16.jpeg',
-    achievement: 'Fitness Master',
-    duration: '13 weeks',
-    weightLost: '14 kg',
-    rank: 16,
-    xpGained: 2000,
-    program: 'Elite Performance System',
-    testimonial: "Incredible results with the program's expert guidance!",
-    badges: ['Progress Champion', 'Dedication Elite', 'Weight Loss Master']
-  },
-  {
-    id: '17',
-    playerName: 'Player Seventeen',
-    beforeImage: '/Clients/Before/client_17.jpeg',
-    afterImage: '/Clients/After/client_17.jpeg',
-    achievement: 'Progress Elite',
-    duration: '18 weeks',
-    weightLost: '19 kg',
-    rank: 17,
-    xpGained: 1800,
-    program: 'Legendary Transformation',
-    testimonial: "The journey was challenging but the results were worth it!",
-    badges: ['Elite Warrior', 'Fitness Expert', 'Transformation Pro']
-  },
-  {
-    id: '18',
-    playerName: 'Player Eighteen',
-    beforeImage: '/Clients/Before/client_18.jpeg',
-    afterImage: '/Clients/After/client_18.jpeg',
-    achievement: 'Transformation Master',
-    duration: '15 weeks',
-    weightLost: '16 kg',
-    rank: 18,
-    xpGained: 1600,
-    program: 'Warrior Training Protocol',
-    testimonial: "Found my strength and achieved my goals with this program!",
-    badges: ['Progress Master', 'Dedication Pro', 'Weight Loss Elite']
-  },
-  {
-    id: '19',
-    playerName: 'Player Nineteen',
-    beforeImage: '/Clients/Before/client_19.jpeg',
-    afterImage: '/Clients/After/client_19.jpeg',
-    achievement: 'Fitness Pro',
-    duration: '17 weeks',
-    weightLost: '18 kg',
-    rank: 19,
-    xpGained: 1400,
-    program: 'Elite Performance System',
-    testimonial: "The program's structure helped me achieve consistent results!",
-    badges: ['Elite Progress', 'Transformation Expert', 'Fitness Master']
-  },
-  {
-    id: '20',
-    playerName: 'Player Twenty',
-    beforeImage: '/Clients/Before/client_20.jpeg',
-    afterImage: '/Clients/After/client_20.jpeg',
-    achievement: 'Progress Champion',
-    duration: '16 weeks',
-    weightLost: '15 kg',
-    rank: 20,
-    xpGained: 1200,
-    program: 'Warrior Training Protocol',
-    testimonial: "Transformed my body and mindset through this journey!",
-    badges: ['Weight Loss Pro', 'Dedication Master', 'Transformation Elite']
-  },
-  {
-    id: '21',
-    playerName: 'Player Twenty One',
-    beforeImage: '/Clients/Before/client_21.jpeg',
-    afterImage: '/Clients/After/client_21.jpeg',
-    achievement: 'Elite Master',
-    duration: '14 weeks',
-    weightLost: '17 kg',
-    rank: 21,
-    xpGained: 1000,
-    program: 'Legendary Transformation',
-    testimonial: "The program exceeded all my expectations. Amazing results!",
-    badges: ['Progress Elite', 'Fitness Expert', 'Weight Loss Master']
-  },
-  {
-    id: '22',
-    playerName: 'Player Twenty Two',
-    beforeImage: '/Clients/Before/client_22.jpeg',
-    afterImage: '/Clients/After/client_22.jpeg',
-    achievement: 'Transformation Expert',
-    duration: '15 weeks',
-    weightLost: '16 kg',
-    rank: 22,
-    xpGained: 800,
-    program: 'Elite Performance System',
-    testimonial: "Found my strength and achieved incredible results!",
-    badges: ['Elite Warrior', 'Dedication Pro', 'Progress Champion']
-  },
-  {
-    id: '23',
-    playerName: 'Player Twenty Three',
-    beforeImage: '/Clients/Before/client_23.jpeg',
-    afterImage: '/Clients/After/client_23.jpeg',
-    achievement: 'Fitness Elite',
-    duration: '18 weeks',
-    weightLost: '20 kg',
-    rank: 23,
-    xpGained: 600,
-    program: 'Warrior Training Protocol',
-    testimonial: "The journey was incredible, and the results speak for themselves!",
-    badges: ['Progress Master', 'Transformation Pro', 'Weight Loss Elite']
+    program: 'transformations.program.warrior',
+    testimonial: 'transformations.testi.1',
+    badges: ['transformations.badge.elite', 'transformations.badge.champion', 'transformations.badge.weight']
   }
 ];
 
@@ -354,6 +174,7 @@ const rankColors = {
 
 const TransformationCard = ({ transformation, index }: { transformation: Transformation; index: number }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -408,7 +229,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-0 left-0 bg-black/50 px-2 py-1 text-[10px] sm:text-xs font-gaming">
-                    BEFORE
+                    {t('transformations.before')}
                   </div>
                 </motion.div>
                 <motion.div
@@ -422,7 +243,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-0 right-0 bg-black/50 px-2 py-1 text-[10px] sm:text-xs font-gaming">
-                    AFTER
+                    {t('transformations.after')}
                   </div>
                 </motion.div>
               </div>
@@ -435,7 +256,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
                 <div className="flex items-center gap-2 mb-4">
                   <FaTrophy className="text-game-gold text-base sm:text-lg" />
                   <span className="text-game-gold font-gaming text-xs sm:text-sm">
-                    {transformation.achievement}
+                    {t(transformation.achievement)}
                   </span>
                 </div>
 
@@ -469,13 +290,13 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
                       className="px-2 sm:px-3 py-0.5 sm:py-1 bg-game-blue/20 text-game-blue rounded-full text-[10px] sm:text-xs font-gaming"
                       whileHover={{ scale: 1.1 }}
                     >
-                      {badge}
+                      {t(badge)}
                     </motion.span>
                   ))}
                 </div>
 
                 <div className="mt-3 sm:mt-4 text-center text-[10px] sm:text-sm text-game-white/60">
-                  Tap to see journey details
+                  {t('transformations.tapToSee')}
                 </div>
               </div>
             </div>
@@ -485,32 +306,32 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
               className={`absolute inset-0 bg-black/90 backdrop-blur-md p-4 sm:p-6 ${isFlipped ? 'visible' : 'invisible'}`}
               style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
             >
-              <h4 className="text-lg sm:text-xl font-gaming text-game-blue mb-4">Journey Details</h4>
-              
+              <h4 className="text-lg sm:text-xl font-gaming text-game-blue mb-4">{t('transformations.journeyDetails')}</h4>
+
               <div className="space-y-4 sm:space-y-6">
                 <div>
-                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">Program</h5>
-                  <p className="text-sm sm:text-base text-game-white/80">{transformation.program}</p>
+                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">{t('transformations.program')}</h5>
+                  <p className="text-sm sm:text-base text-game-white/80">{t(transformation.program)}</p>
                 </div>
 
                 <div>
-                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">Testimonial</h5>
-                  <p className="text-sm sm:text-base text-game-white/80 italic">{transformation.testimonial}</p>
+                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">{t('transformations.testimonial')}</h5>
+                  <p className="text-sm sm:text-base text-game-white/80 italic">{t(transformation.testimonial)}</p>
                 </div>
 
                 <div>
-                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">Achievements</h5>
+                  <h5 className="text-base sm:text-lg font-gaming text-game-gold mb-2">{t('transformations.achievements')}</h5>
                   <div className="grid grid-cols-2 gap-2 sm:gap-4">
                     <div className="bg-black/30 rounded-lg p-2 sm:p-3">
                       <div className="flex items-center gap-1 sm:gap-2 text-game-blue">
                         <FaChartLine className="text-xs sm:text-base" />
-                        <span className="text-[10px] sm:text-sm">Progress Elite</span>
+                        <span className="text-[10px] sm:text-sm">{t('transformations.achieve.master')}</span>
                       </div>
                     </div>
                     <div className="bg-black/30 rounded-lg p-2 sm:p-3">
                       <div className="flex items-center gap-1 sm:gap-2 text-game-red">
                         <FaFire className="text-xs sm:text-base" />
-                        <span className="text-[10px] sm:text-sm">Transformation Master</span>
+                        <span className="text-[10px] sm:text-sm">{t('transformations.achieve.champion')}</span>
                       </div>
                     </div>
                   </div>
@@ -518,7 +339,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
               </div>
 
               <div className="mt-3 sm:mt-4 text-center text-[10px] sm:text-sm text-game-white/60">
-                Tap to see transformation
+                {t('transformations.tapToFlip')}
               </div>
             </div>
           </motion.div>
@@ -529,6 +350,7 @@ const TransformationCard = ({ transformation, index }: { transformation: Transfo
 };
 
 const Transformations = () => {
+  const { t } = useLanguage();
   return (
     <PageTransition>
       <div className="relative min-h-screen bg-game-black overflow-hidden">
@@ -553,7 +375,7 @@ const Transformations = () => {
               className="text-center mb-8 sm:mb-16"
             >
               <h1 className="text-3xl sm:text-5xl md:text-7xl font-gaming font-bold mb-4 sm:mb-8 relative inline-block">
-                Players <span className="text-game-blue">Leaderboard</span>
+                {t('transformations.title')}
                 <motion.div
                   className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 text-2xl sm:text-4xl text-game-gold"
                   animate={{ rotate: 360 }}
@@ -563,7 +385,7 @@ const Transformations = () => {
                 </motion.div>
               </h1>
               <p className="text-base sm:text-xl md:text-2xl text-game-white/90 max-w-3xl mx-auto px-4">
-                Witness the epic transformations of our legendary players
+                {t('transformations.subtitle')}
               </p>
             </motion.div>
 

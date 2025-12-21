@@ -101,7 +101,7 @@ const XPSystem = () => {
           <div className="inline-block bg-gradient-to-br from-black/80 to-black/40 p-8 rounded-2xl border-2 border-game-blue/30 shadow-[0_0_50px_rgba(0,163,255,0.4)] relative overflow-hidden group hover:scale-105 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-r from-game-blue/10 via-transparent to-game-red/10 animate-pulse" />
             <div className="relative z-10">
-              <h2 className="text-4xl font-gaming text-game-blue mb-4 animate-glow">Current Level</h2>
+              <h2 className="text-4xl font-gaming text-game-blue mb-4 animate-glow">{t('xp.currentLevel')}</h2>
               <div className="text-7xl font-gaming text-game-white mb-6 animate-bounce-slow relative">
                 {currentLevel}
                 <div className="absolute -inset-4 bg-gradient-to-r from-game-blue/20 to-game-red/20 blur-lg animate-pulse" />
@@ -130,7 +130,7 @@ const XPSystem = () => {
                 whileTap={{ scale: 0.95 }}
                 className="mt-6 px-6 py-2 bg-game-blue/20 border-2 border-game-blue rounded-lg font-gaming text-game-blue hover:bg-game-blue/30 transition-colors"
               >
-                View Full Arsenal
+                {t('xp.viewArsenal')}
               </motion.button>
             </div>
           </div>
@@ -144,10 +144,10 @@ const XPSystem = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-game-blue/10 to-game-red/10 blur-xl animate-pulse" />
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-gaming text-game-white mb-6 relative z-10">
-            MA Warrior Journey
+            {t('xp.heroTitle')}
           </h1>
           <p className="text-lg sm:text-xl text-game-white/80 max-w-3xl mx-auto relative z-10">
-            Welcome to MA Fitness, where your fitness journey transforms into a real gameplay experience!
+            {t('xp.heroSubtitle')}
           </p>
         </motion.div>
 
@@ -373,10 +373,10 @@ const XPSystem = () => {
 
             <div className="relative z-10 p-6 xs:p-8 sm:p-10">
               <h2 className="text-2xl xs:text-3xl sm:text-4xl font-gaming mb-4 xs:mb-6 bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">
-                Ready to Begin Your Journey?
+                {t('xp.ctaTitle')}
               </h2>
               <p className="text-sm xs:text-base sm:text-lg text-game-white/90 mb-6 xs:mb-8">
-                View our complete arsenal of training packages and choose the perfect path for your fitness quest.
+                {t('xp.ctaSubtitle')}
               </p>
               <Button
                 variant="primary"
@@ -387,7 +387,7 @@ const XPSystem = () => {
                 className="relative overflow-hidden group text-sm sm:text-base font-gaming rounded-xl border-2"
               >
                 <span className="relative z-10 group-hover:text-white transition-colors flex items-center justify-center gap-2 py-1">
-                  <span>View Full Arsenal</span>
+                  <span>{t('xp.viewArsenal')}</span>
                   <motion.span
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
@@ -413,27 +413,27 @@ const XPSystem = () => {
           <Card glowing className="p-6 sm:p-8">
             <div className="flex items-center gap-3 mb-6">
               <FaChartLine className="text-3xl text-game-red" />
-              <h2 className="text-2xl sm:text-3xl font-gaming text-game-white">Why Level Up?</h2>
+              <h2 className="text-2xl sm:text-3xl font-gaming text-game-white">{t('xp.benefitsTitle')}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-4 text-game-white/80">
                 <div className="flex items-start gap-3">
                   <FaCrown className="text-xl text-game-blue mt-1" />
-                  <p>Exclusive titles displayed on the Global Leaderboard</p>
+                  <p>{t('xp.benefit1')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <FaGift className="text-xl text-game-blue mt-1" />
-                  <p>Free T-shirt or Hoodie every 10 levels</p>
+                  <p>{t('xp.benefit2')}</p>
                 </div>
               </div>
               <div className="space-y-4 text-game-white/80">
                 <div className="flex items-start gap-3">
                   <FaTrophy className="text-xl text-game-blue mt-1" />
-                  <p>Higher levels = More strength and determination</p>
+                  <p>{t('xp.benefit3')}</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <FaMedal className="text-xl text-game-blue mt-1" />
-                  <p>Chance to appear among MA Fitness's top players</p>
+                  <p>{t('xp.benefit4')}</p>
                 </div>
               </div>
             </div>

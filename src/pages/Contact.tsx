@@ -111,7 +111,7 @@ ${formData.message}`,
       const button = document.querySelector('button[type="submit"]');
       if (button) {
         button.setAttribute('disabled', 'true');
-        button.textContent = 'Sending...';
+        button.textContent = t('contact.sending');
       }
 
       // Send the email
@@ -122,7 +122,7 @@ ${formData.message}`,
       );
 
       // Show success message
-      alert('Your message has been sent successfully! We will contact you soon.');
+      alert(t('contact.success'));
       setShowForm(false);
       setFormData({
         name: '',
@@ -135,7 +135,7 @@ ${formData.message}`,
       });
     } catch (error) {
       console.error('Error sending form:', error);
-      alert('There was an error sending your message. Please try again.');
+      alert(t('contact.error'));
     } finally {
       // Reset button state
       const button = document.querySelector('button[type="submit"]');
@@ -222,7 +222,7 @@ ${formData.message}`,
                       {social.name}
                     </h3>
                     <p className="text-sm text-white/80">
-                      Follow Coach Moumen
+                      {t('contact.followCoach')}
                     </p>
                   </div>
                   <motion.div
@@ -301,7 +301,7 @@ ${formData.message}`,
                               focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                               placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                               backdrop-blur-sm"
-                            placeholder="Enter your name"
+                            placeholder={t('contact.phName')}
                           />
                         </div>
 
@@ -317,7 +317,7 @@ ${formData.message}`,
                               focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                               placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                               backdrop-blur-sm"
-                            placeholder="Enter your email"
+                            placeholder={t('contact.phEmail')}
                           />
                         </div>
                       </div>
@@ -335,7 +335,7 @@ ${formData.message}`,
                               focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                               placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                               backdrop-blur-sm"
-                            placeholder="Enter your phone number"
+                            placeholder={t('contact.phPhone')}
                           />
                         </div>
 
@@ -376,7 +376,7 @@ ${formData.message}`,
                                 focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                                 placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                                 backdrop-blur-sm"
-                              placeholder="Enter the position you're applying for"
+                              placeholder={t('contact.phPosition')}
                             />
                           </div>
 
@@ -392,12 +392,12 @@ ${formData.message}`,
                                 focus:outline-none focus:border-game-blue focus:ring-2 focus:ring-game-blue/50
                                 placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                                 backdrop-blur-sm"
-                              placeholder="Enter your years of experience"
+                              placeholder={t('contact.phExperience')}
                             />
                           </div>
 
                           <div>
-                            <label className="block text-game-white mb-2 font-gaming">Resume/CV</label>
+                            <label className="block text-game-white mb-2 font-gaming">{t('contact.resume')}</label>
                             <input
                               type="file"
                               name="resume"
@@ -426,8 +426,8 @@ ${formData.message}`,
                             placeholder-game-white/50 transition-all duration-300 hover:border-game-blue/50
                             backdrop-blur-sm min-h-[120px] resize-y"
                           placeholder={formData.requestType === 'job' ?
-                            "Tell us about your experience and why you'd be a great fit" :
-                            "Tell us about your partnership idea"}
+                            t('contact.phMessageJob') :
+                            t('contact.phMessagePartner')}
                         />
                       </div>
 
