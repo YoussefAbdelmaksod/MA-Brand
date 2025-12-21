@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import FitnessScene from '@/components/FitnessScene';
 import { FaBolt, FaStar, FaTrophy, FaGem, FaShieldAlt, FaCheck, FaFire, FaCrown, FaRocket, FaWhatsapp } from 'react-icons/fa';
 import { GiCrossedSwords, GiLaurelsTrophy } from 'react-icons/gi';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface Service {
   title: string;
@@ -132,7 +133,7 @@ const colorClasses: Record<string, { text: string; bg: string; border: string; g
   }
 };
 
-const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
+const ServiceCard = ({ service, index, t }: { service: Service; index: number; t: (key: string) => string }) => {
   const colors = colorClasses[service.color];
 
   return (
@@ -152,7 +153,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           className={`absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-4 py-1.5 rounded-full font-gaming text-sm
             bg-gradient-to-r ${colors.gradient} text-white ${colors.glow}`}
         >
-          {service.popular ? <><FaFire className="inline mr-1" /> MOST POPULAR</> : <><FaCrown className="inline mr-1" /> BEST VALUE</>}
+          {service.popular ? <><FaFire className="inline mr-1" /> {t('services.mostPopular')}</> : <><FaCrown className="inline mr-1" /> {t('services.bestValue')}</>}
         </motion.div>
       )}
 
@@ -229,7 +230,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           {/* Features List */}
           <div className="flex-grow mb-6">
             <h4 className={`text-sm font-gaming ${colors.text} mb-4 flex items-center gap-2`}>
-              <FaStar /> What's Included
+              <FaStar /> {t('services.whatsIncluded')}
             </h4>
             <ul className="space-y-3">
               {service.features.map((feature, i) => (
@@ -261,7 +262,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
           >
             <span className={`font-gaming ${colors.text}`}>
               <FaBolt className="inline mr-2" />
-              +{service.xpBonus} XP Bonus
+              +{service.xpBonus} {t('services.xpBonus')}
             </span>
           </motion.div>
 
@@ -279,8 +280,8 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
             />
             <span className="relative z-10 flex items-center justify-center gap-3">
               <FaWhatsapp className="text-xl" />
-              Start Your Quest
-              <GiCrossedSwords />
+              {t('services.startQuest')}
+              <GiCrossedSwords className={colors.text} />
             </span>
           </Button>
         </div>
@@ -290,6 +291,8 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
 };
 
 const Services = () => {
+  const { t } = useLanguage();
+
   return (
     <PageTransition>
       <div className="relative min-h-screen bg-game-black overflow-hidden">
@@ -320,23 +323,23 @@ const Services = () => {
                 transition={{ duration: 3, repeat: Infinity }}
               >
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-gaming font-bold mb-6 bg-gradient-to-r from-game-blue via-white to-game-red bg-clip-text text-transparent">
-                  Choose Your Path
+                  {t('services.title')}
                 </h1>
               </motion.div>
               <p className="text-xl text-white/80 max-w-3xl mx-auto mb-4">
-                Select your training tier and unlock your full potential
+                {t('services.subtitle')}
               </p>
               <div className="flex items-center justify-center gap-4 text-sm text-white/60">
-                <span className="flex items-center gap-2"><FaRocket className="text-game-blue" /> Instant Start</span>
-                <span className="flex items-center gap-2"><GiLaurelsTrophy className="text-game-gold" /> Proven Results</span>
-                <span className="flex items-center gap-2"><FaWhatsapp className="text-green-400" /> 24/7 Support</span>
+                <span className="flex items-center gap-2"><FaRocket className="text-game-blue" /> {t('services.instantStart')}</span>
+                <span className="flex items-center gap-2"><GiLaurelsTrophy className="text-game-gold" /> {t('services.provenResults')}</span>
+                <span className="flex items-center gap-2"><FaWhatsapp className="text-green-400" /> {t('services.support247')}</span>
               </div>
             </motion.div>
 
             {/* Plans Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-20">
               {services.map((service, index) => (
-                <ServiceCard key={service.title} service={service} index={index} />
+                <ServiceCard key={service.title} service={service} index={index} t={t} />
               ))}
             </div>
 
@@ -348,10 +351,10 @@ const Services = () => {
               className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
             >
               {[
-                { icon: <FaTrophy className="text-3xl text-game-gold" />, value: '1000+', label: 'Warriors Trained' },
-                { icon: <FaStar className="text-3xl text-yellow-400" />, value: '95%', label: 'Success Rate' },
-                { icon: <FaFire className="text-3xl text-game-red" />, value: '8+', label: 'Years Experience' },
-                { icon: <GiCrossedSwords className="text-3xl text-game-blue" />, value: '500+', label: 'Transformations' }
+                { icon: <FaTrophy className="text-3xl text-game-gold" />, value: '1000+', labelKey: 'services.warriorsTrained' },
+                { icon: <FaStar className="text-3xl text-yellow-400" />, value: '95%', labelKey: 'home.successRate' },
+                { icon: <FaFire className="text-3xl text-game-red" />, value: '8+', labelKey: 'services.yearsExperience' },
+                { icon: <GiCrossedSwords className="text-3xl text-game-blue" />, value: '500+', labelKey: 'nav.transformations' }
               ].map((stat, i) => (
                 <motion.div
                   key={i}
@@ -360,7 +363,7 @@ const Services = () => {
                 >
                   <div className="mb-3">{stat.icon}</div>
                   <div className="text-3xl font-gaming text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-white/60">{stat.label}</div>
+                  <div className="text-sm text-white/60">{t(stat.labelKey)}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -382,10 +385,10 @@ const Services = () => {
                     <FaGem className="text-6xl text-game-gold" />
                   </motion.div>
                   <h2 className="text-3xl sm:text-4xl font-gaming mb-4 bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">
-                    Need Something Custom?
+                    {t('services.customQuest')}
                   </h2>
                   <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-                    Let's craft a unique training protocol tailored specifically to your goals, schedule, and preferences.
+                    {t('services.customDescription')}
                   </p>
                   <Button
                     variant="primary"
@@ -396,7 +399,7 @@ const Services = () => {
                   >
                     <span className="flex items-center gap-3">
                       <FaWhatsapp className="text-xl" />
-                      Create Custom Quest
+                      {t('services.createCustom')}
                       <FaRocket />
                     </span>
                   </Button>
