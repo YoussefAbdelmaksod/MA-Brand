@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <motion.footer
       initial={{ opacity: 0, y: 20 }}
@@ -10,19 +13,19 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Copyright */}
-          <motion.div 
+          <motion.div
             className="text-game-white/80 font-gaming text-sm"
             whileHover={{ scale: 1.05 }}
           >
-            © {new Date().getFullYear()} Coach Moumen. All Rights Reserved.
+            © {new Date().getFullYear()} Coach Moumen. {t('footer.allRights')}
           </motion.div>
 
           {/* Powered By */}
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2 text-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-game-white/60">Powered by</span>
+            <span className="text-game-white/60">{t('footer.poweredBy')}</span>
             <span className="text-game-blue">
               Vibe Tech
             </span>
