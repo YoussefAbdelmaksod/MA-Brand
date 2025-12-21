@@ -22,13 +22,23 @@
     <meta property="twitter:description" content="Transform your body and level up your life through our unique blend of gaming and fitness." />
     <meta property="twitter:image" content="/4.gif" />
 
-    <!-- Fonts -->
+    <!-- Preload critical hero image for faster LCP -->
+    <link rel="preload" as="image" href="/4.gif" />
+    
+    <!-- Fonts with optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Gaming Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Body Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Preload critical gaming font -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" />
+    <!-- Gaming Font with font-display: swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Body Font with font-display: swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <!-- Fallback for noscript -->
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
 
     <title>Level Up Fitness ⚔️</title>
     

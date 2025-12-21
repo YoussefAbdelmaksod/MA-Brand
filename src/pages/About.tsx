@@ -81,6 +81,14 @@ const timelineData: TimelineItem[] = [
 
 const certifications: Certification[] = [
   {
+    title: 'Strength & Conditioning Specialist',
+    organization: 'TASS / PBLS Academy',
+    type: 'onsite',
+    icon: <FaCertificate size={24} className="text-game-gold" />,
+    description: 'Approved by TASS, certified through PBLS Academy, endorsed by Egyptian Federation of Sport Culture. Includes 3.0 CE credits.',
+    date: 'July - September 2025'
+  },
+  {
     title: 'Sport Nutrition Coach',
     organization: 'Swedish Academy of Sports Training',
     type: 'online',
@@ -164,9 +172,9 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
         {/* Date Badge */}
         <motion.div
           className={`px-4 py-2 rounded-xl text-sm font-gaming mb-4 w-full text-center bg-black border-2
-            ${item.type === 'education' ? 'border-game-blue text-game-blue' : 
-              item.type === 'management' ? 'border-purple-500 text-purple-500' : 
-              'border-game-red text-game-red'}`}
+            ${item.type === 'education' ? 'border-game-blue text-game-blue' :
+              item.type === 'management' ? 'border-purple-500 text-purple-500' :
+                'border-game-red text-game-red'}`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: index * 0.3 }}
@@ -178,20 +186,20 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
         {/* Icon Circle */}
         <motion.div
           className={`relative z-20 w-12 h-12 rounded-full border-2 flex items-center justify-center bg-black
-            ${item.type === 'education' ? 'border-game-blue' : 
-              item.type === 'management' ? 'border-purple-500' : 
-              'border-game-red'}
+            ${item.type === 'education' ? 'border-game-blue' :
+              item.type === 'management' ? 'border-purple-500' :
+                'border-game-red'}
             ${item.highlight ? 'shadow-[0_0_15px_rgba(255,0,0,0.3)]' : ''}`}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5, delay: index * 0.2 }}
           whileHover={{ scale: 1.1 }}
         >
-          <motion.div 
+          <motion.div
             className={`text-xl
-              ${item.type === 'education' ? 'text-game-blue' : 
-                item.type === 'management' ? 'text-purple-500' : 
-                'text-game-red'}`}
+              ${item.type === 'education' ? 'text-game-blue' :
+                item.type === 'management' ? 'text-purple-500' :
+                  'text-game-red'}`}
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.3 }}
           >
@@ -211,15 +219,15 @@ const TimelineItem = ({ item, index }: { item: TimelineItem; index: number }) =>
           size="sm"
           className={`transform transition-all duration-300 hover:scale-[1.02] bg-black
             ${item.highlight ? 'border-2 shadow-[0_0_20px_rgba(255,0,0,0.2)]' : 'border'}
-            ${item.type === 'education' ? 'border-game-blue/50 hover:border-game-blue' : 
-              item.type === 'career' ? 'border-game-red/50 hover:border-game-red' : 
-              'border-purple-500/50 hover:border-purple-500'}`}
+            ${item.type === 'education' ? 'border-game-blue/50 hover:border-game-blue' :
+              item.type === 'career' ? 'border-game-red/50 hover:border-game-red' :
+                'border-purple-500/50 hover:border-purple-500'}`}
         >
           <div className="p-4">
             <h3 className={`text-lg font-gaming mb-2 
-              ${item.type === 'education' ? 'text-game-blue' : 
-                item.type === 'management' ? 'text-purple-500' : 
-                'text-game-red'}`}>
+              ${item.type === 'education' ? 'text-game-blue' :
+                item.type === 'management' ? 'text-purple-500' :
+                  'text-game-red'}`}>
               {item.title}
             </h3>
             <p className="text-sm text-game-white/80">{item.description}</p>
@@ -269,7 +277,7 @@ const CertificationCard = ({ cert, index }: { cert: Certification; index: number
           {cert.date && (
             <p className="text-xs text-game-blue text-center mb-2 relative z-10">{cert.date}</p>
           )}
-          <motion.span 
+          <motion.span
             className={`mt-3 px-4 py-1.5 rounded-full text-xs font-gaming
               ${cert.type === 'online' ? 'bg-game-blue/20 text-game-blue' : 'bg-game-red/20 text-game-red'}
               relative z-10`}
@@ -331,7 +339,7 @@ const About = () => {
         <div className="fixed inset-0 pointer-events-none">
           <FitnessScene />
         </div>
-        
+
         {/* Content */}
         <div className="relative z-10 pointer-events-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32">
@@ -342,7 +350,7 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-16 sm:mb-24"
             >
-              <motion.h1 
+              <motion.h1
                 className="text-6xl md:text-7xl font-gaming font-bold mb-8 relative inline-block"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -359,7 +367,7 @@ const About = () => {
                 </motion.div>
               </motion.h1>
               <p className="text-lg sm:text-xl text-game-white/90 max-w-3xl mx-auto mb-12">
-                From Sports Science student to Fitness Industry Leader, discover how I turned the 
+                From Sports Science student to Fitness Industry Leader, discover how I turned the
                 challenges of COVID-19 into opportunities to transform lives through innovative fitness solutions.
               </p>
 
@@ -452,13 +460,13 @@ const About = () => {
               transition={{ delay: 0.8, duration: 0.8 }}
               className="mt-32 mb-16 text-center"
             >
-              <Card 
-                glowing 
+              <Card
+                glowing
                 className="inline-block max-w-2xl w-full transform hover:scale-105 transition-all duration-300 
                   hover:shadow-[0_0_30px_rgba(0,163,255,0.3)] relative overflow-hidden"
               >
                 {/* Background Animation */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 opacity-20"
                   animate={{
                     background: [
@@ -473,7 +481,7 @@ const About = () => {
                     ease: "linear"
                   }}
                 />
-                
+
                 <div className="relative z-10">
                   <h2 className="text-3xl sm:text-4xl font-gaming mb-6">Ready to Level Up?</h2>
                   <p className="text-lg sm:text-xl text-game-white/80 mb-8">
