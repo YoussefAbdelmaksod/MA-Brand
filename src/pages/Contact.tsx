@@ -9,6 +9,7 @@ import {
   FaWhatsapp, FaStar, FaHandshake, FaArrowRight, FaSnapchatGhost, FaFileAlt
 } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const EMAILJS_PUBLIC_KEY = "x9dqPxdwnZdgOh1jq";
 const EMAILJS_SERVICE_ID = "service_e8k2jpe";
@@ -72,6 +73,7 @@ interface FormData {
 
 const Contact = () => {
   const [showForm, setShowForm] = useState(false);
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -179,7 +181,7 @@ ${formData.message}`,
               className="text-center mb-16"
             >
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-gaming font-bold mb-8 relative inline-block">
-                Join The <span className="text-game-blue">Adventure</span>
+                {t('contact.joinAdventure').split(' ')[0]} <span className="text-game-blue">{t('contact.joinAdventure').split(' ').slice(1).join(' ')}</span>
                 <motion.div
                   className="absolute -top-6 -right-6 text-4xl text-game-gold"
                   animate={{ rotate: 360 }}
@@ -189,7 +191,7 @@ ${formData.message}`,
                 </motion.div>
               </h1>
               <p className="text-xl sm:text-2xl text-game-white/90 max-w-3xl mx-auto">
-                Connect with Coach Moumen and start your fitness journey today
+                {t('contact.heroSubtitle')}
               </p>
             </motion.div>
 
@@ -255,8 +257,8 @@ ${formData.message}`,
                       <FaHandshake className="text-3xl text-game-blue" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-gaming text-game-white">Contact Us</h2>
-                      <p className="text-game-white/80">Partner with us or join our team</p>
+                      <h2 className="text-2xl font-gaming text-game-white">{t('contact.title')}</h2>
+                      <p className="text-game-white/80">{t('contact.partnerOrJoin')}</p>
                     </div>
                   </div>
 
@@ -270,7 +272,7 @@ ${formData.message}`,
                       className="relative overflow-hidden group"
                     >
                       <span className="relative z-10 flex items-center justify-center gap-2">
-                        <span>Start Application</span>
+                        <span>{t('contact.startApplication')}</span>
                         <motion.span
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
@@ -288,7 +290,7 @@ ${formData.message}`,
                     >
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-game-white mb-2 font-gaming">Your Name</label>
+                          <label className="block text-game-white mb-2 font-gaming">{t('contact.yourName')}</label>
                           <input
                             type="text"
                             name="name"
@@ -304,7 +306,7 @@ ${formData.message}`,
                         </div>
 
                         <div>
-                          <label className="block text-game-white mb-2 font-gaming">Your Email</label>
+                          <label className="block text-game-white mb-2 font-gaming">{t('contact.email')}</label>
                           <input
                             type="email"
                             name="email"
@@ -322,7 +324,7 @@ ${formData.message}`,
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-game-white mb-2 font-gaming">Phone Number</label>
+                          <label className="block text-game-white mb-2 font-gaming">{t('contact.phone')}</label>
                           <input
                             type="tel"
                             name="phone"
@@ -338,7 +340,7 @@ ${formData.message}`,
                         </div>
 
                         <div>
-                          <label className="block text-game-white mb-2 font-gaming">Request Type</label>
+                          <label className="block text-game-white mb-2 font-gaming">{t('contact.requestType')}</label>
                           <select
                             name="requestType"
                             value={formData.requestType}
@@ -349,8 +351,8 @@ ${formData.message}`,
                               transition-all duration-300 hover:border-game-blue/50 backdrop-blur-sm
                               cursor-pointer"
                           >
-                            <option value="partnership" className="bg-game-black">Partnership Request</option>
-                            <option value="job" className="bg-game-black">Job Application</option>
+                            <option value="partnership" className="bg-game-black">{t('contact.partnership')}</option>
+                            <option value="job" className="bg-game-black">{t('contact.jobApplication')}</option>
                           </select>
                         </div>
                       </div>
@@ -363,7 +365,7 @@ ${formData.message}`,
                           className="space-y-6"
                         >
                           <div>
-                            <label className="block text-game-white mb-2 font-gaming">Position</label>
+                            <label className="block text-game-white mb-2 font-gaming">{t('contact.position')}</label>
                             <input
                               type="text"
                               name="position"
@@ -379,7 +381,7 @@ ${formData.message}`,
                           </div>
 
                           <div>
-                            <label className="block text-game-white mb-2 font-gaming">Years of Experience</label>
+                            <label className="block text-game-white mb-2 font-gaming">{t('contact.experience')}</label>
                             <input
                               type="text"
                               name="experience"
@@ -413,7 +415,7 @@ ${formData.message}`,
                       )}
 
                       <div>
-                        <label className="block text-game-white mb-2 font-gaming">Message</label>
+                        <label className="block text-game-white mb-2 font-gaming">{t('contact.message')}</label>
                         <textarea
                           name="message"
                           value={formData.message}
@@ -443,7 +445,7 @@ ${formData.message}`,
                             transition-all duration-300"
                         >
                           <span className="relative z-10 flex items-center justify-center gap-2">
-                            <span>{formData.requestType === 'job' ? 'Submit Application' : 'Send Partnership Request'}</span>
+                            <span>{t('contact.submit')}</span>
                             <motion.span
                               animate={{ scale: [1, 1.2, 1] }}
                               transition={{ duration: 1.5, repeat: Infinity }}

@@ -13,7 +13,7 @@ import {
   bounceIn,
 } from '../hooks/useAnimations';
 import { useNavigate } from 'react-router-dom';
-import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye, FaGamepad } from 'react-icons/fa';
+import { FaStar, FaChartLine, FaTrophy, FaHeartbeat, FaBolt, FaCrown, FaBullseye } from 'react-icons/fa';
 import { GiCrossedSwords } from 'react-icons/gi';
 import { useLanguage } from '@/hooks/useLanguage';
 
