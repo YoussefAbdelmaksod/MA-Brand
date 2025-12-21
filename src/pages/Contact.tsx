@@ -1,11 +1,11 @@
 import { useState, FormEvent } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import FitnessScene from '@/components/FitnessScene';
 import {
-  FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaEnvelope, FaDiscord,
+  FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaEnvelope,
   FaWhatsapp, FaStar, FaHandshake, FaArrowRight, FaSnapchatGhost, FaFileAlt
 } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
@@ -113,7 +113,7 @@ ${formData.message}`,
       }
 
       // Send the email
-      const response = await emailjs.send(
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         templateParams
