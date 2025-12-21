@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   // Memoize scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -28,13 +28,13 @@ const Navbar = () => {
   }, [location]);
 
   const navLinks = [
-    { path: '/', label: 'Main Arena' },
-    { path: '/about', label: 'The Journey' },
-    { path: '/services', label: 'Full Arsenal' },
-    { path: '/training', label: 'Missions' },
-    { path: '/transformations', label: 'Leaderboard' },
-    { path: '/xp-system', label: 'Level System' },
-    { path: '/contact', label: 'Play Now' },
+    { path: '/', labelKey: 'nav.home' },
+    { path: '/about', labelKey: 'nav.about' },
+    { path: '/services', labelKey: 'nav.services' },
+    { path: '/training', labelKey: 'nav.training' },
+    { path: '/transformations', labelKey: 'nav.transformations' },
+    { path: '/xp-system', labelKey: 'nav.xpSystem' },
+    { path: '/contact', labelKey: 'nav.contact' },
   ];
 
   return (
@@ -72,7 +72,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
-            {navLinks.map(({ path, label }) => (
+            {navLinks.map(({ path, labelKey }) => (
               <Link
                 key={path}
                 to={path}
@@ -91,7 +91,7 @@ const Navbar = () => {
                     before:duration-300 hover:before:scale-110 before:opacity-0
                     hover:before:opacity-100 overflow-hidden`}
                 >
-                  <span className="relative z-10">{label}</span>
+                  <span className="relative z-10">{t(labelKey)}</span>
                   {location.pathname === path && (
                     <motion.span
                       className="absolute inset-0 rounded-lg"
@@ -156,7 +156,7 @@ const Navbar = () => {
                   className="h-screen flex flex-col items-center justify-center p-4"
                 >
                   <div className="w-full max-w-[280px] flex flex-col gap-3">
-                    {navLinks.map(({ path, label }) => (
+                    {navLinks.map(({ path, labelKey }) => (
                       <Link
                         key={path}
                         to={path}
@@ -169,7 +169,7 @@ const Navbar = () => {
                       >
                         <span className={`text-white ${location.pathname === path ? 'opacity-100' : 'opacity-80'} 
                           hover:opacity-100 transition-opacity duration-300`}>
-                          {label}
+                          {t(labelKey)}
                         </span>
                       </Link>
                     ))}

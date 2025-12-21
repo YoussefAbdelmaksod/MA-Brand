@@ -5,6 +5,7 @@ import Card from '@/components/Card';
 import Button from '@/components/Button';
 import { FaGamepad, FaTrophy, FaMedal, FaChartLine, FaCrown, FaGift, FaStar, FaFire, FaShieldAlt, FaGem, FaBullseye } from 'react-icons/fa';
 import { GiCrossedSwords, GiLaurelsTrophy } from 'react-icons/gi';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const XPSystem = () => {
   const [currentLevel] = useState(1);
@@ -12,6 +13,7 @@ const XPSystem = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const maxXP = 1000;
+  const { t } = useLanguage();
 
   const scrollToSlide = (index: number) => {
     if (scrollContainerRef.current) {
@@ -68,18 +70,18 @@ const XPSystem = () => {
   ];
 
   const levelTiers = [
-    { level: '1-9', title: 'Fitness Novice', reward: 'Gaining exercise experience' },
-    { level: '10-19', title: 'MA Warrior', reward: 'Special MA Warrior T-shirt' },
-    { level: '20-29', title: 'Elite Trainee', reward: 'MA Hoodie for distinguished players' },
-    { level: '30-39', title: 'MA Legend', reward: 'Special Edition MA T-shirt' },
-    { level: '40-49', title: 'Fitness Leader', reward: 'Limited Edition MA Hoodie' },
-    { level: '50-59', title: 'MA Knight', reward: 'New Design MA T-shirt' },
-    { level: '60-69', title: 'Victory Master', reward: 'Level-specific MA Hoodie' },
-    { level: '70-79', title: 'MA Champion', reward: 'Exclusive Design MA T-shirt' },
-    { level: '80-89', title: 'Fitness Beast', reward: 'Champions MA Hoodie' },
-    { level: '90-98', title: 'MA Legend Elite', reward: 'Top-tier MA T-shirt' },
-    { level: '99', title: 'Supreme Warrior', reward: 'VIP Edition MA Hoodie' },
-    { level: '100', title: 'Captain MA', reward: 'Exclusive to Captain Moumen (MA)' },
+    { level: '1-9', titleKey: 'xp.tier.fitnessNovice', rewardKey: 'xp.reward.gaining' },
+    { level: '10-19', titleKey: 'xp.tier.maWarrior', rewardKey: 'xp.reward.warriorTshirt' },
+    { level: '20-29', titleKey: 'xp.tier.eliteTrainee', rewardKey: 'xp.reward.hoodie' },
+    { level: '30-39', titleKey: 'xp.tier.maLegend', rewardKey: 'xp.reward.specialTshirt' },
+    { level: '40-49', titleKey: 'xp.tier.fitnessLeader', rewardKey: 'xp.reward.limitedHoodie' },
+    { level: '50-59', titleKey: 'xp.tier.maKnight', rewardKey: 'xp.reward.newDesign' },
+    { level: '60-69', titleKey: 'xp.tier.victoryMaster', rewardKey: 'xp.reward.levelHoodie' },
+    { level: '70-79', titleKey: 'xp.tier.maChampion', rewardKey: 'xp.reward.exclusiveTshirt' },
+    { level: '80-89', titleKey: 'xp.tier.fitnessBeast', rewardKey: 'xp.reward.champHoodie' },
+    { level: '90-98', titleKey: 'xp.tier.maLegendElite', rewardKey: 'xp.reward.topTshirt' },
+    { level: '99', titleKey: 'xp.tier.supremeWarrior', rewardKey: 'xp.reward.vipHoodie' },
+    { level: '100', titleKey: 'xp.tier.captainMA', rewardKey: 'xp.reward.captain' },
   ];
 
   return (
@@ -159,7 +161,7 @@ const XPSystem = () => {
           <Card glowing className="p-6 sm:p-8 bg-gradient-to-br from-black/80 to-black/40 border-game-blue/30 hover:border-game-blue/50 transition-colors duration-300">
             <div className="flex items-center gap-3 mb-6">
               <FaGamepad className="text-3xl text-game-blue animate-bounce-slow" />
-              <h2 className="text-2xl sm:text-3xl font-gaming text-game-white">How to Earn XP</h2>
+              <h2 className="text-2xl sm:text-3xl font-gaming text-game-white">{t('xp.howToEarnXp')}</h2>
             </div>
             <ul className="space-y-4 text-game-white/80">
               <motion.li
@@ -167,28 +169,28 @@ const XPSystem = () => {
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
-                <p className="group-hover:text-game-blue transition-colors">Start at Level 1 when you subscribe to any package</p>
+                <p className="group-hover:text-game-blue transition-colors">{t('xp.rule1')}</p>
               </motion.li>
               <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
-                <p className="group-hover:text-game-blue transition-colors">Each package grants you XP to help you progress</p>
+                <p className="group-hover:text-game-blue transition-colors">{t('xp.rule2')}</p>
               </motion.li>
               <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
-                <p className="group-hover:text-game-blue transition-colors">Every 10 levels, unlock a new title and special rewards</p>
+                <p className="group-hover:text-game-blue transition-colors">{t('xp.rule3')}</p>
               </motion.li>
               <motion.li
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                 whileHover={{ scale: 1.02 }}
               >
                 <span className="w-2 h-2 mt-2 bg-game-blue rounded-full group-hover:animate-pulse" />
-                <p className="group-hover:text-game-blue transition-colors">Track your progress and compete with others on our Leaderboard</p>
+                <p className="group-hover:text-game-blue transition-colors">{t('xp.rule4')}</p>
               </motion.li>
             </ul>
           </Card>
@@ -207,10 +209,10 @@ const XPSystem = () => {
           <div className="flex items-center justify-between mb-8 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-gaming text-game-white flex items-center gap-3">
               <FaTrophy className="text-game-red animate-bounce-slow" />
-              <span className="bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">Levels & Titles</span>
+              <span className="bg-gradient-to-r from-game-blue to-game-red bg-clip-text text-transparent">{t('xp.levelsAndTitles')}</span>
             </h2>
             <div className="hidden sm:flex items-center gap-2 text-game-white/60 text-sm">
-              <span>Scroll</span>
+              <span>{t('xp.scroll')}</span>
               <motion.div
                 animate={{ x: [0, 10, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
@@ -307,13 +309,13 @@ const XPSystem = () => {
                         {tierIcons[index]}
                       </motion.div>
                       <h3 className="text-2xl font-gaming text-game-white mb-2 group-hover:text-game-blue transition-colors duration-300">
-                        {tier.title}
+                        {t(tier.titleKey)}
                       </h3>
                       <div className="w-16 h-1 bg-gradient-to-r from-game-blue to-game-red rounded-full my-3 group-hover:w-24 transition-all duration-300" />
                     </div>
 
                     <div className="relative z-10 bg-black/40 backdrop-blur-sm p-4 rounded-xl border border-white/10 group-hover:border-white/20 transition-colors duration-300">
-                      <p className="text-game-white/90 text-sm group-hover:text-white transition-colors duration-300">{tier.reward}</p>
+                      <p className="text-game-white/90 text-sm group-hover:text-white transition-colors duration-300">{t(tier.rewardKey)}</p>
                     </div>
 
                     <motion.div
